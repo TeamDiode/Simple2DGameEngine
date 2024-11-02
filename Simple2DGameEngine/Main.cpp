@@ -13,7 +13,7 @@
 #define SCREEN_HEIGHT 900
 #define DefaultFrameLate 60
 
-LRESULT CALLBACK OnWindowProcessed(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK OnWindowProcedure(HWND, UINT, WPARAM, LPARAM);
 HINSTANCE g_hInst;
 LPCTSTR windowShowName = TEXT("Engine");
 
@@ -32,7 +32,7 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 	windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 	windowClass.hInstance = instanceHandle;
-	windowClass.lpfnWndProc = OnWindowProcessed;
+	windowClass.lpfnWndProc = OnWindowProcedure;
 	windowClass.lpszClassName = windowShowName;
 	windowClass.lpszMenuName = NULL;
 	windowClass.style = CS_HREDRAW | CS_VREDRAW;
@@ -52,6 +52,8 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 
 // ±âº» À©µµ¿ì ÇÁ·Î¼¼½º ÄÝ¹é ÇÔ¼ö
 LRESULT CALLBACK OnWindowProcessed(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
+// ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ ï¿½Ý¹ï¿½ ï¿½Ô¼ï¿½
+LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
 	LPARAM pointerParameter)
 {
 
