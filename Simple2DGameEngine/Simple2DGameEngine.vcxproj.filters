@@ -22,6 +22,18 @@
     <Filter Include="DEngine\Source\Public\Engine">
       <UniqueIdentifier>{72c5dee6-463d-4b3f-913f-0643146ab61e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Public\Object">
+      <UniqueIdentifier>{7b23594b-397d-4ea7-9924-0807af87dd02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DEngine\Source\Private\Object">
+      <UniqueIdentifier>{71a6b726-a414-4f24-bfce-6f91e7be6503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DEngine\Source\Private\Math">
+      <UniqueIdentifier>{8b39e2bf-4749-4e11-8754-124e1dd75574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DEngine\Source\Public\Math">
+      <UniqueIdentifier>{e87e99b6-d1a9-493a-aa23-5b0bda433d28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -30,10 +42,28 @@
     <ClCompile Include="DEngine.cpp">
       <Filter>DEngine\Source\Private\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="DObject.cpp">
+      <Filter>DEngine\Source\Private\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="DObjectManager.cpp">
+      <Filter>DEngine\Source\Private\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="DMathTypes.cpp">
+      <Filter>DEngine\Source\Private\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEngine.h">
       <Filter>DEngine\Source\Public\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DObject.h">
+      <Filter>DEngine\Source\Public\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="DObjectManager.h">
+      <Filter>DEngine\Source\Public\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="DMathTypes.h">
+      <Filter>DEngine\Source\Public\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
