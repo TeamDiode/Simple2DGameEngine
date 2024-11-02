@@ -10,11 +10,16 @@
     <Filter Include="DEngine\Source">
       <UniqueIdentifier>{25fedfda-0a6d-47d3-a0a9-0c3eef3f2f5f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DEngine\Source\Public">
-      <UniqueIdentifier>{22a1fe79-6c1e-408b-ab41-f1a685305143}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DEngine\Source\Private">
       <UniqueIdentifier>{ac3dad94-978a-4bc2-b992-0801673bc169}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Public">
+      <UniqueIdentifier>{22a1fe79-6c1e-408b-ab41-f1a685305143}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>DEngine\Source\Public</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
