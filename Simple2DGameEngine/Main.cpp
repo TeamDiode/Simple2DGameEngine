@@ -14,6 +14,7 @@
 #define DefaultFrameLate 60
 
 LRESULT CALLBACK OnWindowProcedure(HWND, UINT, WPARAM, LPARAM);
+void CALLBACK OnTimerTickProcedure(HWND, UINT, UINT_PTR, DWORD);
 HINSTANCE g_hInst;
 LPCTSTR windowShowName = TEXT("Engine");
 
@@ -50,9 +51,7 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 }
 
 
-// ±âº» À©µµ¿ì ÇÁ·Î¼¼½º ÄÝ¹é ÇÔ¼ö
-LRESULT CALLBACK OnWindowProcessed(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
-// ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ ï¿½Ý¹ï¿½ ï¿½Ô¼ï¿½
+// ±âº» À©µµ¿ì ÇÁ·Î½ÃÀú ÄÝ¹é ÇÔ¼ö
 LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
 	LPARAM pointerParameter)
 {
@@ -60,7 +59,7 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 	switch (messageFlag)
 	{
 	case WM_CREATE: // ÃÖÃÊ »ý¼º
-		SetTimer(windowHandle, 1, 1000 / DefaultFrameLate, NULL);
+		SetTimer(windowHandle, 1, 1000 / DefaultFrameLate, OnTimerTickProcedure);
 
 		break;
 
@@ -84,4 +83,11 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 	}
 
 	return (DefWindowProc(windowHandle, messageFlag, wordParameter, pointerParameter));
+}
+
+
+void CALLBACK OnTimerTickProcedure(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
+{
+	
+
 }
