@@ -13,9 +13,10 @@
 #define SCREEN_HEIGHT 900
 #define DefaultFrameLate 60
 
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK OnWindowProcedure(HWND, UINT, WPARAM, LPARAM);
+void CALLBACK OnTimerTickProcedure(HWND, UINT, UINT_PTR, DWORD);
 HINSTANCE g_hInst;
-LPCTSTR lpszClass = TEXT("Engine");
+LPCTSTR windowShowName = TEXT("Engine");
 
 
 // 메인
@@ -32,12 +33,12 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 	windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 	windowClass.hInstance = instanceHandle;
-	windowClass.lpfnWndProc = WndProc;
-	windowClass.lpszClassName = lpszClass;
+	windowClass.lpfnWndProc = OnWindowProcedure;
+	windowClass.lpszClassName = windowShowName;
 	windowClass.lpszMenuName = NULL;
 	windowClass.style = CS_HREDRAW | CS_VREDRAW;
 	RegisterClass(&windowClass);
-	windowHandle = CreateWindow(lpszClass, lpszClass, WS_OVERLAPPEDWINDOW, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, NULL, (HMENU)NULL, instanceHandle, NULL);
+	windowHandle = CreateWindow(windowShowName, windowShowName, WS_OVERLAPPEDWINDOW, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, NULL, (HMENU)NULL, instanceHandle, NULL);
 
 	ShowWindow(windowHandle, commandShowAmount);
 	while (GetMessage(&message, NULL, 0, 0))
@@ -50,14 +51,15 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 }
 
 
-LRESULT CALLBACK WndProc(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
+// 기본 윈도우 프로시저 콜백 함수
+LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
 	LPARAM pointerParameter)
 {
 
 	switch (messageFlag)
 	{
 	case WM_CREATE: // 최초 생성
-		SetTimer(windowHandle, 1, 1000 / DefaultFrameLate, NULL);
+		SetTimer(windowHandle, 1, 1000 / DefaultFrameLate, OnTimerTickProcedure);
 
 		break;
 
@@ -81,4 +83,11 @@ LRESULT CALLBACK WndProc(HWND windowHandle, UINT messageFlag, WPARAM wordParamet
 	}
 
 	return (DefWindowProc(windowHandle, messageFlag, wordParameter, pointerParameter));
+}
+
+
+void CALLBACK OnTimerTickProcedure(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
+{
+	
+
 }
