@@ -16,10 +16,24 @@
     <Filter Include="DEngine\Source\Public">
       <UniqueIdentifier>{22a1fe79-6c1e-408b-ab41-f1a685305143}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Private\Engine">
+      <UniqueIdentifier>{136c3b52-6f92-4541-9d69-af5351dbbce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DEngine\Source\Public\Engine">
+      <UniqueIdentifier>{72c5dee6-463d-4b3f-913f-0643146ab61e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>DEngine\Source\Public</Filter>
     </ClCompile>
+    <ClCompile Include="DEngine.cpp">
+      <Filter>DEngine\Source\Private\Engine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DEngine.h">
+      <Filter>DEngine\Source\Public\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
