@@ -34,6 +34,9 @@
     <Filter Include="DEngine\Source\Public\Math">
       <UniqueIdentifier>{e87e99b6-d1a9-493a-aa23-5b0bda433d28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Private\Graphics">
+      <UniqueIdentifier>{7e473a79-a3fa-4b2c-afbc-c468047853e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
