@@ -4,9 +4,6 @@
     <Filter Include="DEngine">
       <UniqueIdentifier>{840f0d8d-5e24-486d-b128-c07472618ae0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SampleProject">
-      <UniqueIdentifier>{b0cb964e-689b-4dd7-95ee-acd5af66e9f8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DEngine\Source">
       <UniqueIdentifier>{25fedfda-0a6d-47d3-a0a9-0c3eef3f2f5f}</UniqueIdentifier>
     </Filter>
@@ -37,6 +34,12 @@
     <Filter Include="DEngine\Source\Private\Graphics">
       <UniqueIdentifier>{7e473a79-a3fa-4b2c-afbc-c468047853e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Public\Graphics">
+      <UniqueIdentifier>{a5d1d827-8c7c-4952-9cfe-b2f3796e845c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SampleProject">
+      <UniqueIdentifier>{b0cb964e-689b-4dd7-95ee-acd5af66e9f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -54,6 +57,12 @@
     <ClCompile Include="DMathTypes.cpp">
       <Filter>DEngine\Source\Private\Math</Filter>
     </ClCompile>
+    <ClCompile Include="DORender.cpp">
+      <Filter>DEngine\Source\Private\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="DRenderer.cpp">
+      <Filter>DEngine\Source\Private\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEngine.h">
@@ -67,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="DMathTypes.h">
       <Filter>DEngine\Source\Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DORender.h">
+      <Filter>DEngine\Source\Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DRenderer.h">
+      <Filter>DEngine\Source\Public\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
