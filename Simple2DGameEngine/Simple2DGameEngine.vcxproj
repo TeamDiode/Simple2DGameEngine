@@ -127,7 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DataTypes.cpp" />
     <ClCompile Include="DEngine.cpp" />
     <ClCompile Include="DObject.cpp" />
     <ClCompile Include="DMathTypes.cpp" />
@@ -135,7 +134,7 @@
     <ClCompile Include="DObjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataTypes.h" />
+    <ClInclude Include="DataTypes.hpp" />
     <ClInclude Include="DEngine.h" />
     <ClInclude Include="DObject.h" />
     <ClInclude Include="DObjectManager.h" />
