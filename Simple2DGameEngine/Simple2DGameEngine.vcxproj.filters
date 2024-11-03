@@ -34,6 +34,12 @@
     <Filter Include="DEngine\Source\Public\Math">
       <UniqueIdentifier>{e87e99b6-d1a9-493a-aa23-5b0bda433d28}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Public\Data">
+      <UniqueIdentifier>{683451c8-03bb-4881-8422-ed234c69c86a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DEngine\Source\Private\Data">
+      <UniqueIdentifier>{954d60aa-cad3-47bc-ae52-00821269d989}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -51,6 +57,9 @@
     <ClCompile Include="DMathTypes.cpp">
       <Filter>DEngine\Source\Private\Math</Filter>
     </ClCompile>
+    <ClCompile Include="DataTypes.cpp">
+      <Filter>DEngine\Source\Private\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEngine.h">
@@ -64,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="DMathTypes.h">
       <Filter>DEngine\Source\Public\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DataTypes.h">
+      <Filter>DEngine\Source\Public\Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
