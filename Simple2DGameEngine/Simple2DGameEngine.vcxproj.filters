@@ -43,7 +43,7 @@
     <Filter Include="DEngine\Source\Public\Data">
       <UniqueIdentifier>{683451c8-03bb-4881-8422-ed234c69c86a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DEngine\Source\Public\Singleton">
+    <Filter Include="DEngine\Source\Public\DesignPattern">
       <UniqueIdentifier>{16cc1e7d-fe69-422c-855c-e92039055611}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -96,7 +96,7 @@
       <Filter>DEngine\Source\Public\Data</Filter>
     </ClInclude>
     <ClInclude Include="DSingleton.hpp">
-      <Filter>DEngine\Source\Public\Singleton</Filter>
+      <Filter>DEngine\Source\Public\DesignPattern</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
