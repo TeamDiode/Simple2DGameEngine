@@ -44,12 +44,13 @@ public:
 
 private:
 	DIterator* currentIterator;
+	int size;
 
 public:
 	bool Move(bool isNext = true);
 	MemberType GetValue();
 	DIterator<MemberType>* AddNext(MemberType value);
-	void RemoveHere();
+	bool RemoveHere();
 
 };
 
@@ -59,6 +60,7 @@ DList<MemberType>::DList()
 	currentIterator = new DIterator(MemberType(), nullptr, nullptr);
 	currentIterator->next = currentIterator;
 	currentIterator->previous = currentIterator;
+	size = 1;
 }
 
 template<typename MemberType>
@@ -113,12 +115,17 @@ template<typename MemberType>
 DIterator<MemberType>* DList<MemberType>::AddNext(MemberType value)
 {
 	currentIterator->next = new DIterator(value, currentIterator, next == nullptr ? nullptr : next->next);
+	size++;
+	
 	return currentIterator;
 }
 
 template<typename MemberType>
-void DList<MemberType>::RemoveHere()
+bool DList<MemberType>::RemoveHere()
 {
-	Move();
-	if (currentIterator != currentIterator->previous) delete currentIteratorcurrentIterator->previous;
+	if (Move() && currentIterator != currentIterator->previous)
+	{
+		delete currentIterator->previous;
+		size--;
+	}
 }
