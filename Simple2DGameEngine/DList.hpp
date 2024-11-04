@@ -47,6 +47,7 @@ private:
 	int size;
 
 public:
+	int GetSize();
 	bool Move(bool isNext = true);
 	MemberType GetValue();
 	DIterator<MemberType>* AddNext(MemberType value);
@@ -82,6 +83,12 @@ DList<MemberType>::~DList()
 	{
 		delete currentIterator->previous;
 	}
+}
+
+template<typename MemberType>
+int DList<MemberType>::GetSize()
+{
+	return size;
 }
 
 template<typename MemberType>
