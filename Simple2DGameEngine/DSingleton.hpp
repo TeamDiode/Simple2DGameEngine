@@ -1,11 +1,11 @@
 #pragma
 
 template<typename ClassName>
-class Singleton
+class DSingleton
 {
 public:
-	Singleton();
-	~Singleton();
+	DSingleton();
+	~DSingleton();
 
 private:
 	static ClassName* instance;
@@ -15,7 +15,7 @@ public:
 };
 
 template<typename ClassName>
-Singleton<ClassName>::Singleton()
+DSingleton<ClassName>::DSingleton()
 {
 	if (instance == nullptr)
 	{
@@ -24,12 +24,12 @@ Singleton<ClassName>::Singleton()
 }
 
 template<typename ClassName>
-Singleton<ClassName>::~Singleton()
+DSingleton<ClassName>::~DSingleton()
 {
 }
 
 template<typename ClassName>
-ClassName* Singleton<ClassName>::GetInstance()
+ClassName* DSingleton<ClassName>::GetInstance()
 {
 	// 객체가 비어도 생성하지 않음
 	return instance;
