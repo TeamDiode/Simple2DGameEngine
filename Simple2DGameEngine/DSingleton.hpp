@@ -17,7 +17,10 @@ public:
 template<typename ClassName>
 Singleton<ClassName>::Singleton()
 {
-	instance = this;
+	if (instance == nullptr)
+	{
+		instance = this;
+	}
 }
 
 template<typename ClassName>
