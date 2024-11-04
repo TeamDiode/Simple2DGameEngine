@@ -39,6 +39,9 @@ int DORender::GetBottom()
 
 void DORender::DrawSelf(HDC hdc, RECT rect, DRenderer* renderer)
 {
-	if (renderer) 		
-		renderer->Draw(hdc, rect, this);
+	if (renderer) 
+	{
+		renderer->Initialize(hdc, rect); 
+		renderer->Draw(this);            
+	}
 }
