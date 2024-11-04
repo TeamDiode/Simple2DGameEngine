@@ -4,33 +4,47 @@
 #define RECTANGEL 1
 #define EllIPSE 2
 
-void DRenderer::Draw(HDC hdc, RECT rect, DORender* object)
+DRenderer::DRenderer(HDC newHdc, RECT newRect, DORender* newObject)
+{
+    hdc = newHdc;
+    rect = newRect;
+    object = newObject;
+}
+
+void DRenderer::Initialize(HDC newHdc, RECT newRect, DORender* newObject)
+{
+    hdc = newHdc;
+    rect = newRect;
+    object = newObject;
+}
+
+void DRenderer::Draw()
 {
     switch (object->GetObjectType())
     {
     case RECTANGEL:
-        DrawRectangel(hdc, rect ,object);
+        DrawRectangel();
         break;
     case EllIPSE:
-        DrawEllipse(hdc, rect, object);
+        DrawEllipse();
         break;
     }
 }
 
-void DRenderer::Reset(HDC hdc, RECT rect)
+void DRenderer::Reset()
 {
     GetClientRect(WindowFromDC(hdc), &rect); 
     FillRect(hdc, &rect, (HBRUSH)(COLOR_WINDOW + 1));
 }
 
-void DRenderer::DrawRectangel(HDC hdc, RECT rect, DORender* object)
+void DRenderer::DrawRectangel()
 {
-    Reset(hdc, rect);
+    Reset();
     Rectangle(hdc, object->GetLeft(), object->GetTop(), object->GetRight(), object->GetBottom());
 }
 
-void DRenderer::DrawEllipse(HDC hdc, RECT rect, DORender* object)
+void DRenderer::DrawEllipse() 
 {
-    Reset(hdc, rect);
+    Reset();
     Ellipse(hdc, object->GetLeft(), object->GetTop(), object->GetRight(), object->GetBottom());
 }
