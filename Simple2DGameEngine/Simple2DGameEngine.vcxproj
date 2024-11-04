@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClInclude Include="DArray.hpp" />
     <ClInclude Include="DEngine.h" />
+    <ClInclude Include="DList.hpp" />
     <ClInclude Include="DObject.h" />
     <ClInclude Include="DObjectManager.h" />
     <ClInclude Include="DMathTypes.h" />
