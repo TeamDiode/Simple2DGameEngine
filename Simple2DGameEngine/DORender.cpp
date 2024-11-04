@@ -36,3 +36,9 @@ int DORender::GetBottom()
 {
 	return GetLocation().y + GetScale().y / 2;
 }
+
+void DORender::DrawSelf(HDC hdc, RECT rect, DRenderer* renderer)
+{
+	if (renderer) 		
+		renderer->Draw(hdc, rect, this);
+}
