@@ -1,5 +1,6 @@
 #pragma once
 
+#define ADDITIONAL_EXPAND_SIZE 5
 
 template <typename MemberType>
 struct DArray
@@ -14,8 +15,9 @@ protected:
 	int capacity;
 
 public:
-	MemberType& operator [](int value);
 	int GetCapacity();
+	void ReSize(int newCapacity);
+	MemberType& operator [](int value);
 
 };
 
@@ -38,13 +40,29 @@ DArray<MemberType>::~DArray()
 }
 
 template<typename MemberType>
-MemberType& DArray<MemberType>::operator[](int value)
-{
-	return members[value];
-}
-
-template<typename MemberType>
 int DArray<MemberType>::GetCapacity()
 {
 	return capacity;
+}
+
+template<typename MemberType>
+void DArray<MemberType>::ReSize(int newCapacity)
+{
+	newCapacity += ADDITIONAL_EXPAND_SIZE;
+	MemberType* tempMembers = new MemberType[newCapacity];
+
+	for (int i = 0; i < (capacity < newCapacity ? capacity : newCapacity); i++)
+	{
+		tempMembers[i] = members[i];
+	}
+	delete[] members;
+	members = tempMembers;
+	capacity = newCapacity;
+}
+
+template<typename MemberType>
+MemberType& DArray<MemberType>::operator[](int value)
+{
+	if (value > capacity) ReSize(value);
+	return members[value];
 }
