@@ -8,9 +8,12 @@ DObjectManager::~DObjectManager()
 {
 }
 
-DObject* DObjectManager::CreateObject()
+DObject* DObjectManager::CreateObject(DObject newObjectBlueprint)
 {
-	return nullptr;
+	DObject* newObject = new DObject(newObjectBlueprint);
+	objectInstances.Add(newObject);
+
+	return newObject;
 }
 
 bool DObjectManager::DestroyObject(DObject* objectToDestroy)

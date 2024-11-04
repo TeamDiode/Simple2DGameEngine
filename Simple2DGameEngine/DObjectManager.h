@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DObject.h"
+#include "DArray.hpp"
 
 class DObjectManager
 {
@@ -9,9 +10,10 @@ public:
 	~DObjectManager();
 
 private:
-	
+	DArray<DObject*> objectInstances;
+
 public:
-	static DObject* CreateObject();
-	static bool DestroyObject(DObject* objectToDestroy);
+	DObject* CreateObject(DObject newObjectBlueprint);
+	bool DestroyObject(DObject* objectToDestroy);
 
 };
