@@ -12,10 +12,13 @@ public:
 
 protected:
 	MemberType* members;
+	int size;
 	int capacity;
 
 public:
+	int GetSize();
 	int GetCapacity();
+	void Add(MemberType newValue);
 	void ReSize(int newCapacity);
 	MemberType& operator [](int value);
 
@@ -40,9 +43,21 @@ DArray<MemberType>::~DArray()
 }
 
 template<typename MemberType>
+int DArray<MemberType>::GetSize()
+{
+	return size;
+}
+
+template<typename MemberType>
 int DArray<MemberType>::GetCapacity()
 {
 	return capacity;
+}
+
+template<typename MemberType>
+void DArray<MemberType>::Add(MemberType newValue)
+{
+	this[size++] = newValue;
 }
 
 template<typename MemberType>
