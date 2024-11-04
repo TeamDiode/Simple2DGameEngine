@@ -4,13 +4,14 @@
 template<typename MemberType>
 struct DIterator
 {
+public:
 	DIterator();
 	DIterator(MemberType value, MemberType* previousIterator, MemberType* nextIterator);
 	~DIterator();
 
 	MemberType currentValue;
-	DIterator* previous;
-	DIterator* next;
+	DIterator<MemberType>* previous;
+	DIterator<MemberType>* next;
 };
 
 template<typename MemberType>
@@ -43,7 +44,7 @@ public:
 	~DList();
 
 private:
-	DIterator* currentIterator;
+	DIterator<MemberType>* currentIterator;
 	int size;
 
 public:
@@ -58,7 +59,7 @@ public:
 template<typename MemberType>
 DList<MemberType>::DList()
 {
-	currentIterator = new DIterator(MemberType(), nullptr, nullptr);
+	currentIterator = new DIterator<MemberType>(MemberType(), nullptr, nullptr);
 	currentIterator->next = currentIterator;
 	currentIterator->previous = currentIterator;
 	size = 1;
@@ -95,7 +96,7 @@ template<typename MemberType>
 bool DList<MemberType>::Move(bool isNext)
 {
 	bool isSuccess = true;
-	DIterator iterator;
+	DIterator<MemberType>* iterator;
 
 	if (isNext)
 	{
@@ -121,7 +122,7 @@ MemberType DList<MemberType>::GetValue()
 template<typename MemberType>
 DIterator<MemberType>* DList<MemberType>::AddNext(MemberType value)
 {
-	currentIterator->next = new DIterator(value, currentIterator, next == nullptr ? nullptr : next->next);
+	currentIterator->next = new DIterator<MemberType>(value, currentIterator, currentIterator->next);
 	size++;
 	
 	return currentIterator;
