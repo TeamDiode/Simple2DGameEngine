@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include "DObject.h"
 
 class DObjectManager
 {
@@ -10,6 +10,8 @@ public:
 
 private:
 	
-	
+public:
+	static DObject* CreateObject();
+	static bool DestroyObject(DObject* objectToDestroy);
 
 };
