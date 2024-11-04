@@ -71,5 +71,8 @@
     <ClInclude Include="DArray.hpp">
       <Filter>DEngine\Source\Public\Data</Filter>
     </ClInclude>
+    <ClInclude Include="DList.hpp">
+      <Filter>DEngine\Source\Public\Data</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
