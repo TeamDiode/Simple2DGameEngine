@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include "math.h"
 #include "DObject.h"
 #include "DRenderer.h"
 
