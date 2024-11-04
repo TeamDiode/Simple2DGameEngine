@@ -17,43 +17,44 @@ void DRenderer::Initialize(HDC newHdc, RECT newRect)
     rect = newRect;
 }
 
-void DRenderer::Draw(DORender* object)
+void DRenderer::RegisterSprite(DOSprite* sprite)
 {
-    const float PI = 3.14;
+    sprites.AddNext(sprite);
+}
 
-    switch (object->GetObjectType())
-    {
-    case RECTANGEL:
-        DrawRectangel(object ,PI);
-        break;
-    case EllIPSE:
-        DrawEllipse(object, PI);
-        break;
-    }
+void DRenderer::Draw()
+{
+    while (sprites.Move())
+        DrawBySpriteType(sprites.GetValue());
 }
 
 void DRenderer::Reset()
 {
-    GetClientRect(WindowFromDC(hdc), &rect); 
+    GetClientRect(WindowFromDC(hdc), &rect);
     FillRect(hdc, &rect, (HBRUSH)(COLOR_WINDOW + 1));
 }
 
-void DRenderer::DrawRectangel(DORender* object, float PI)
+void DRenderer::DrawBySpriteType(DOSprite* sptrite)
 {
-    Reset();
-
-    
-    int left =
-        (int)(object->GetLeft() * cos(object->GetAngle() * PI / 360)
-            - object->GetTop() * sin(object->GetAngle() * PI / 360));
-    int right;
-    int top;
-    int bottom;
-    Rectangle(hdc, object->GetLeft(), object->GetTop(), object->GetRight(), object->GetBottom());
+    switch (sptrite->GetType())
+    {
+    case RECTANGEL:
+        DrawRectangel(sptrite);
+        break;
+    case EllIPSE:
+        DrawEllipse(sptrite);
+        break;
+    }
 }
 
-void DRenderer::DrawEllipse(DORender* object, float PI)
+void DRenderer::DrawRectangel(DOSprite* sptrite)
 {
     Reset();
-    Ellipse(hdc, object->GetLeft(), object->GetTop(), object->GetRight(), object->GetBottom());
+    Rectangle(hdc, sptrite->GetLeft(), sptrite->GetTop(), sptrite->GetRight(), sptrite->GetBottom());
+}
+
+void DRenderer::DrawEllipse(DOSprite* sptrite)
+{
+    Reset();
+    Ellipse(hdc, sptrite->GetLeft(), sptrite->GetTop(), sptrite->GetRight(), sptrite->GetBottom());
 }

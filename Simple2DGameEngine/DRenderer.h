@@ -1,23 +1,26 @@
 #pragma once
-#include "DORender.h"
-#include "DObject.h"
-#include "DMathTypes.h"
+#include "DOSprite.h"
+#include "DList.hpp"
+#include "DSingleton.hpp"
 #include <Windows.h>
 
-class DRenderer
+class DRenderer : public DSingleton<DRenderer>
 {
 public:
 	DRenderer(HDC newHdc, RECT newRect);
 
 	void Initialize(HDC newHdc, RECT newRect);
-	void Draw(DORender* object);
+	void RegisterSprite(DOSprite* sprite);
+	void Draw();
+	
 private:
 	HDC hdc;
 	RECT rect;
-	DVector2i vetor[4];
+	DList<DOSprite*> sprites;
 
 	void Reset();
 
-	void DrawRectangel(DORender* object, float PI);
-	void DrawEllipse(DORender* object, float PI);
+	void DrawBySpriteType(DOSprite* sptrite);
+	void DrawRectangel(DOSprite* sptrite);
+	void DrawEllipse(DOSprite* sptrite);
 };

@@ -2,21 +2,19 @@
 #include <Windows.h>
 #include "math.h"
 #include "DObject.h"
-#include "DRenderer.h"
 
-class DORender : public DObject
+class DOSprite : public DObject
 {
 public:
-	DORender(int newType);
-	~DORender();
+	DOSprite(int newType);
+	~DOSprite();
 
-	int GetObjectType();
+	//각도값 적용안됨, 위치와 크기값에 대한 처리만 적용됨
 	int GetLeft();
 	int GetRight();
 	int GetTop();
 	int GetBottom();
-
-	void DrawSelf(HDC hdc, RECT rect, DRenderer* renderer);
+	int GetType();
 
 private:
 	int type;
