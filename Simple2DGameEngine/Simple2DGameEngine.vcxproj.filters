@@ -37,6 +37,9 @@
     <Filter Include="DEngine\Source\Public\Data">
       <UniqueIdentifier>{683451c8-03bb-4881-8422-ed234c69c86a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Public\Singleton">
+      <UniqueIdentifier>{16cc1e7d-fe69-422c-855c-e92039055611}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="DList.hpp">
       <Filter>DEngine\Source\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DSingleton.hpp">
+      <Filter>DEngine\Source\Public\Singleton</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
