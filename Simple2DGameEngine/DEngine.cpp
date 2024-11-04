@@ -2,6 +2,7 @@
 
 DEngine::DEngine()
 {
+	objectManager = DObjectManager();
 }
 
 DEngine::~DEngine()
@@ -10,6 +11,7 @@ DEngine::~DEngine()
 
 void DEngine::ProcessTick()
 {
+	
 }
 
 void DEngine::ProcessObject()

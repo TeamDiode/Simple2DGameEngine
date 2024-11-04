@@ -1,6 +1,7 @@
 #pragma once
 
-
+#include "DObjectManager.h"
+#include "DRenderer.h"
 
 class DEngine
 {
@@ -10,10 +11,10 @@ public:
 
 	
 private:
-	// 오브젝트 관리자
+	DObjectManager objectManager;
 	// 물리 처리
 	// 서브 시스템
-	// 랜더러
+	DRenderer renderer;
 
 public:
 	// 틱마다 처리하는 엔진 프로세스
