@@ -2,6 +2,7 @@
 
 #include "DObject.h"
 #include "DArray.hpp"
+#include "DList.hpp"
 
 class DObjectManager
 {
@@ -10,7 +11,7 @@ public:
 	~DObjectManager();
 
 private:
-	DArray<DObject*> objectInstances;
+	DList<DObject*> objectInstances;
 
 public:
 	DObject* CreateObject(DObject newObjectBlueprint);
