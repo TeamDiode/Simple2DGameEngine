@@ -2,8 +2,9 @@
 
 #include "DObjectManager.h"
 #include "DRenderer.h"
+#include "DSingleton.hpp"
 
-class DEngine
+class DEngine : public DSingleton<DEngine>
 {
 public:
 	DEngine();
