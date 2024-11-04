@@ -144,6 +144,7 @@
     <ClInclude Include="DMathTypes.h" />
     <ClInclude Include="DORender.h" />
     <ClInclude Include="DRenderer.h" />
+    <ClInclude Include="DSingleton.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
