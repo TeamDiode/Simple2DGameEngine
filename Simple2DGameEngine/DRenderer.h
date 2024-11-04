@@ -6,10 +6,17 @@
 class DRenderer
 {
 public:
-	void Draw(HDC hdc, RECT rect, DORender* object);
-private:
-	void Reset(HDC hdc, RECT rect);
+	DRenderer(HDC newHdc, RECT newRect, DORender* newObject);
 
-	void DrawRectangel(HDC hdc, RECT rect, DORender* object);
-	void DrawEllipse(HDC hdc, RECT rect, DORender* object);
+	void Initialize(HDC newHdc, RECT newRect, DORender* newObject);
+	void Draw();
+private:
+	HDC hdc;
+	RECT rect;
+	DORender* object;
+
+	void Reset();
+
+	void DrawRectangel();
+	void DrawEllipse();
 };
