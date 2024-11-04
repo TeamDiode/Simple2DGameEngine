@@ -7,7 +7,8 @@
 
 // 헤더
 #include <windows.h>
-
+#include "EDkeyCodeEnum.h"
+#include "DInput.h"
 // 창 시작 크기
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 900
@@ -46,7 +47,7 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 		TranslateMessage(&message);
 		DispatchMessage(&message);
 	}
-
+	DInputManager::Start(); // InputManager 변수 초기화  HAUN
 	return (int)message.wParam;
 }
 
@@ -67,8 +68,16 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 
 		break;
 
-	case WM_KEYDOWN: // 키 입력
+	case WM_KEYDOWN: // Key Down  HAUN
+		if (EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z) {
+			DInputManager::BufferAddDown((EDkeyCode)wordParameter);
+		}
+		break;
 
+	case WM_KEYUP: // Key Up  HAUN
+		if(EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z){
+			DInputManager::BufferAddUp((EDkeyCode)wordParameter);
+		}
 		break;
 
 	case WM_PAINT: // 그리기
@@ -88,6 +97,10 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 
 void CALLBACK OnTimerTickProcedure(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
-	
+	char c;
+	if (DInputManager::GetKey(EDkeyCode::a)) {
+		c = 'a';
+	}
 
+	DInputManager::Init(); // InputManager Init (CALLBACK Last Func) HAUN
 }
