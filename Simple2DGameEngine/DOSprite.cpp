@@ -4,34 +4,55 @@
 #include "DMathTypes.h"
 #include <Windows.h>
 
+#define LEFT GetLocation().x - GetScale().x / 2
+#define RIGHT GetLocation().x + GetScale().x / 2
+#define TOP GetLocation().y - GetScale().y / 2
+#define BOTTOM GetLocation().y + GetScale().y / 2
+
 DOSprite::DOSprite(int newType)
 {
 	type = newType;
 	DRenderer::GetInstance()->RegisterSprite(this);
 }
 
-DOSprite::~DOSprite()
+DVector2i DOSprite::GetLeftTopPositionVector()
 {
+	//left
+	position.x = LEFT * cos(GetAngle()) - TOP * sin(GetAngle());
+	//top
+	position.y = LEFT * sin(GetAngle()) + TOP * cos(GetAngle());
+
+	return position;
 }
 
-int DOSprite::GetLeft()
+DVector2i DOSprite::GetLeftBottomPositionVector()
 {
-	return GetLocation().x - GetScale().x / 2;
+	//left
+	position.x = LEFT * cos(GetAngle()) - BOTTOM * sin(GetAngle());
+	//bottom
+	position.y = LEFT * sin(GetAngle()) + BOTTOM * cos(GetAngle());
+
+	return position;
 }
 
-int DOSprite::GetRight()
+DVector2i DOSprite::GetRightTopPositionVector()
 {
-	return GetLocation().x + GetScale().x / 2;
+	//right
+	position.x = RIGHT * cos(GetAngle()) - TOP * sin(GetAngle());
+	//top
+	position.y = RIGHT * sin(GetAngle()) + TOP * cos(GetAngle());
+
+	return position;
 }
 
-int DOSprite::GetTop()
+DVector2i DOSprite::GetRightBottomPosiitonVector()
 {
-	return GetLocation().y - GetScale().y / 2;
-}
+	//right
+	position.x = RIGHT * cos(GetAngle()) - BOTTOM * sin(GetAngle());
+	//bottom
+	position.y = RIGHT * sin(GetAngle()) + BOTTOM * cos(GetAngle());
 
-int DOSprite::GetBottom()
-{
-	return GetLocation().y + GetScale().y / 2;
+	return position;
 }
 
 int DOSprite::GetType()
