@@ -15,7 +15,7 @@ DOSprite::DOSprite(int newType)
 	DRenderer::GetInstance()->RegisterSprite(this);
 }
 
-DVector2i DOSprite::GetLeftTopPositionVector()
+DVector2i DOSprite::GetLeftTopPosition()
 {
 	//left
 	position.x = LEFT * cos(GetAngle()) - TOP * sin(GetAngle());
@@ -25,7 +25,7 @@ DVector2i DOSprite::GetLeftTopPositionVector()
 	return position;
 }
 
-DVector2i DOSprite::GetLeftBottomPositionVector()
+DVector2i DOSprite::GetLeftBottomPosition()
 {
 	//left
 	position.x = LEFT * cos(GetAngle()) - BOTTOM * sin(GetAngle());
@@ -35,7 +35,7 @@ DVector2i DOSprite::GetLeftBottomPositionVector()
 	return position;
 }
 
-DVector2i DOSprite::GetRightTopPositionVector()
+DVector2i DOSprite::GetRightTopPosition()
 {
 	//right
 	position.x = RIGHT * cos(GetAngle()) - TOP * sin(GetAngle());
@@ -45,7 +45,7 @@ DVector2i DOSprite::GetRightTopPositionVector()
 	return position;
 }
 
-DVector2i DOSprite::GetRightBottomPosiitonVector()
+DVector2i DOSprite::GetRightBottomPosiiton()
 {
 	//right
 	position.x = RIGHT * cos(GetAngle()) - BOTTOM * sin(GetAngle());

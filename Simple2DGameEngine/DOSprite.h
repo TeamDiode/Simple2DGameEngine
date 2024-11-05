@@ -9,10 +9,10 @@ class DOSprite : public DObject
 public:
 	DOSprite(int newType);
 
-	DVector2i GetLeftTopPositionVector();
-	DVector2i GetLeftBottomPositionVector();
-	DVector2i GetRightTopPositionVector();
-	DVector2i GetRightBottomPosiitonVector();
+	DVector2i GetLeftTopPosition();
+	DVector2i GetLeftBottomPosition();
+	DVector2i GetRightTopPosition();
+	DVector2i GetRightBottomPosiiton();
 	
 	int GetType();
 
