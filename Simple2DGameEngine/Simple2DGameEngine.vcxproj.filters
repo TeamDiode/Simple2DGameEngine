@@ -71,7 +71,10 @@
     <ClInclude Include="DArray.hpp">
       <Filter>DEngine\Source\Public\Data</Filter>
     </ClInclude>
-    <ClInclude Include="DList.hpp">
+    <ClInclude Include="IDIterator.hpp">
+      <Filter>DEngine\Source\Public\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DLinkedList.hpp">
       <Filter>DEngine\Source\Public\Data</Filter>
     </ClInclude>
   </ItemGroup>
