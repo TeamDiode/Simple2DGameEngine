@@ -1,7 +1,6 @@
 #pragma once
 
 #include "DObject.h"
-#include "DArray.hpp"
 #include "DList.hpp"
 
 class DObjectManager

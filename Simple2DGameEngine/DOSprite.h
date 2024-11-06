@@ -6,6 +6,7 @@
 class DOSprite : public DObject
 {
 public:
+	DOSprite();
 	DOSprite(int newType);
 	~DOSprite();
 

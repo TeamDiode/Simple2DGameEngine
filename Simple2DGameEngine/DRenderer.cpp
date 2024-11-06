@@ -1,9 +1,19 @@
 #include "DRenderer.h"
 #include "math.h"
 #include <Windows.h>
+#include "DList.hpp"
 
 #define RECTANGEL 1
 #define EllIPSE 2
+
+
+DList<DOSprite*> DRenderer::sprites = DList<DOSprite*>();
+
+DRenderer::DRenderer()
+{
+    hdc = NULL;
+    rect = RECT();
+}
 
 DRenderer::DRenderer(HDC newHdc, RECT newRect)
 {
@@ -24,8 +34,12 @@ void DRenderer::RegisterSprite(DOSprite* sprite)
 
 void DRenderer::Draw()
 {
-    while (sprites.Move())
+    for (int i = sprites.GetSize(); i > 0; i--)
+    {
+        sprites.Move();
         DrawBySpriteType(sprites.GetValue());
+    }
+        
 }
 
 void DRenderer::Reset()

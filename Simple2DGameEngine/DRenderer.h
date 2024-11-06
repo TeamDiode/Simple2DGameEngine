@@ -4,19 +4,20 @@
 #include "DSingleton.hpp"
 #include <Windows.h>
 
-class DRenderer : public DSingleton<DRenderer>
+class DRenderer
 {
 public:
+	DRenderer();
 	DRenderer(HDC newHdc, RECT newRect);
 
 	void Initialize(HDC newHdc, RECT newRect);
-	void RegisterSprite(DOSprite* sprite);
+	static void RegisterSprite(DOSprite* sprite);
 	void Draw();
 	
 private:
 	HDC hdc;
 	RECT rect;
-	DList<DOSprite*> sprites;
+	static DList<DOSprite*> sprites;
 
 	void Reset();
 

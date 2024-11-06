@@ -1,12 +1,11 @@
-#pragma
-
+#pragma once
 
 template<typename MemberType>
 struct DIterator
 {
 public:
 	DIterator();
-	DIterator(MemberType value, MemberType* previousIterator, MemberType* nextIterator);
+	DIterator(MemberType value, DIterator<MemberType>* previousIterator, DIterator<MemberType>* nextIterator);
 	~DIterator();
 
 	MemberType currentValue;
@@ -18,10 +17,12 @@ template<typename MemberType>
 DIterator<MemberType>::DIterator()
 {
 	currentValue = MemberType();
+	previous = this;
+	next = this;
 }
 
 template<typename MemberType>
-DIterator<MemberType>::DIterator(MemberType value, MemberType* previousIterator, MemberType* nextIterator)
+DIterator<MemberType>::DIterator(MemberType value, DIterator<MemberType>* previousIterator, DIterator<MemberType>* nextIterator)
 {
 	currentValue = value;
 	previous = previousIterator;
@@ -31,8 +32,8 @@ DIterator<MemberType>::DIterator(MemberType value, MemberType* previousIterator,
 template<typename MemberType>
 DIterator<MemberType>::~DIterator()
 {
-	previous->next = next;
-	next->previous = previous;
+	if (previous != this) previous->next = next;
+	if (next != this) next->previous = previous;
 }
 
 template<typename MemberType>
@@ -41,7 +42,6 @@ struct DList
 public:
 	DList();
 	DList(MemberType value, int size = 1);
-	~DList();
 
 private:
 	DIterator<MemberType>* currentIterator;
@@ -59,9 +59,7 @@ public:
 template<typename MemberType>
 DList<MemberType>::DList()
 {
-	currentIterator = new DIterator<MemberType>(MemberType(), nullptr, nullptr);
-	currentIterator->next = currentIterator;
-	currentIterator->previous = currentIterator;
+	currentIterator = new DIterator<MemberType>();
 	size = 1;
 }
 
@@ -70,19 +68,10 @@ DList<MemberType>::DList(MemberType value, int size) : DList()
 {
 	currentIterator->currentValue = value;
 
-	for (int i = 1; i < value; i++)
+	for (int i = 1; i < size; i++)
 	{
-		AddNext();
+		AddNext(value);
 		Move();
-	}
-}
-
-template<typename MemberType>
-DList<MemberType>::~DList()
-{
-	while (Move())
-	{
-		delete currentIterator->previous;
 	}
 }
 
@@ -122,18 +111,24 @@ MemberType DList<MemberType>::GetValue()
 template<typename MemberType>
 DIterator<MemberType>* DList<MemberType>::AddNext(MemberType value)
 {
-	currentIterator->next = new DIterator<MemberType>(value, currentIterator, currentIterator->next);
+	DIterator<MemberType>* newIterator = new DIterator<MemberType>(value, currentIterator, currentIterator->next);
+	currentIterator->next->previous = newIterator;
+	currentIterator->next = newIterator;
 	size++;
-	
+
 	return currentIterator;
 }
 
 template<typename MemberType>
 bool DList<MemberType>::RemoveHere()
 {
-	if (Move() && currentIterator != currentIterator->previous)
+	bool isSuccess = Move() && (currentIterator != currentIterator->previous);
+
+	if (isSuccess)
 	{
 		delete currentIterator->previous;
 		size--;
 	}
+
+	return isSuccess;
 }

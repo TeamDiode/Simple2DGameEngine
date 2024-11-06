@@ -7,6 +7,7 @@
 
 // 헤더
 #include <windows.h>
+#include "DEngine.h"
 
 // 창 시작 크기
 #define SCREEN_WIDTH 1600
@@ -40,6 +41,10 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 	RegisterClass(&windowClass);
 	windowHandle = CreateWindow(windowShowName, windowShowName, WS_OVERLAPPEDWINDOW, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, NULL, (HMENU)NULL, instanceHandle, NULL);
 
+	RECT displayRectangle;
+	GetClientRect(windowHandle, &displayRectangle);
+	DEngine engine(GetDC(windowHandle), displayRectangle);
+
 	ShowWindow(windowHandle, commandShowAmount);
 	while (GetMessage(&message, NULL, 0, 0))
 	{
@@ -60,7 +65,7 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 	{
 	case WM_CREATE: // 최초 생성
 		SetTimer(windowHandle, 1, 1000 / DefaultFrameLate, OnTimerTickProcedure);
-
+		
 		break;
 
 	case WM_TIMER: // 윈도우 타이머 틱
@@ -88,6 +93,6 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 
 void CALLBACK OnTimerTickProcedure(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
-	
+	DEngine::GetInstance()->ProcessTick();
 
 }

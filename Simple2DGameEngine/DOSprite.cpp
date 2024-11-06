@@ -4,10 +4,15 @@
 #include "DMathTypes.h"
 #include <Windows.h>
 
+DOSprite::DOSprite()
+{
+	type = 1;
+}
+
 DOSprite::DOSprite(int newType)
 {
 	type = newType;
-	DRenderer::GetInstance()->RegisterSprite(this);
+	DRenderer::RegisterSprite(this);
 }
 
 DOSprite::~DOSprite()
