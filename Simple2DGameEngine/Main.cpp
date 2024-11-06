@@ -1,15 +1,17 @@
 /*
-* ===[¼öÁ¤ Á¤º¸]=========================================
-* ÃÖÁ¾ ¼öÁ¤ÀÏ : 2024/11/02
+* ===[ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½]=========================================
+* ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : 2024/11/02
 *
 */
 
 
-// Çì´õ
+// ï¿½ï¿½ï¿½
 #include <windows.h>
 #include "DEngine.h"
+#include "EDkeyCodeEnum.h"
+#include "DInput.h"
 
-// Ã¢ ½ÃÀÛ Å©±â
+// Ã¢ ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 900
 #define DefaultFrameLate 60
@@ -20,7 +22,7 @@ HINSTANCE g_hInst;
 LPCTSTR windowShowName = TEXT("Engine");
 
 
-// ¸ÞÀÎ
+// ï¿½ï¿½ï¿½ï¿½
 int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPSTR
 	commandParameter, int commandShowAmount)
 {
@@ -51,36 +53,44 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 		TranslateMessage(&message);
 		DispatchMessage(&message);
 	}
-
+	DInputManager::Start(); // InputManager ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­  HAUN
 	return (int)message.wParam;
 }
 
 
-// ±âº» À©µµ¿ì ÇÁ·Î½ÃÀú ÄÝ¹é ÇÔ¼ö
+// ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ ï¿½Ý¹ï¿½ ï¿½Ô¼ï¿½
 LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
 	LPARAM pointerParameter)
 {
 
 	switch (messageFlag)
 	{
-	case WM_CREATE: // ÃÖÃÊ »ý¼º
+	case WM_CREATE: // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		SetTimer(windowHandle, 1, 1000 / DefaultFrameLate, OnTimerTickProcedure);
 		
 		break;
 
-	case WM_TIMER: // À©µµ¿ì Å¸ÀÌ¸Ó Æ½
+	case WM_TIMER: // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ì¸ï¿½ Æ½
 
 		break;
 
-	case WM_KEYDOWN: // Å° ÀÔ·Â
+	case WM_KEYDOWN: // Key Down  HAUN
+		if (EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z) {
+			DInputManager::BufferAddDown((EDkeyCode)wordParameter);
+		}
+		break;
+
+	case WM_KEYUP: // Key Up  HAUN
+		if(EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z){
+			DInputManager::BufferAddUp((EDkeyCode)wordParameter);
+		}
+		break;
+
+	case WM_PAINT: // ï¿½×¸ï¿½ï¿½ï¿½
 
 		break;
 
-	case WM_PAINT: // ±×¸®±â
-
-		break;
-
-	case WM_DESTROY: // Á¾·á
+	case WM_DESTROY: // ï¿½ï¿½ï¿½ï¿½
 		PostQuitMessage(0);
 		KillTimer(windowHandle, 1);
 
@@ -95,4 +105,5 @@ void CALLBACK OnTimerTickProcedure(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD
 {
 	DEngine::GetInstance()->ProcessTick();
 
+	DInputManager::Init(); // InputManager Init (CALLBACK Last Func) HAUN
 }
