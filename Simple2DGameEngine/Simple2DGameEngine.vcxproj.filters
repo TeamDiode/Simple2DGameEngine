@@ -46,6 +46,12 @@
     <Filter Include="DEngine\Source\Public\DesignPattern">
       <UniqueIdentifier>{16cc1e7d-fe69-422c-855c-e92039055611}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Public\Input">
+      <UniqueIdentifier>{e6f69814-1194-426f-b951-5c24d165ec12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DEngine\Source\Private\Input">
+      <UniqueIdentifier>{fbae12ab-70d5-440d-8f5b-818390050c36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -63,10 +69,13 @@
     <ClCompile Include="DMathTypes.cpp">
       <Filter>DEngine\Source\Private\Math</Filter>
     </ClCompile>
-    <ClCompile Include="DORender.cpp">
+    <ClCompile Include="DRenderer.cpp">
       <Filter>DEngine\Source\Private\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="DRenderer.cpp">
+    <ClCompile Include="DInput.cpp">
+      <Filter>DEngine\Source\Private\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="DOSprite.cpp">
       <Filter>DEngine\Source\Private\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,9 +92,6 @@
     <ClInclude Include="DMathTypes.h">
       <Filter>DEngine\Source\Public\Math</Filter>
     </ClInclude>
-    <ClInclude Include="DORender.h">
-      <Filter>DEngine\Source\Public\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="DRenderer.h">
       <Filter>DEngine\Source\Public\Graphics</Filter>
     </ClInclude>
@@ -97,6 +103,15 @@
     </ClInclude>
     <ClInclude Include="DSingleton.hpp">
       <Filter>DEngine\Source\Public\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="DInput.h">
+      <Filter>DEngine\Source\Public\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="EDkeyCodeEnum.h">
+      <Filter>DEngine\Source\Public\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="DOSprite.h">
+      <Filter>DEngine\Source\Public\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
