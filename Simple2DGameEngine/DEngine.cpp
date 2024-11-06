@@ -32,6 +32,7 @@ void DEngine::ProcessTick()
 	ProcessPhysics();
 	ProcessGameLogic();
 	ProcessDisplay();
+	DInputManager::Init();
 }
 
 void DEngine::ProcessObject()

@@ -4,6 +4,7 @@
 #include "DObjectManager.h"
 #include "DRenderer.h"
 #include "DSingleton.hpp"
+#include "DInput.h"
 
 class DEngine
 {

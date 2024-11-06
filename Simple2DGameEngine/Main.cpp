@@ -53,7 +53,6 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 		TranslateMessage(&message);
 		DispatchMessage(&message);
 	}
-	DInputManager::Start(); // InputManager ���� �ʱ�ȭ  HAUN
 	return (int)message.wParam;
 }
 
@@ -105,5 +104,4 @@ void CALLBACK OnTimerTickProcedure(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD
 {
 	DEngine::GetInstance()->ProcessTick();
 
-	DInputManager::Init(); // InputManager Init (CALLBACK Last Func) HAUN
 }

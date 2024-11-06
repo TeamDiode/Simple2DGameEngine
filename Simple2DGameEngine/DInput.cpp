@@ -3,6 +3,12 @@
 #include "DInput.h"
 #include "EDkeyCodeEnum.h"
 
+bool DInputManager::isLockDownBuffer = false;
+bool DInputManager::isLockUpBuffer = false;
+EDkeyCode DInputManager::keyDownBuffer[LEN] = { EDkeyCode::null };
+EDkeyCode DInputManager::keyUpBuffer[LEN] = { EDkeyCode::null };
+EDkeyCode DInputManager::keyAnyBuffer[LEN] = { EDkeyCode::null };
+
 void DInputManager::BufferAddAny(EDkeyCode k)
 {
 	for (int i = 0; i < LEN; i++)
