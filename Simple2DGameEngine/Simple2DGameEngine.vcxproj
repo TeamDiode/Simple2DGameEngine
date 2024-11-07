@@ -137,6 +137,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="DObjectManager.cpp" />
     <ClCompile Include="DOSprite.cpp" />
+    <ClCompile Include="SimpleMapTool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DArray.hpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="DRenderer.h" />
     <ClInclude Include="DSingleton.hpp" />
     <ClInclude Include="EDkeyCodeEnum.h" />
+    <ClInclude Include="SimpleMapTool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

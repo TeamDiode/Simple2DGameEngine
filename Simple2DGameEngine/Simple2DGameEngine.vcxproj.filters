@@ -84,6 +84,9 @@
     <ClCompile Include="DOCamera.cpp">
       <Filter>DEngine\Source\Private\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="SimpleMapTool.cpp">
+      <Filter>SampleProject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEngine.h">
@@ -124,6 +127,9 @@
     </ClCompile>
     <ClInclude Include="DOCamera.h">
       <Filter>DEngine\Source\Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMapTool.h">
+      <Filter>SampleProject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

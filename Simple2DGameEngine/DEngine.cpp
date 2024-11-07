@@ -1,5 +1,5 @@
 #include "DEngine.h"
-
+#include "SimpleMapTool.h"
 
 DEngine* DEngine::engineInstance = nullptr;
 
