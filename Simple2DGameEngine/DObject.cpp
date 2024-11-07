@@ -6,8 +6,10 @@
 DObject::DObject()
 {
 	location = DVector2i();
+	localLocation = DVector2i();
 	angle = 0.f;
 	scale = DVector2i();
+	upperObject = nullptr;
 }
 
 DObject::~DObject()
@@ -31,7 +33,7 @@ void DObject::SetLocation(DVector2i newLocation)
 
 void DObject::SetLocation(int newLocationX, int newLocationY)
 {
-	location = DVector2i(newLocationX, newLocationY);
+	SetLocation(DVector2i(newLocationX, newLocationY));
 }
 
 void DObject::SetLocalLocation(DVector2i newLocalLocation)
@@ -41,7 +43,7 @@ void DObject::SetLocalLocation(DVector2i newLocalLocation)
 
 void DObject::SetLocalLocation(int newLocalLocationX, int newLocalLocationY)
 {
-	localLocation = DVector2i(newLocalLocationX, newLocalLocationY);
+	SetLocalLocation(DVector2i(newLocalLocationX, newLocalLocationY));
 }
 
 float DObject::GetAngle()
