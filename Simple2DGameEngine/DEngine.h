@@ -19,26 +19,25 @@ private:
 	static DEngine* engineInstance;
 
 	DObjectManager objectManager;
-	// ¹°¸® Ã³¸®
-	// ¼­ºê ½Ã½ºÅÛ
+	// ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½
 	DRenderer renderer;
 
-	SimpleMapTool simpleMaptool;
-
+	SimpleMapTool mapTool;
 
 public:
 	static DEngine* GetInstance();
 
-	// Æ½¸¶´Ù Ã³¸®ÇÏ´Â ¿£Áø ÇÁ·Î¼¼½º
+	// Æ½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½
 	void ProcessTick();
 
-	// ¿ÀºêÁ§Æ® Ã³¸®
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ã³ï¿½ï¿½
 	void ProcessObject();
-	// ¹°¸® Ã³¸®
+	// ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	void ProcessPhysics();
-	// °ÔÀÓ ·ÎÁ÷ Ã³¸®
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	void ProcessGameLogic();
-	// Ãâ·Â Ã³¸®
+	// ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	void ProcessDisplay();
 
 };

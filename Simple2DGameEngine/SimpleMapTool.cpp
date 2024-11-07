@@ -3,7 +3,7 @@
 
 SimpleMapTool::SimpleMapTool()
 {
-	// ¿©±â¼­ ¸Ê ÃÊ±âÈ­ ÀÛ¾÷ ÁøÇà
+	// ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½Û¾ï¿½ ï¿½ï¿½ï¿½ï¿½
 }
 
 void SimpleMapTool::Activated()
