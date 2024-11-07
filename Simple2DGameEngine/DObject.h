@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DMathTypes.h"
+#include "DList.hpp"
 
 
 class DObject
@@ -10,22 +11,33 @@ public:
 	~DObject();
 
 private:
-	// 위치
+	// 월드 위치
 	DVector2i location;
+	// 상위 오브젝트에 상대적인 로컬 위치
+	DVector2i localLocation;
 	// 각도. 단위는 도(degree)
 	float angle;
 	// 크기. 정규값은 (1, 1)
 	DVector2i scale;
+
+	// 귀속된 상위 오브젝트
+	DObject* upperObject;
+	// 부착된 하위 오브젝트
+	DList<DObject*> lowerObjectAttachments;
 	
 public:
 	/* 오브젝트 상태 프로퍼티 */
 
 	// 위치을 반환
 	DVector2i GetLocation();
-	// 위치를 벡터로 수정
+	// 월드 위치를 벡터로 수정
 	void SetLocation(DVector2i newLocation);
-	// 위치를 원소로 수정
+	// 월드 위치를 원소로 수정
 	void SetLocation(int newLocationX, int newLocationY);
+	// 로컬 위치를 벡터로 수정
+	void SetLocalLocation(DVector2i newLocalLocation);
+	// 로컬 위치를 원소로 수정
+	void SetLocalLocation(int newLocalLocationX, int newLocalLocationY);
 
 	// 각도를 반환
 	float GetAngle();
@@ -40,5 +52,11 @@ public:
 	void SetScale(DVector2i newScale);
 	// 크기를 원소로 수정
 	void SetScale(int newScaleX, int newScaleY);
+
+	// 상위 오브젝트를 지정
+	void SetUpperObject(DObject* newUpperObject);
+	// 하위 오브젝트를 부착
+	void AttachObject(DObject* lowerObjectToAttach);
+
 };
 
