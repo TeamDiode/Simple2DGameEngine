@@ -22,6 +22,8 @@ private:
 	// 서브 시스템
 	DRenderer renderer;
 
+	SimpleMapTool mapTool;
+
 public:
 	static DEngine* GetInstance();
 
