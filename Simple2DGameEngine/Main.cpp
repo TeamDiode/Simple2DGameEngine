@@ -10,6 +10,7 @@
 #include "DEngine.h"
 #include "EDkeyCodeEnum.h"
 #include "DInput.h"
+#include "SimpleMapTool.h"
 
 // â ���� ũ��
 #define SCREEN_WIDTH 1600
@@ -62,6 +63,7 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 	LPARAM pointerParameter)
 {
 
+	static SimpleMapTool mapTool;
 	switch (messageFlag)
 	{
 	case WM_CREATE: // ���� ����
