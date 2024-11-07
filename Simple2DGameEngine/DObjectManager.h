@@ -10,10 +10,10 @@ public:
 	~DObjectManager();
 
 private:
-	DList<DObject*> objectInstances;
+	static DList<DObject*> objectInstances;
 
 public:
-	DObject* CreateObject(DObject newObjectBlueprint);
-	bool DestroyObject(DObject* objectToDestroy);
+	static DObject* CreateObject(DObject newObjectBlueprint);
+	static bool DestroyObject(DObject* objectToDestroy);
 
 };
