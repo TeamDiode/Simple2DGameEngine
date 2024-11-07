@@ -6,13 +6,13 @@ struct DVector2i
 {
 public:
 	DVector2i();
-	DVector2i(int x, int y);
+	DVector2i(float x, float y);
 
 public:
 	// x ¿ø¼Ò
-	int x;
+	float x;
 	// y ¿ø¼Ò
-	int y;
+	float y;
 
 public:
 	// º¤ÅÍ µ¡¼À
@@ -20,6 +20,13 @@ public:
 	// º¤ÅÍ »¬¼À
 	DVector2i operator -(DVector2i value);
 	// ½ºÄ®¶ó °ö
-	DVector2i operator *(int value);
+	DVector2i operator *(float value);
 	
+	// º¤ÅÍ Á¤±ÔÈ­
+	void Normalize();
+
+	// ¹éÅÍ ³»Àû
+	float Dot(DVector2i value);
+	// ¹éÅÍ ¿ÜÀû
+	DVector2i Cross(DVector2i value);
 };
