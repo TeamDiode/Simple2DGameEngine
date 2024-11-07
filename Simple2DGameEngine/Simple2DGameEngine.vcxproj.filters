@@ -78,6 +78,9 @@
     <ClCompile Include="DOSprite.cpp">
       <Filter>DEngine\Source\Private\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="SimpleMapTool.cpp">
+      <Filter>SampleProject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEngine.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="DOSprite.h">
       <Filter>DEngine\Source\Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMapTool.h">
+      <Filter>SampleProject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
