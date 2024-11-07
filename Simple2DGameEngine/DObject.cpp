@@ -12,6 +12,7 @@ DObject::DObject()
 
 DObject::~DObject()
 {
+	// 하위 오브젝트의 메모리 해제
 }
 
 DVector2i DObject::GetLocation()
@@ -21,12 +22,26 @@ DVector2i DObject::GetLocation()
 
 void DObject::SetLocation(DVector2i newLocation)
 {
-	location = newLocation;
+	location = newLocation + localLocation;
+	for (int i = lowerObjectAttachments.GetSize(); i > 0; i--)
+	{
+		lowerObjectAttachments.GetValue()->SetLocation(location);
+	}
 }
 
 void DObject::SetLocation(int newLocationX, int newLocationY)
 {
 	location = DVector2i(newLocationX, newLocationY);
+}
+
+void DObject::SetLocalLocation(DVector2i newLocalLocation)
+{
+	localLocation = newLocalLocation;
+}
+
+void DObject::SetLocalLocation(int newLocalLocationX, int newLocalLocationY)
+{
+	localLocation = DVector2i(newLocalLocationX, newLocalLocationY);
 }
 
 float DObject::GetAngle()
@@ -57,4 +72,15 @@ void DObject::SetScale(DVector2i newScale)
 void DObject::SetScale(int newScaleX, int newScaleY)
 {
 	scale = DVector2i(newScaleX, newScaleY);
+}
+
+void DObject::SetUpperObject(DObject* newUpperObject)
+{
+	upperObject = upperObject;
+}
+
+void DObject::AttachObject(DObject* newLowerObject)
+{
+	newLowerObject->SetUpperObject(this);
+	lowerObjectAttachments.AddNext(newLowerObject);
 }
