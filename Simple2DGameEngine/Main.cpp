@@ -75,14 +75,29 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 
 	case WM_KEYDOWN: // Key Down  HAUN
 		if (EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z) {
-			DInputManager::BufferAddDown((EDkeyCode)wordParameter);
+			DInputManager::BufferAddKeyDown((EDkeyCode)wordParameter);
 		}
 		break;
 
 	case WM_KEYUP: // Key Up  HAUN
 		if(EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z){
-			DInputManager::BufferAddUp((EDkeyCode)wordParameter);
+			DInputManager::BufferAddKeyUp((EDkeyCode)wordParameter);
 		}
+		break;
+	case WM_LBUTTONDOWN:
+		BufferAddMouseDown(0);
+		break;
+
+	case WM_LBUTTONUP:
+		BufferAddMouseUP(0);
+		break;
+
+	case WM_RBUTTONDOWN:
+		BufferAddMouseUP(1);
+		break;
+
+	case WM_RBUTTONUP:
+		BufferAddMouseUP(1);
 		break;
 
 	case WM_PAINT: // �׸���
