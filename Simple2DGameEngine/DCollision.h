@@ -2,9 +2,9 @@
 
 #include "DCollisionData.h"
 
-class CollisionDetector {
+class DCollisionDetector {
 public:
-    CollisionDetector(DCollisionData* a, DCollisionData* b);
+    DCollisionDetector(DCollisionData* a, DCollisionData* b);
 
     bool detectCollision(); // 충돌 발생시 true
     void ResolveCollision(DCollisionData a, DCollisionData b);

@@ -3,12 +3,12 @@
 
 #include "DMathTypes.h"
 
-CollisionDetector::CollisionDetector(DCollisionData* a, DCollisionData* b)
+DCollisionDetector::DCollisionDetector(DCollisionData* a, DCollisionData* b)
     : A(a), B(b), normal(0, 0), penetration(0) {}
 
 
 //충돌 감지
-bool CollisionDetector::detectCollision()
+bool DCollisionDetector::detectCollision()
 {
     DVector2i n = B->pos - A->pos;
 
@@ -37,7 +37,7 @@ bool CollisionDetector::detectCollision()
 }
 
 //충돌 해결
-void CollisionDetector::ResolveCollision(DCollisionData a, DCollisionData b)
+void DCollisionDetector::ResolveCollision(DCollisionData a, DCollisionData b)
 {
     DVector2i rv = b.velocity - a.velocity;
     float velAlongNormal = rv.x * normal.x + rv.y * normal.y; //내적 계산
