@@ -1,5 +1,6 @@
 #pragma once
 
+
 template<typename MemberType>
 struct DIterator
 {
@@ -32,8 +33,11 @@ DIterator<MemberType>::DIterator(MemberType value, DIterator<MemberType>* previo
 template<typename MemberType>
 DIterator<MemberType>::~DIterator()
 {
-	if (previous != this) previous->next = next;
-	if (next != this) next->previous = previous;
+	if (next != this && previous != this)
+	{
+		previous->next = next;
+		next->previous = previous;
+	}
 }
 
 template<typename MemberType>
@@ -42,6 +46,8 @@ struct DList
 public:
 	DList();
 	DList(MemberType value, int size = 1);
+	DList(const DList<MemberType>& copy);
+	~DList();
 
 private:
 	DIterator<MemberType>* currentIterator;
@@ -54,6 +60,7 @@ public:
 	DIterator<MemberType>* AddNext(MemberType value);
 	bool RemoveHere();
 
+	void operator=(const DList<MemberType>& copy);
 };
 
 template<typename MemberType>
@@ -73,6 +80,27 @@ DList<MemberType>::DList(MemberType value, int size) : DList()
 		AddNext(value);
 		Move();
 	}
+}
+
+template<typename MemberType>
+DList<MemberType>::DList(const DList<MemberType>& copy) : DList()
+{
+	DIterator<MemberType>* copyIterator = copy.currentIterator;
+	this->currentIterator->currentValue = copyIterator->currentValue;
+	for (int i = 1; i < copy.size; i++)
+	{
+		copyIterator = copyIterator->next;
+		this->AddNext(copyIterator->currentValue);
+		Move();
+	}
+}
+
+template<typename MemberType>
+DList<MemberType>::~DList()
+{
+	while (RemoveHere());
+
+	delete currentIterator;
 }
 
 template<typename MemberType>
@@ -111,9 +139,8 @@ MemberType DList<MemberType>::GetValue()
 template<typename MemberType>
 DIterator<MemberType>* DList<MemberType>::AddNext(MemberType value)
 {
-	DIterator<MemberType>* newIterator = new DIterator<MemberType>(value, currentIterator, currentIterator->next);
-	currentIterator->next->previous = newIterator;
-	currentIterator->next = newIterator;
+	currentIterator->next = new DIterator<MemberType>(value, currentIterator, currentIterator->next);
+	currentIterator->next->next->previous = currentIterator->next;
 	size++;
 
 	return currentIterator;
@@ -122,13 +149,29 @@ DIterator<MemberType>* DList<MemberType>::AddNext(MemberType value)
 template<typename MemberType>
 bool DList<MemberType>::RemoveHere()
 {
-	bool isSuccess = Move() && (currentIterator != currentIterator->previous);
-
-	if (isSuccess)
+	if (Move() && currentIterator != currentIterator->previous)
 	{
 		delete currentIterator->previous;
 		size--;
+		return true;
 	}
+	else
+	{
+		return false;
+	}
+}
 
-	return isSuccess;
+template<typename MemberType>
+void DList<MemberType>::operator=(const DList<MemberType>& copy)
+{
+	while (RemoveHere());
+
+	DIterator<MemberType>* copyIterator = copy.currentIterator;
+	this->currentIterator->currentValue = copyIterator->currentValue;
+	for (int i = 1; i < copy.size; i++)
+	{
+		copyIterator = copyIterator->next;
+		this->AddNext(copyIterator->currentValue);
+		Move();
+	}
 }

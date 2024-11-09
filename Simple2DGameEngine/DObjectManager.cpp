@@ -1,6 +1,9 @@
 #include "DObjectManager.h"
 #include "DList.hpp"
 
+
+DList<DObject*> DObjectManager::objectInstances = DList<DObject*>();
+
 DObjectManager::DObjectManager()
 {
 	objectInstances = DList<DObject*>(new DObject(), 5);
