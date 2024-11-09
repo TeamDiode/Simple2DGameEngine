@@ -1,4 +1,4 @@
-#pragma
+#pragma once
 
 
 template<typename MemberType>
@@ -18,6 +18,8 @@ template<typename MemberType>
 DIterator<MemberType>::DIterator()
 {
 	currentValue = MemberType();
+	previous = this;
+	next = this;
 }
 
 template<typename MemberType>
@@ -64,9 +66,7 @@ public:
 template<typename MemberType>
 DList<MemberType>::DList()
 {
-	currentIterator = new DIterator<MemberType>(MemberType(), nullptr, nullptr);
-	currentIterator->next = currentIterator;
-	currentIterator->previous = currentIterator;
+	currentIterator = new DIterator<MemberType>();
 	size = 1;
 }
 
@@ -142,7 +142,7 @@ DIterator<MemberType>* DList<MemberType>::AddNext(MemberType value)
 	currentIterator->next = new DIterator<MemberType>(value, currentIterator, currentIterator->next);
 	currentIterator->next->next->previous = currentIterator->next;
 	size++;
-	
+
 	return currentIterator;
 }
 
