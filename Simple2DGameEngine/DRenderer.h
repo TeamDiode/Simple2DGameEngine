@@ -21,7 +21,7 @@ private:
 
 	void Reset();
 
-	void DrawBySpriteType(DOSprite* sptrite);
-	void DrawRectangel(DOSprite* sptrite);
-	void DrawEllipse(DOSprite* sptrite);
+	void DrawBySpriteType(DOSprite* sprite);
+	void DrawRectangel(DOSprite* sprite);
+	void DrawEllipse(DOSprite* sprite);
 };

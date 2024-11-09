@@ -48,27 +48,32 @@ void DRenderer::Reset()
     FillRect(hdc, &rect, (HBRUSH)(COLOR_WINDOW + 1));
 }
 
-void DRenderer::DrawBySpriteType(DOSprite* sptrite)
+void DRenderer::DrawBySpriteType(DOSprite* sprite)
 {
-    switch (sptrite->GetType())
+    switch (sprite->GetType())
     {
     case RECTANGEL:
-        DrawRectangel(sptrite);
+        DrawRectangel(sprite);
         break;
     case EllIPSE:
-        DrawEllipse(sptrite);
+        DrawEllipse(sprite);
         break;
     }
 }
 
-void DRenderer::DrawRectangel(DOSprite* sptrite)
+void DRenderer::DrawRectangel(DOSprite* sprite)
 {
     Reset();
-    Rectangle(hdc, sptrite->GetLeft(), sptrite->GetTop(), sptrite->GetRight(), sptrite->GetBottom());
+    MoveToEx(hdc, sprite->GetLeftTopPosition().x, sprite->GetLeftTopPosition().y, NULL);
+    LineTo(hdc, sprite->GetRightTopPosition().x, sprite->GetRightTopPosition().y);
+    LineTo(hdc, sprite->GetRightBottomPosiiton().x, sprite->GetRightBottomPosiiton().y);
+    LineTo(hdc, sprite->GetLeftBottomPosition().x, sprite->GetLeftBottomPosition().y);
+    LineTo(hdc, sprite->GetLeftTopPosition().x, sprite->GetLeftTopPosition().y);
 }
 
-void DRenderer::DrawEllipse(DOSprite* sptrite)
+void DRenderer::DrawEllipse(DOSprite* sprite)
 {
     Reset();
-    Ellipse(hdc, sptrite->GetLeft(), sptrite->GetTop(), sptrite->GetRight(), sptrite->GetBottom());
+    Ellipse(hdc, sprite->GetLeftTopPosition().x, sprite->GetLeftTopPosition().y, 
+        sprite->GetRightBottomPosiiton().x, sprite->GetRightBottomPosiiton().y);
 }

@@ -131,6 +131,7 @@
     <ClCompile Include="DInput.cpp" />
     <ClCompile Include="DObject.cpp" />
     <ClCompile Include="DMathTypes.cpp" />
+    <ClCompile Include="DOCamera.cpp" />
     <ClCompile Include="DRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="DObjectManager.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="DObject.h" />
     <ClInclude Include="DObjectManager.h" />
     <ClInclude Include="DMathTypes.h" />
+    <ClInclude Include="DOCamera.h" />
     <ClInclude Include="DOSprite.h" />
     <ClInclude Include="DRenderer.h" />
     <ClInclude Include="DSingleton.hpp" />

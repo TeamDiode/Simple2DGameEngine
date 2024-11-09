@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include "math.h"
+#include "DMathTypes.h"
 #include "DObject.h"
 
 class DOSprite : public DObject
@@ -8,15 +9,15 @@ class DOSprite : public DObject
 public:
 	DOSprite();
 	DOSprite(int newType);
-	~DOSprite();
 
-	//각도값 적용안됨, 위치와 크기값에 대한 처리만 적용됨
-	int GetLeft();
-	int GetRight();
-	int GetTop();
-	int GetBottom();
+	DVector2i GetLeftTopPosition();
+	DVector2i GetLeftBottomPosition();
+	DVector2i GetRightTopPosition();
+	DVector2i GetRightBottomPosiiton();
+	
 	int GetType();
 
 private:
 	int type;
+	DVector2i position;
 };
