@@ -15,6 +15,8 @@ DEngine::DEngine(HDC deviceContextHandle, RECT displayRectangle)
 	objectManager = DObjectManager();
 	renderer = DRenderer(deviceContextHandle, displayRectangle);
 	engineInstance = this;
+
+	simpleMaptool.Activated();
 }
 
 DEngine::~DEngine()
