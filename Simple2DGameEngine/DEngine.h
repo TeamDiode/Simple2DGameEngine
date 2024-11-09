@@ -5,6 +5,7 @@
 #include "DRenderer.h"
 #include "DSingleton.hpp"
 #include "DInput.h"
+#include "SimpleMapTool.h"
 
 class DEngine
 {
@@ -21,6 +22,8 @@ private:
 	// 물리 처리
 	// 서브 시스템
 	DRenderer renderer;
+
+	SimpleMapTool simpleMaptool;
 
 
 public:
