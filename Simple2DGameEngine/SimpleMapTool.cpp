@@ -20,3 +20,9 @@ void TestPlayer::Update()
 		SetLocation(GetLocation() + DVector2i(0, 10));
 	}
 }
+
+void SimpleMapTool::Activated()
+{
+	DObject* a = DObjectManager::CreateObject(TestPlayer());
+	a->SetLocation(500, 500);
+}

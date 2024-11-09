@@ -23,6 +23,8 @@ private:
 	// ���� �ý���
 	DRenderer renderer;
 
+	SimpleMapTool simpleMaptool;
+
 
 public:
 	static DEngine* GetInstance();
