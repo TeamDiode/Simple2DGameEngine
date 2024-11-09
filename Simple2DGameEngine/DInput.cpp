@@ -8,29 +8,25 @@ bool DInputManager::isLockUpBuffer = false;
 EDkeyCode DInputManager::keyDownBuffer[LEN] = { EDkeyCode::null };
 EDkeyCode DInputManager::keyUpBuffer[LEN] = { EDkeyCode::null };
 EDkeyCode DInputManager::keyAnyBuffer[LEN] = { EDkeyCode::null };
-bool DInputManager::mouseUpBuffer[MOUSE_INPUT_TYPE] = { false, };
-bool DInputManager::mouseDownBuffer[MOUSE_INPUT_TYPE] = { false, };
-bool DInputManager::mouseAnyBuffer[MOUSE_INPUT_TYPE] = { false, };
 
-const EDkeyCode DInputManager::TrueValueReturn(EDkeyCode e)
-{
-	switch (e) {
-	case EDkeyCode::back:
-	case EDkeyCode::tab:
-	case EDkeyCode::enter:
-	case EDkeyCode::shift:
-	case EDkeyCode::ctr:
-	case EDkeyCode::esc:
-	case EDkeyCode::space:
-	case EDkeyCode::left:
-	case EDkeyCode::up:
-	case EDkeyCode::right:
-	case EDkeyCode::down:
+static const EDkeyCode TrueValueReturn(EDkeyCode e){
+	switch(e){
+		case EDkeyCode::back:
+		case EDkeyCode::tab:
+		case EDkeyCode::enter:
+		case EDkeyCode::shift:
+		case EDkeyCode::ctr:
+		case EDkeyCode::esc:
+		case EDkeyCode::space:
+		case EDkeyCode::left:
+		case EDkeyCode::up:
+		case EDkeyCode::right:
+		case EDkeyCode::down:
 		return e;
 	}
-	if (EDkeyCode::A <= e && e <= EDkeyCode::Z) return e;
-	if (EDkeyCode::a <= e && e <= EDkeyCode::z) return e;
-	if (EDkeyCode::int_0 <= e && e <= EDkeyCode::int_9) return e;
+	if(EDkeyCode::A <= e && e <= EDkeyCode::Z) return e;
+	if(EDkeyCode::a <= e && e <= EDkeyCode::z) return e;
+	if(EDkeyCode::int_0 <= e && e <= EDkeyCode::int_9) return e;
 
 	return EDkeyCode::null;
 }
@@ -46,14 +42,14 @@ void DInputManager::BufferAddKeyAny(EDkeyCode k)
 	}
 }
 
-void DInputManager::BufferAddMouseAny(int i){
+static void BufferAddMouseAny(int i){
 	mouseAnyBuffer[i] = true;
 }
 
 void DInputManager::BufferAddKeyUp(EDkeyCode e)
 {
 	if (isLockUpBuffer) return; // ����ȭ�� ���� Lock����
-	EDkeyCode k =TrueValueReturn(e);
+	EDkeyCode k =T rueValueReturn(e);
 	for (int i = 0; i < LEN; i++)
 	{
 		if (keyAnyBuffer[i] == k) {
@@ -73,7 +69,7 @@ void DInputManager::BufferAddKeyUp(EDkeyCode e)
 void DInputManager::BufferAddKeyDown(EDkeyCode e)
 {
 	if (isLockDownBuffer) return; // ����ȭ�� ���� Lock����
-	EDkeyCode k =TrueValueReturn(e);
+	EDkeyCode k =T rueValueReturn(e);
 	for (int i = 0; i < LEN; i++)
 	{
 		if (keyDownBuffer[i] == 0) {
@@ -83,13 +79,13 @@ void DInputManager::BufferAddKeyDown(EDkeyCode e)
 	}
 }
 
-void DInputManager::BufferAddMouseUP(int i){
+static void BufferAddMouseUP(int i){
 	if(MOUSE_INPUT_TYPE <= i || i < 0) return; //indet errer check
-	mouseUpBuffer[i] = true;
+	mouseUPBuffer[i] = true;
 	mouseAnyBuffer[i] = false;
 }
 
-void DInputManager::BufferAddMouseDown(int i){
+static void BufferAddMouseDown(int i){
 	if(MOUSE_INPUT_TYPE <= i || i < 0) return; //indet errer check
 	mouseDownBuffer[i] = true;
 }
@@ -136,7 +132,7 @@ void DInputManager::Init()
 	for (int i = 0; i < MOUSE_INPUT_TYPE; i++)
 	{
 		if(mouseDownBuffer[i]) mouseAnyBuffer[i] = true;
-		mouseUpBuffer[i] = false;
+		MouseUpBuffer[i] = false;
 		mouseDownBuffer[i] = false;
 	}
 	isLockDownBuffer = false;
@@ -155,7 +151,7 @@ void DInputManager::Start()
 	}
 	for (int i = 0; i < MOUSE_INPUT_TYPE; i++)
 	{
-		mouseUpBuffer[i] = false;
+		MouseUpBuffer[i] = false;
 		mouseDownBuffer[i] = false;
 		mouseAnyBuffer[i] = false;
 	}

@@ -45,7 +45,7 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 
 	RECT displayRectangle;
 	GetClientRect(windowHandle, &displayRectangle);
-	DEngine engine(windowHandle);
+	DEngine engine(GetDC(windowHandle), displayRectangle);
 
 	ShowWindow(windowHandle, commandShowAmount);
 	while (GetMessage(&message, NULL, 0, 0))
@@ -85,19 +85,19 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		}
 		break;
 	case WM_LBUTTONDOWN:
-		DInputManager::BufferAddMouseDown(0);
+		BufferAddMouseDown(0);
 		break;
 
 	case WM_LBUTTONUP:
-		DInputManager::BufferAddMouseUP(0);
+		BufferAddMouseUP(0);
 		break;
 
 	case WM_RBUTTONDOWN:
-		DInputManager::BufferAddMouseUP(1);
+		BufferAddMouseUP(1);
 		break;
 
 	case WM_RBUTTONUP:
-		DInputManager::BufferAddMouseUP(1);
+		BufferAddMouseUP(1);
 		break;
 
 	case WM_PAINT: // �׸���

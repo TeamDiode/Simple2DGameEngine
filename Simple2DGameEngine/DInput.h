@@ -9,7 +9,7 @@ private:
 	static bool isLockDownBuffer;
 	static bool isLockUpBuffer;
 
-	static bool mouseUpBuffer[MOUSE_INPUT_TYPE];
+	static bool mouseUPBuffer[MOUSE_INPUT_TYPE];
 	static bool mouseDownBuffer[MOUSE_INPUT_TYPE];
 	static bool mouseAnyBuffer[MOUSE_INPUT_TYPE];
 
@@ -17,7 +17,7 @@ private:
 	static EDkeyCode keyUpBuffer[LEN];
 	static EDkeyCode keyAnyBuffer[LEN];
 
-	static const EDkeyCode TrueValueReturn(EDkeyCode e);
+	static const EDkeyCode TrueValueReturn(EDkeyCode i);
 
 	static void BufferAddKeyAny(EDkeyCode k);
 	static void BufferAddMouseAny(int i);
@@ -33,9 +33,9 @@ public:
 	const static bool GetKey(EDkeyCode k); 
 	const static bool GetKeyUp(EDkeyCode k); 
 
-	const static bool GetMouseButtonDown(int i) { return (MOUSE_INPUT_TYPE > i && i > 0) ? mouseDownBuffer[i] : false; }
-	const static bool GetMouseButtonUp(int i) { return (MOUSE_INPUT_TYPE > i && i > 0) ? mouseUpBuffer[i] : false; }
-	const static bool GetMouseButton(int i) { return (MOUSE_INPUT_TYPE > i && i > 0) ? mouseAnyBuffer[i] : false; }
+	const static bool GetMouseButtonDown(int i) { return (MOUSE_INPUT_TYPE > i || i > 0) ? mouseDownBuffer[i] : false; }
+	const static bool GetMouseButtonUp(int i) { return (MOUSE_INPUT_TYPE > i || i > 0) ? mouseUpBuffer[i] : false; }
+	const static bool GetMouseButton(int i) { return (MOUSE_INPUT_TYPE > i || i > 0) ? mouseAnyBuffer[i] : false; }
 
 	static void Init();
 	static void Start();
