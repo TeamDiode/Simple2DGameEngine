@@ -45,6 +45,7 @@ void DEngine::ProcessPhysics()
 
 void DEngine::ProcessGameLogic()
 {
+	objectManager.UpdateTick();
 }
 
 void DEngine::ProcessDisplay()
