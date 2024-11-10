@@ -63,14 +63,18 @@ public:
 
 	void operator=(const DList<MemberType>& copy);
 };
-
+/// <summary>
+/// List를 생성합니다.
+/// </summary>
 template<typename MemberType>
 DList<MemberType>::DList()
 {
 	currentIterator = nullptr;
 	size = 0;
 }
-
+/// <summary>
+/// List를 생성하고 매개변수 value를 size만큼 삽입합니다.
+/// </summary>
 template<typename MemberType>
 DList<MemberType>::DList(MemberType value, int size) : DList()
 {
@@ -98,13 +102,17 @@ DList<MemberType>::~DList()
 {
 	while (RemoveHere());
 }
-
+/// <summary>
+/// 리스트의 크기를 반환합니다.
+/// </summary>
 template<typename MemberType>
 int DList<MemberType>::GetSize()
 {
 	return size;
 }
-
+/// <summary>
+/// 매개변수 isNext 값이 true일 경우 뒤로 false의 경우 뒤로 이동합니다.
+/// </summary>
 template<typename MemberType>
 bool DList<MemberType>::Move(bool isNext)
 {
@@ -127,13 +135,18 @@ bool DList<MemberType>::Move(bool isNext)
 
 	return isSuccess;
 }
-
+/// <summary>
+/// 현재 방문하고 있는 위치의 값을 반환합니다.
+/// </summary>
 template<typename MemberType>
 MemberType DList<MemberType>::GetValue()
 {
 	return currentIterator->currentValue;
 }
-
+/// <summary>
+/// 현재 방분하고 있는 위치의 뒤에 value을 삽입합니다.
+/// </summary>
+/// <returns>현재 위치의 주소를 반환합니다.</returns>
 template<typename MemberType>
 DIterator<MemberType>* DList<MemberType>::AddNext(MemberType value)
 {
@@ -153,7 +166,11 @@ DIterator<MemberType>* DList<MemberType>::AddNext(MemberType value)
 
 	return currentIterator;
 }
-
+/// <summary>
+/// 현재 방문하고 있는 위치의 데이터를 삭제하고 다음으로 이동합니다.
+/// 삭제 불가능할 시 false값을 반환합니다.
+/// </summary>
+/// <returns>삭제 성공 여부</returns>
 template<typename MemberType>
 bool DList<MemberType>::RemoveHere()
 {
@@ -169,7 +186,9 @@ bool DList<MemberType>::RemoveHere()
 	size--;
 	return true;
 }
-
+/// <summary>
+/// 리스트가 비어있는지 확인합니다.
+/// </summary>
 template<typename MemberType>
 inline bool DList<MemberType>::IsEmpty()
 {
