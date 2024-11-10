@@ -58,5 +58,8 @@ public:
 	// 하위 오브젝트를 부착
 	void AttachObject(DObject* lowerObjectToAttach);
 
+	// 매 틱마다 호출되는 함수
+	virtual void Update();
+
 };
 

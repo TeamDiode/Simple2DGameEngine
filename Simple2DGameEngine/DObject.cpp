@@ -86,3 +86,7 @@ void DObject::AttachObject(DObject* newLowerObject)
 	newLowerObject->SetUpperObject(this);
 	lowerObjectAttachments.AddNext(newLowerObject);
 }
+
+void DObject::Update()
+{
+}

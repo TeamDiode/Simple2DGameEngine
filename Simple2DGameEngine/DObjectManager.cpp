@@ -39,3 +39,14 @@ bool DObjectManager::DestroyObject(DObject* objectToDestroy)
 
 	return isSuccess;
 }
+
+void DObjectManager::UpdateTick()
+{
+	int objectAmount = objectInstances.GetSize();
+
+	for (int i = 0; i < objectAmount; i++)
+	{
+		objectInstances.GetValue()->Update();
+		objectInstances.Move();
+	}
+}
