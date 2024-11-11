@@ -14,4 +14,6 @@ public:
 private:
 	HWND hWnd;
 	RECT rect;
+
+	void InitRect();
 };
