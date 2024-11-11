@@ -46,6 +46,12 @@
     <Filter Include="DEngine\Source\Public\DesignPattern">
       <UniqueIdentifier>{16cc1e7d-fe69-422c-855c-e92039055611}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DEngine\Source\Private\Physics">
+      <UniqueIdentifier>{a494cc7c-687a-4259-a7a9-d8c467cfc582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DEngine\Source\Public\Physics">
+      <UniqueIdentifier>{598df82c-5695-4609-ab92-bd2043596894}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -68,6 +74,18 @@
     </ClCompile>
     <ClCompile Include="DRenderer.cpp">
       <Filter>DEngine\Source\Private\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="DCollision.cpp">
+      <Filter>DEngine\Source\Private\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="DCollisionData.cpp">
+      <Filter>DEngine\Source\Private\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="DGravity.cpp">
+      <Filter>DEngine\Source\Private\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="DPhysicsManager.cpp">
+      <Filter>DEngine\Source\Private\Physics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +115,18 @@
     </ClInclude>
     <ClInclude Include="DSingleton.hpp">
       <Filter>DEngine\Source\Public\DesignPattern</Filter>
+    </ClInclude>
+    <ClInclude Include="DCollision.h">
+      <Filter>DEngine\Source\Public\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="DCollisionData.h">
+      <Filter>DEngine\Source\Public\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="DGravity.h">
+      <Filter>DEngine\Source\Public\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="DPhysicsManager.h">
+      <Filter>DEngine\Source\Public\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
