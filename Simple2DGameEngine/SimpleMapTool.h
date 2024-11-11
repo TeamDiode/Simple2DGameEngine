@@ -2,6 +2,7 @@
 
 #include "DObjectManager.h"
 #include "DRenderer.h"
+#include "DInput.h"
 
 
 class SimpleMapTool
@@ -21,12 +22,20 @@ class TestPlayer : public DObject
 public:
 	TestPlayer()
 	{
-		DOSprite* skin = new DOSprite(1);
+		DObject* skin = DObjectManager::CreateObject(DOSprite(1));
 		skin->SetScale(100, 100);
 		AttachObject(skin);
 	}
 
+	~TestPlayer()
+	{
+
+	}
+
 private:
+
+public:
+	virtual void Update() override;
 	
 
 };
