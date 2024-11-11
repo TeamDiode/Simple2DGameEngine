@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="DEngine.cpp" />
     <ClCompile Include="DInput.cpp" />
+    <ClCompile Include="DMathHelper.cpp" />
     <ClCompile Include="DObject.cpp" />
     <ClCompile Include="DMathTypes.cpp" />
     <ClCompile Include="DOCamera.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="DEngine.h" />
     <ClInclude Include="DInput.h" />
     <ClInclude Include="DList.hpp" />
+    <ClInclude Include="DMathHelper.h" />
     <ClInclude Include="DObject.h" />
     <ClInclude Include="DObjectManager.h" />
     <ClInclude Include="DMathTypes.h" />
