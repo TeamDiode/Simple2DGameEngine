@@ -1,20 +1,11 @@
 #pragma once
+
+#define PI		3.1415926535897932384
+#define Rad2Deg 0.01745329251
+#define Deg2Rad 57.2957795131
+
 class DMathHelper
 {
-public:
-	/// <summary>
-	/// 원주율 PI
-	/// </summary>
-	static double PI;
-	/// <summary>
-	/// 도 단위로 전환하는 스칼라 (RadianToDgree)
-	/// </summary>
-	static float Rad2Deg;
-	/// <summary>
-	/// 라디언 단위로 전환하는 스칼라 (DgreeToRadian)
-	/// </summary>
-	static float Deg2Rad;
-
 public:
 	/// <summary>
 	/// 파라미터 값 중 작은 값을 반환합니다.

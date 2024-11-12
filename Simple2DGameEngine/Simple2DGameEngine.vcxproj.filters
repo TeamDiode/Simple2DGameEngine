@@ -78,6 +78,9 @@
     <ClCompile Include="DOSprite.cpp">
       <Filter>DEngine\Source\Private\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="DMathHelper.cpp">
+      <Filter>DEngine\Source\Private\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DEngine.h">
@@ -112,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="DOSprite.h">
       <Filter>DEngine\Source\Public\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DMathHelper.h">
+      <Filter>DEngine\Source\Public\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
