@@ -34,12 +34,12 @@ void DRenderer::RegisterSprite(DOSprite* sprite)
 
 void DRenderer::Draw()
 {
+    Reset();
     for (int i = sprites.GetSize(); i > 0; i--)
     {
         sprites.Move();
         DrawBySpriteType(sprites.GetValue());
     }
-        
 }
 
 void DRenderer::Reset()
@@ -63,7 +63,6 @@ void DRenderer::DrawBySpriteType(DOSprite* sprite)
 
 void DRenderer::DrawRectangel(DOSprite* sprite)
 {
-    Reset();
     MoveToEx(hdc, (int)sprite->GetLeftTopPosition().x, (int)sprite->GetLeftTopPosition().y, NULL);
     LineTo(hdc, (int)sprite->GetRightTopPosition().x, (int)sprite->GetRightTopPosition().y);
     LineTo(hdc, (int)sprite->GetRightBottomPosiiton().x, (int)sprite->GetRightBottomPosiiton().y);
@@ -73,7 +72,6 @@ void DRenderer::DrawRectangel(DOSprite* sprite)
 
 void DRenderer::DrawEllipse(DOSprite* sprite)
 {
-    Reset();
     Ellipse(hdc, (int)sprite->GetLeftTopPosition().x, (int)sprite->GetLeftTopPosition().y,
         (int)sprite->GetRightBottomPosiiton().x, (int)sprite->GetRightBottomPosiiton().y);
 }
