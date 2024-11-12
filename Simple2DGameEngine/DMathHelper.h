@@ -2,6 +2,11 @@
 class DMathHelper
 {
 public:
+	static double PI;
+	static float Rad2Deg;
+	static float Deg2Rad;
+
+public:
 	/// <summary>
 	/// 파라미터 값 중 작은 값을 반환합니다.
 	/// </summary>

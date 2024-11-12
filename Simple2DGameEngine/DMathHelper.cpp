@@ -1,6 +1,10 @@
 #include "DMathHelper.h"
 #include <cmath>
 
+double DMathHelper::PI = 3.1415926535897932384;
+float DMathHelper::Deg2Rad = PI/180;
+float DMathHelper::Rad2Deg = 180/PI;
+
 float DMathHelper::Min(float a, float b)
 {
     return a < b ? a : b;
