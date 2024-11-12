@@ -2,8 +2,17 @@
 class DMathHelper
 {
 public:
+	/// <summary>
+	/// 원주율 PI
+	/// </summary>
 	static double PI;
+	/// <summary>
+	/// 도 단위로 전환하는 스칼라 (RadianToDgree)
+	/// </summary>
 	static float Rad2Deg;
+	/// <summary>
+	/// 라디언 단위로 전환하는 스칼라 (DgreeToRadian)
+	/// </summary>
 	static float Deg2Rad;
 
 public:
