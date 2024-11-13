@@ -1,23 +1,28 @@
 #include "DOCamera.h"
 #include "DObject.h"
 
-#define LEFT GetLocation().x - GetScale().x / 2
-#define RIGHT GetLocation().x + GetScale().x / 2
-#define TOP GetLocation().y - GetScale().y / 2
-#define BOTTOM GetLocation().y + GetScale().y / 2
-
 DOCamera::DOCamera(HWND newHWnd)
 {
 	hWnd = newHWnd;
-	rect = { LEFT, TOP, RIGHT, BOTTOM };
+	InitRect();
 }
 
 DOCamera::DOCamera()
 {
-	rect = { LEFT, TOP, RIGHT, BOTTOM };
+	InitRect();
 }
 
 void DOCamera::PrintScreen()
 {
 	InvalidateRect(hWnd, &rect, true);
+}
+
+void DOCamera::InitRect()
+{
+	int left = (int)(GetLocation().x - GetScale().x / 2);
+	int right = (int)(GetLocation().x + GetScale().x / 2);
+	int top = (int)(GetLocation().y - GetScale().y / 2);
+	int bottom = (int)(GetLocation().y + GetScale().y / 2);
+
+	rect = { left, top, right, bottom };
 }
