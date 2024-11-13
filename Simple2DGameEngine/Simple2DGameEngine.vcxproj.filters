@@ -78,6 +78,9 @@
     <ClCompile Include="DOSprite.cpp">
       <Filter>DEngine\Source\Private\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="DMathHelper.cpp">
+      <Filter>DEngine\Source\Private\Math</Filter>
+    </ClCompile>
     <ClCompile Include="DOCamera.cpp">
       <Filter>DEngine\Source\Private\Graphics</Filter>
     </ClCompile>
@@ -116,6 +119,9 @@
     <ClInclude Include="DOSprite.h">
       <Filter>DEngine\Source\Public\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="DMathHelper.h">
+      <Filter>DEngine\Source\Public\Math</Filter>
+    </ClCompile>
     <ClInclude Include="DOCamera.h">
       <Filter>DEngine\Source\Public\Graphics</Filter>
     </ClInclude>

@@ -1,4 +1,9 @@
 #pragma once
+
+#define PI		3.1415926535897932384
+#define Rad2Deg 0.01745329251
+#define Deg2Rad 57.2957795131
+
 class DMathHelper
 {
 public:

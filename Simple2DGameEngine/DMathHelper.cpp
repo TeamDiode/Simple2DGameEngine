@@ -1,6 +1,7 @@
 #include "DMathHelper.h"
 #include <cmath>
 
+
 float DMathHelper::Min(float a, float b)
 {
     return a < b ? a : b;
