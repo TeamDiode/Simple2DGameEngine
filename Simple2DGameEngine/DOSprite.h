@@ -19,5 +19,9 @@ public:
 
 private:
 	int type;
+	float angleInRadian;
 	DVector2i position;
+
+private:
+	DVector2i GetRotatedPosition(float x, float y);
 };
