@@ -134,6 +134,7 @@
     <ClCompile Include="DMathTypes.cpp" />
     <ClCompile Include="DOCamera.cpp" />
     <ClCompile Include="DRenderer.cpp" />
+    <ClCompile Include="DWorld.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="DObjectManager.cpp" />
     <ClCompile Include="DOSprite.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="DOSprite.h" />
     <ClInclude Include="DRenderer.h" />
     <ClInclude Include="DSingleton.hpp" />
+    <ClInclude Include="DWorld.h" />
     <ClInclude Include="EDkeyCodeEnum.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
