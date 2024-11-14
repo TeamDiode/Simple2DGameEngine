@@ -8,6 +8,7 @@ DEngine::DEngine()
 	objectManager = DObjectManager();
 	renderer = DRenderer();
 	engineInstance = this;
+	startWorld.Load();
 }
 
 DEngine::DEngine(HDC deviceContextHandle, RECT displayRectangle)
@@ -15,6 +16,7 @@ DEngine::DEngine(HDC deviceContextHandle, RECT displayRectangle)
 	objectManager = DObjectManager();
 	renderer = DRenderer(deviceContextHandle, displayRectangle);
 	engineInstance = this;
+	startWorld.Load();
 }
 
 DEngine::~DEngine()
