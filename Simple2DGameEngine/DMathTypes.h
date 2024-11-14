@@ -28,5 +28,5 @@ public:
 	// 백터 내적
 	float Dot(DVector2i value);
 	// 백터 외적
-	DVector2i Cross(DVector2i value);
+	float Cross(DVector2i value);
 };

@@ -41,7 +41,7 @@ float DVector2i::Dot(DVector2i value)
 	return (x * value.x) + (y * value.y);
 }
 
-DVector2i DVector2i::Cross(DVector2i value)
+float DVector2i::Cross(DVector2i value)
 {
-	return DVector2i((x + value.y), (value.x+ y));
+	return (x * value.y) - (value.x * y);
 }
