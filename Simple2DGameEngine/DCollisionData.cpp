@@ -1,10 +1,15 @@
 #include "DCollisionData.h"
 
-DCollisionData::DCollisionData(const DVector2i& position, const DVector2i& s, Shape sha, float den, float r)
-    : pos(position), size(size), shape(sha), density(den), restitution(r) {
+DCollisionData::DCollisionData(Shape sha, float den, float r)
+    : shape(sha), density(den), restitution(r) 
+{
+    localPosition = GetLocation();
+    size = GetScale();
+
+
     //AABB경계 구하기
-    aabb.min = pos - (size * 0.5f);
-    aabb.max = pos + (size * 0.5f);
+    aabb.min = localPosition - (size * 0.5f);
+    aabb.max = localPosition + (size * 0.5f);
 
     mass = CalculateMass();
 }
@@ -28,8 +33,10 @@ float DCollisionData::CalculateMass()
 
 void DCollisionData::UpdatePosition(float deltaTime) {
     // 속도 위치 업데이트
-    pos.x += static_cast<int>(velocity.x * deltaTime);
-    pos.y += static_cast<int>(velocity.y * deltaTime);
-    aabb.min = pos - (size * 0.5f);  //AABB 위치 갱신
-    aabb.max = pos + (size * 0.5f);
+    localPosition.x += static_cast<int>(velocity.x * deltaTime);
+    localPosition.y += static_cast<int>(velocity.y * deltaTime);
+    aabb.min = localPosition - (size * 0.5f);  //AABB 위치 갱신
+    aabb.max = localPosition + (size * 0.5f);
+
+    SetLocation(localPosition); // DObject에 위치 반영
 }
