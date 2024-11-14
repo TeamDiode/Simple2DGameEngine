@@ -2,5 +2,7 @@
 
 void DGravity::ApplyGravity(DCollisionData& object, float deltaTime)
 {
-	object.velocity.y += gravity * deltaTime;  // Y축에 중력 가속도 적용
+	float effectiveGravity = gravity * gravityScale; // 중력 계산
+
+	object.velocity.y += effectiveGravity * deltaTime; // 변화량 반영
 }
