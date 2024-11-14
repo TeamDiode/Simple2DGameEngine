@@ -9,7 +9,7 @@ private:
 	static bool isLockDownBuffer;
 	static bool isLockUpBuffer;
 
-	static bool mouseUPBuffer[MOUSE_INPUT_TYPE];
+	static bool mouseUpBuffer[MOUSE_INPUT_TYPE];
 	static bool mouseDownBuffer[MOUSE_INPUT_TYPE];
 	static bool mouseAnyBuffer[MOUSE_INPUT_TYPE];
 
@@ -17,7 +17,7 @@ private:
 	static EDkeyCode keyUpBuffer[LEN];
 	static EDkeyCode keyAnyBuffer[LEN];
 
-	static const EDkeyCode TrueValueReturn(EDkeyCode i);
+	static const EDkeyCode TrueValueReturn(EDkeyCode e);
 
 	static void BufferAddKeyAny(EDkeyCode k);
 	static void BufferAddMouseAny(int i);

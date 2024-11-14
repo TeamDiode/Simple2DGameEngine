@@ -85,19 +85,19 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		}
 		break;
 	case WM_LBUTTONDOWN:
-		BufferAddMouseDown(0);
+		DInputManager::BufferAddMouseDown(0);
 		break;
 
 	case WM_LBUTTONUP:
-		BufferAddMouseUP(0);
+		DInputManager::BufferAddMouseUP(0);
 		break;
 
 	case WM_RBUTTONDOWN:
-		BufferAddMouseUP(1);
+		DInputManager::BufferAddMouseUP(1);
 		break;
 
 	case WM_RBUTTONUP:
-		BufferAddMouseUP(1);
+		DInputManager::BufferAddMouseUP(1);
 		break;
 
 	case WM_PAINT: // �׸���
