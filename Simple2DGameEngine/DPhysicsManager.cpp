@@ -19,7 +19,7 @@ void DPhysicsManager::ResolveCollisions() {
         for (int j = i + 1; j < objects.GetSize(); j++) {
             DCollisionData* objB = objects.GetValue();
             DCollisionDetector detector(objA, objB);
-            if (detector.detectCollision()) {
+            if (detector.DetectCollision()) {
                 detector.ResolveCollision(*objA, *objB); // 충돌 해결
             }
             objects.Move();
