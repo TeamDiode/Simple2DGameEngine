@@ -4,18 +4,24 @@
 
 class DCollisionDetector {
 public:
-    DCollisionDetector(DCollisionData* a, DCollisionData* b);
+    DCollisionDetector(DCollisionData* objectA, DCollisionData* objectB);
 
-    bool detectCollision(); // 충돌 발생시 true
-    void ResolveCollision(DCollisionData a, DCollisionData b);
+    bool DetectCollision(); // 충돌 발생시 true
+    void ResolveCollision(DCollisionData objectA, DCollisionData objectB);
 
-    DVector2i getNormal() const { return normal; }
-    float getPenetration() const { return penetration; }
+    DVector2i GetNormal() const { return normal; }
+    float GetPenetration() const { return penetration; }
 
 private:
-    DCollisionData* A;
-    DCollisionData* B;
-    DVector2i normal; // 충돌 방향
+    // 충돌 감지 세부 메서드
+    bool DetectAABBCollision(); // AABB-AABB
+    bool DetectCircleCollision(); // circle-circle
+    bool DetectCircleAABBCollision(); // AABB-circle
+
+private:
+    DCollisionData* a; // 첫 번째 충돌 객체
+    DCollisionData* b; // 두 번째 충돌 객체
+    DVector2i normal; // 충돌 방향; 법선
     float penetration; // 겹쳐진 부분의 길이
 };
 
