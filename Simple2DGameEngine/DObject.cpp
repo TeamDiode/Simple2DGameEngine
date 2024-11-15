@@ -10,11 +10,13 @@ DObject::DObject()
 	angle = 0.f;
 	scale = DVector2i();
 	upperObject = nullptr;
+
+	DObjectManager::RegisterObject(this);
 }
 
 DObject::~DObject()
 {
-	// 하위 오브젝트의 메모리 해제
+	DObjectManager::CancelObject(this);
 }
 
 DVector2i DObject::GetLocation()
