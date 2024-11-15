@@ -40,6 +40,30 @@ bool DObjectManager::DestroyObject(DObject* objectToDestroy)
 	return isSuccess;
 }
 
+bool DObjectManager::RegisterObject(DObject* newObject)
+{
+	objectInstances.AddNext(newObject);
+
+	return true;
+}
+
+bool DObjectManager::CancelObject(DObject* oldObject)
+{
+	bool isSuccess = false;
+	int remainLoopAmount = objectInstances.GetSize();
+
+	while (remainLoopAmount-- && objectInstances.Move() && !isSuccess)
+	{
+		if (objectInstances.GetValue() == oldObject)
+		{
+			objectInstances.RemoveHere();
+			isSuccess = true;
+		}
+	}
+
+	return isSuccess;
+}
+
 void DObjectManager::UpdateTick()
 {
 	int objectAmount = objectInstances.GetSize();

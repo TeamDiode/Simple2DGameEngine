@@ -16,6 +16,9 @@ public:
 	static DObject* CreateObject(DObject newObjectBlueprint);
 	static bool DestroyObject(DObject* objectToDestroy);
 
+	static bool RegisterObject(DObject* newObject);
+	static bool CancelObject(DObject* oldObject);
+
 	void UpdateTick();
 
 };
