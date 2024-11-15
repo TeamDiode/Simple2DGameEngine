@@ -8,6 +8,9 @@ bool DInputManager::isLockUpBuffer = false;
 EDkeyCode DInputManager::keyDownBuffer[LEN] = { EDkeyCode::null };
 EDkeyCode DInputManager::keyUpBuffer[LEN] = { EDkeyCode::null };
 EDkeyCode DInputManager::keyAnyBuffer[LEN] = { EDkeyCode::null };
+bool DInputManager::mouseUpBuffer[MOUSE_INPUT_TYPE] = { false, };
+bool DInputManager::mouseDownBuffer[MOUSE_INPUT_TYPE] = { false, };
+bool DInputManager::mouseAnyBuffer[MOUSE_INPUT_TYPE] = { false, };
 
 const EDkeyCode DInputManager::TrueValueReturn(EDkeyCode e)
 {

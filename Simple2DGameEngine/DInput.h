@@ -33,9 +33,9 @@ public:
 	const static bool GetKey(EDkeyCode k); 
 	const static bool GetKeyUp(EDkeyCode k); 
 
-	const static bool GetMouseButtonDown(int i) { return (MOUSE_INPUT_TYPE > i || i > 0) ? mouseDownBuffer[i] : false; }
-	const static bool GetMouseButtonUp(int i) { return (MOUSE_INPUT_TYPE > i || i > 0) ? mouseUpBuffer[i] : false; }
-	const static bool GetMouseButton(int i) { return (MOUSE_INPUT_TYPE > i || i > 0) ? mouseAnyBuffer[i] : false; }
+	const static bool GetMouseButtonDown(int i) { return (MOUSE_INPUT_TYPE > i && i > 0) ? mouseDownBuffer[i] : false; }
+	const static bool GetMouseButtonUp(int i) { return (MOUSE_INPUT_TYPE > i && i > 0) ? mouseUpBuffer[i] : false; }
+	const static bool GetMouseButton(int i) { return (MOUSE_INPUT_TYPE > i && i > 0) ? mouseAnyBuffer[i] : false; }
 
 	static void Init();
 	static void Start();
