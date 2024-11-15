@@ -8,18 +8,14 @@ class DRenderer
 {
 public:
 	DRenderer();
-	DRenderer(HDC newHdc, RECT newRect);
+	DRenderer(HDC newHdc);
 
-	void Initialize(HDC newHdc, RECT newRect);
 	static void RegisterSprite(DOSprite* sprite);
 	void Draw();
 	
 private:
 	HDC hdc;
-	RECT rect;
 	static DList<DOSprite*> sprites;
-
-	void Reset();
 
 	void DrawBySpriteType(DOSprite* sprite);
 	void DrawRectangel(DOSprite* sprite);

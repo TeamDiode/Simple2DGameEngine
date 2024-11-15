@@ -12,19 +12,11 @@ DList<DOSprite*> DRenderer::sprites = DList<DOSprite*>();
 DRenderer::DRenderer()
 {
     hdc = NULL;
-    rect = RECT();
 }
 
-DRenderer::DRenderer(HDC newHdc, RECT newRect)
+DRenderer::DRenderer(HDC newHdc)
 {
     hdc = newHdc;
-    rect = newRect;
-}
-
-void DRenderer::Initialize(HDC newHdc, RECT newRect)
-{
-    hdc = newHdc;
-    rect = newRect;
 }
 
 void DRenderer::RegisterSprite(DOSprite* sprite)
@@ -34,7 +26,6 @@ void DRenderer::RegisterSprite(DOSprite* sprite)
 
 void DRenderer::Draw()
 {
-    Reset();
     for (int i = sprites.GetSize(); i > 0; i--)
     {
         sprites.Move();
@@ -42,11 +33,6 @@ void DRenderer::Draw()
     }
 }
 
-void DRenderer::Reset()
-{
-    GetClientRect(WindowFromDC(hdc), &rect);
-    FillRect(hdc, &rect, (HBRUSH)(COLOR_WINDOW + 1));
-}
 
 void DRenderer::DrawBySpriteType(DOSprite* sprite)
 {
