@@ -2,7 +2,6 @@
 
 #include "DMathTypes.h"
 #include "DList.hpp"
-#include "DObjectManager.h"
 
 
 class DObject

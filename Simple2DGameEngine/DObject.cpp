@@ -1,5 +1,5 @@
 #include "DObject.h"
-
+#include "DObjectManager.h"
 
 // TODO : 라디언 단위로 각도 수정하는 부분 개선
 
