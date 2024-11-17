@@ -5,6 +5,7 @@ struct DAutoPointer
 {
 public:
 	DAutoPointer();
+	DAutoPointer(MemberType value);
 	DAutoPointer(MemberType* value);
 	~DAutoPointer();
 
@@ -14,6 +15,7 @@ public:
 	MemberType* GetValue();
 	void SetValue(MemberType value);
 
+	void operator=(const MemberType copy);
 	void operator=(const MemberType* copy);
 };
 
@@ -21,6 +23,12 @@ template<typename MemberType>
 inline DAutoPointer<MemberType>::DAutoPointer()
 {
 	data = nullptr;
+}
+
+template<typename MemberType>
+inline DAutoPointer<MemberType>::DAutoPointer(MemberType value)
+{
+	data = new MemberType(value);
 }
 
 template<typename MemberType>
@@ -52,8 +60,14 @@ inline void DAutoPointer<MemberType>::SetValue(MemberType value)
 }
 
 template<typename MemberType>
+inline void DAutoPointer<MemberType>::operator=(const MemberType copy)
+{
+	SetValue(copy);
+}
+
+template<typename MemberType>
 inline void DAutoPointer<MemberType>::operator=(const MemberType* copy)
 {
-	data = value;
+	data = copy;
 }
 
