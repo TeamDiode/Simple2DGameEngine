@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DArray.hpp" />
+    <ClInclude Include="DAutoPointer.hpp" />
     <ClInclude Include="DEngine.h" />
     <ClInclude Include="DList.hpp" />
     <ClInclude Include="DObject.h" />
