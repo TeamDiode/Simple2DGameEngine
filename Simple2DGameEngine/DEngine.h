@@ -6,6 +6,7 @@
 #include "DSingleton.hpp"
 #include "DInput.h"
 #include "DWorld.h"
+#include "DPhysicsManager.h"
 
 class DEngine
 {
@@ -19,7 +20,7 @@ private:
 	static DEngine* engineInstance;
 
 	DObjectManager objectManager;
-	// 물리 처리
+	DPhysicsManager physicsManager;
 	// 서브 시스템
 	DRenderer renderer;
 
