@@ -9,6 +9,12 @@ enum class Shape
     Circle
 };
 
+struct AABB
+{
+    DVector2i min;
+    DVector2i max;
+};
+
 class DCollisionData : public DObject{
 public:
     //DVector2i pos;      // 물체의 위치
@@ -26,10 +32,4 @@ public:
     float CalculateMass();
     void UpdatePosition(float deltaTime);
 
-};
-
-struct AABB
-{
-    DVector2i min;
-    DVector2i max;
 };
