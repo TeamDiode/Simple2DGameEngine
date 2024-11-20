@@ -36,10 +36,9 @@ float DCollisionData::CalculateMass()
 
 void DCollisionData::UpdatePosition(float deltaTime) {
     // 속도 위치 업데이트
-    localPosition.x += static_cast<int>(velocity.x * deltaTime);
-    localPosition.y += static_cast<int>(velocity.y * deltaTime);
-    aabb.min = localPosition - (size * 0.5f);  //AABB 위치 갱신
-    aabb.max = localPosition + (size * 0.5f);
+    SetLocation(GetLocation() + velocity * deltaTime); // DObject에 위치 반영
+    aabb.min = GetLocation() - (size * 0.5f);  //AABB 위치 갱신
+    aabb.max = GetLocation() + (size * 0.5f);
 
-    SetLocation(localPosition); // DObject에 위치 반영
+    
 }
