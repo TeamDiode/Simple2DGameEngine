@@ -1,4 +1,7 @@
 #include "DPhysicsManager.h"
+#include "DCollision.h"
+
+DList<DCollisionData*> DPhysicsManager::objects = DList<DCollisionData*>();
 
 void DPhysicsManager::AddObject(DCollisionData* object) {
     objects.AddNext(object); // °´Ã¼ Ãß°¡
