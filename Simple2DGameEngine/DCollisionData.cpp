@@ -1,4 +1,5 @@
 #include "DCollisionData.h"
+#include "DPhysicsManager.h"
 
 DCollisionData::DCollisionData(Shape sha, float den, float r)
     : shape(sha), density(den), restitution(r) 
@@ -12,6 +13,8 @@ DCollisionData::DCollisionData(Shape sha, float den, float r)
     aabb.max = localPosition + (size * 0.5f);
 
     mass = CalculateMass();
+
+    DPhysicsManager::AddObject(this);
 }
 
 float DCollisionData::CalculateMass()
