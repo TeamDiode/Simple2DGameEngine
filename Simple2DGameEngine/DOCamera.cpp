@@ -3,19 +3,11 @@
 
 DOCamera::DOCamera()
 {
-
-}
-
-DOCamera::DOCamera()
-{
 	hWnd = nullptr;
 	hdc = nullptr;
 	mapRect = { NULL };
 }
 
-/// <summary>
-/// 게임 세상 속 카메라 위치마다 다르게 그리는 함수
-/// </summary>
 void DOCamera::RenderBasedCamera()
 {
 	AllReset();
@@ -23,31 +15,42 @@ void DOCamera::RenderBasedCamera()
 	InvalidateRect(hWnd, &mapRect, TRUE);
 }
 
-/// <summary>
-/// 게임 세상 속 카메라 위치를 제한하는 함수
-/// </summary>
 void DOCamera::LimitedCameraPositionInGameWorld()
 {
+	float x = GetLocation().x;
+	float y = GetLocation().y;
+
 	//left 제한
 	if((int)(GetLocation().x - GetScale().x / 2) < mapRect.left)
-	{ }
+	{ 
+		x = mapRect.left + GetScale().x / 2;
+		y = GetLocation().y;
+	}
 
 	//right 제한
 	if((int)(GetLocation().x + GetScale().x / 2) > mapRect.right)
-	{ }
+	{
+		x = mapRect.right - GetScale().x / 2;
+		y = GetLocation().y;
+	}
 
 	//top 제한
 	if ((int)(GetLocation().y - GetScale().y / 2) < mapRect.top)
-	{ }
+	{
+		x = GetLocation().x;
+		y = mapRect.top + GetScale().y / 2;
+	}
 
 	//bottom 제한
 	if ((int)(GetLocation().y + GetScale().y / 2) > mapRect.bottom)
-	{ }
+	{
+		x = GetLocation().x;
+		y = mapRect.bottom - GetScale().y / 2;
+	}
+
+	SetLocation(DVector2i(x, y));
 }
 
-/// <summary>
-/// 게임 세상의 크기를 받아오는 함수
-/// </summary>
 void DOCamera::RetrieveGameWorld(DObject* newMap)
 {
 	int left = (int)(newMap->GetLocation().x - newMap->GetScale().x / 2);
