@@ -13,10 +13,10 @@ private:
 	MemberType* data;
 public:
 	MemberType* GetValue();
-	void SetValue(MemberType value);
 
 	void operator=(const MemberType copy);
 	void operator=(const MemberType* copy);
+	void operator=(const DAutoPointer<MemberType> copy);
 };
 
 template<typename MemberType>
@@ -51,23 +51,20 @@ inline MemberType* DAutoPointer<MemberType>::GetValue()
 }
 
 template<typename MemberType>
-inline void DAutoPointer<MemberType>::SetValue(MemberType value)
-{
-	if (data == nullptr)
-		data = new MemberType(value);
-	else
-		data = value;
-}
-
-template<typename MemberType>
 inline void DAutoPointer<MemberType>::operator=(const MemberType copy)
 {
-	SetValue(copy);
+	data = new MemberType(copy);
 }
 
 template<typename MemberType>
 inline void DAutoPointer<MemberType>::operator=(const MemberType* copy)
 {
 	data = copy;
+}
+
+template<typename MemberType>
+inline void DAutoPointer<MemberType>::operator=(const DAutoPointer<MemberType> copy)
+{
+	data = new MemberType(copy.data);
 }
 
