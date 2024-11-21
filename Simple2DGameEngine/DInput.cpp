@@ -2,9 +2,11 @@
 
 #include "DInput.h"
 #include "EDkeyCodeEnum.h"
+#include "DMathTypes.h"
 
 bool DInputManager::isLockDownBuffer = false;
 bool DInputManager::isLockUpBuffer = false;
+DVector2i DInputManager::mousePostion = DVector2i(0, 0);
 EDkeyCode DInputManager::keyDownBuffer[LEN] = { EDkeyCode::null };
 EDkeyCode DInputManager::keyUpBuffer[LEN] = { EDkeyCode::null };
 EDkeyCode DInputManager::keyAnyBuffer[LEN] = { EDkeyCode::null };
@@ -123,6 +125,7 @@ const bool DInputManager::GetKeyUp(EDkeyCode k)
 	}
 	return false;
 }
+
 
 void DInputManager::Init()
 {

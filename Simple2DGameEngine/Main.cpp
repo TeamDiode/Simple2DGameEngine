@@ -10,6 +10,7 @@
 #include "DEngine.h"
 #include "EDkeyCodeEnum.h"
 #include "DInput.h"
+#include "DMathTypes.h"
 
 // â ���� ũ��
 #define SCREEN_WIDTH 1600
@@ -61,7 +62,7 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
 	LPARAM pointerParameter)
 {
-
+	DVector2i mousePostionVector2;
 	switch (messageFlag)
 	{
 	case WM_CREATE: // ���� ����
@@ -85,19 +86,28 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		}
 		break;
 	case WM_LBUTTONDOWN:
-		BufferAddMouseDown(0);
+		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
+		DInputManager::BufferAddMouseDown(0);
 		break;
 
 	case WM_LBUTTONUP:
-		BufferAddMouseUP(0);
+		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
+		DInputManager::BufferAddMouseUP(0);
 		break;
 
 	case WM_RBUTTONDOWN:
-		BufferAddMouseUP(1);
+		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
+		DInputManager::BufferAddMouseDown(1);
 		break;
 
 	case WM_RBUTTONUP:
-		BufferAddMouseUP(1);
+		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
+		DInputManager::BufferAddMouseUP(1);
+		break;
+
+	case WM_MOUSEMOVE:
+		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
+		DInputManager::MouseMove(mousePostionVector2);
 		break;
 
 	case WM_PAINT: // �׸���
