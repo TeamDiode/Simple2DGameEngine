@@ -58,7 +58,19 @@ void DEngine::ProcessDisplay()
 	renderer.Draw();
 }
 
-void DEngine::ManageSubSystemThread(DAutoPointer<DSubSystem> subSystemClass)
+#include <ctime>
+DWORD WINAPI DEngine::ManageSubSystemThread(PVOID subSystemClass)
 {
 	// 스레드 만들어지고 동작
+	// deltaTime, Clock
+	// 
+	clock_t s;
+	double daltatime = 0;
+	while (true)
+	{
+		s = clock();
+		(*(DAutoPointer<DSubSystem>*)subSystemClass).GetValue()->Tick(daltatime);
+		daltatime = s - clock();
+	}
+	
 }
