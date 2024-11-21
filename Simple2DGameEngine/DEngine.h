@@ -44,6 +44,7 @@ public:
 	void ProcessDisplay();
 
 private:
-	void ManageSubSystemThread(DAutoPointer<DSubSystem> subSystemClass);
-
+	void CreateSybSystemThread(DAutoPointer<DSubSystem>& subSystemClass, int threadPriority);
+	static DWORD WINAPI ManageSubSystemThread(PVOID subSystemClass);
+	
 };

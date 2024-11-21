@@ -58,7 +58,15 @@ void DEngine::ProcessDisplay()
 	renderer.Draw();
 }
 
-void DEngine::ManageSubSystemThread(DAutoPointer<DSubSystem> subSystemClass)
+DWORD WINAPI DEngine::ManageSubSystemThread(PVOID subSystemClass)
 {
 	// 스레드 만들어지고 동작
+
+	return 0;
+}
+void DEngine::CreateSybSystemThread(DAutoPointer<DSubSystem>& subSystemClass, int threadPriority)
+{
+	DWORD newThreadID;
+	HANDLE newThreadHandle = CreateThread(NULL, 0, ManageSubSystemThread, (PVOID)&subSystemClass, 0, &newThreadID);
+	SetThreadPriority(newThreadHandle, threadPriority);
 }
