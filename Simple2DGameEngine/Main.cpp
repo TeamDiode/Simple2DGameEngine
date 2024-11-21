@@ -45,7 +45,7 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 
 	RECT displayRectangle;
 	GetClientRect(windowHandle, &displayRectangle);
-	DEngine engine(GetDC(windowHandle), displayRectangle);
+	DEngine engine(GetDC(windowHandle));
 
 	ShowWindow(windowHandle, commandShowAmount);
 	while (GetMessage(&message, NULL, 0, 0))

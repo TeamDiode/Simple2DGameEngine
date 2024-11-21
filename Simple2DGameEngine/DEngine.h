@@ -12,7 +12,7 @@ class DEngine
 {
 public:
 	DEngine();
-	DEngine(HDC deviceContextHandle, RECT displayRectangle);
+	DEngine(HDC deviceContextHandle);
 	~DEngine();
 
 	

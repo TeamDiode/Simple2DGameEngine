@@ -12,11 +12,11 @@ DEngine::DEngine()
 	startWorld.Load();
 }
 
-DEngine::DEngine(HDC deviceContextHandle, RECT displayRectangle)
+DEngine::DEngine(HDC deviceContextHandle)
 {
 	objectManager = DObjectManager();
 	physicsManager = DPhysicsManager();
-	renderer = DRenderer(deviceContextHandle, displayRectangle);
+	renderer = DRenderer(deviceContextHandle);
 	engineInstance = this;
 	startWorld.Load();
 }
