@@ -161,6 +161,7 @@
     <ClInclude Include="DOSprite.h" />
     <ClInclude Include="DRenderer.h" />
     <ClInclude Include="DSingleton.hpp" />
+    <ClInclude Include="DSubSystem.h" />
     <ClInclude Include="DWorld.h" />
     <ClInclude Include="EDkeyCodeEnum.h" />
   </ItemGroup>
