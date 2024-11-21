@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DArray.hpp" />
+    <ClInclude Include="DAutoPointer.hpp" />
     <ClInclude Include="DCollision.h" />
     <ClInclude Include="DCollisionData.h" />
     <ClInclude Include="DEngine.h" />

@@ -7,6 +7,8 @@
 #include "DInput.h"
 #include "DWorld.h"
 #include "DPhysicsManager.h"
+#include "DSubSystem.h"
+#include "DAutoPointer.hpp"
 
 class DEngine
 {
@@ -40,5 +42,8 @@ public:
 	void ProcessGameLogic();
 	// 출력 처리
 	void ProcessDisplay();
+
+private:
+	void ManageSubSystemThread(DAutoPointer<DSubSystem> subSystemClass);
 
 };

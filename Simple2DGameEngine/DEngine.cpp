@@ -57,3 +57,8 @@ void DEngine::ProcessDisplay()
 {
 	renderer.Draw();
 }
+
+void DEngine::ManageSubSystemThread(DAutoPointer<DSubSystem> subSystemClass)
+{
+	// 스레드 만들어지고 동작
+}
