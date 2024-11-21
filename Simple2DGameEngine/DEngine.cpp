@@ -45,7 +45,7 @@ void DEngine::ProcessObject()
 
 void DEngine::ProcessPhysics()
 {
-	physicsManager.UpdateObjects(0.02f); // ÀÓ½Ã deltaTime
+	physicsManager.UpdateObjects(0.02f); // ï¿½Ó½ï¿½ deltaTime
 }
 
 void DEngine::ProcessGameLogic()
@@ -60,10 +60,20 @@ void DEngine::ProcessDisplay()
 
 DWORD WINAPI DEngine::ManageSubSystemThread(PVOID subSystemClass)
 {
-	// ½º·¹µå ¸¸µé¾îÁö°í µ¿ÀÛ
+	// deltaTime, Clock
+	clock_t s;
+	double daltatime = 0;
+	DSubSystem subSystemInstance = *((DAutoPointer<DSubSystem>*)subSystemClass)->GetValue();
 
-	return 0;
+	while (true)
+	{
+		s = clock();
+		subSystemInstance.Tick(daltatime);
+		daltatime = s - clock();
+	}
+	
 }
+
 void DEngine::CreateSybSystemThread(DAutoPointer<DSubSystem>& subSystemClass, int threadPriority)
 {
 	DWORD newThreadID;
