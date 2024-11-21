@@ -75,38 +75,30 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		break;
 
 	case WM_KEYDOWN: // Key Down  HAUN
-		if (EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z) {
-			DInputManager::BufferAddKeyDown((EDkeyCode)wordParameter);
-		}
+		DInputManager::BufferAddKeyDown((EDkeyCode)wordParameter);
 		break;
 
 	case WM_KEYUP: // Key Up  HAUN
-		if(EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z){
-			DInputManager::BufferAddKeyUp((EDkeyCode)wordParameter);
-		}
+		DInputManager::BufferAddKeyUp((EDkeyCode)wordParameter);
+		
 		break;
 	case WM_LBUTTONDOWN:
-		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
 		DInputManager::BufferAddMouseDown(0);
 		break;
 
 	case WM_LBUTTONUP:
-		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
 		DInputManager::BufferAddMouseUP(0);
 		break;
 
 	case WM_RBUTTONDOWN:
-		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
 		DInputManager::BufferAddMouseDown(1);
 		break;
 
 	case WM_RBUTTONUP:
-		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
 		DInputManager::BufferAddMouseUP(1);
 		break;
 
 	case WM_MOUSEMOVE:
-		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
 		DInputManager::MouseMove(mousePostionVector2);
 		break;
 

@@ -30,7 +30,6 @@ public:
 	static void BufferAddMouseUP(int i);
 	static void BufferAddMouseDown(int i);
 
-
 	const static bool GetKeyDown(EDkeyCode k); 
 	const static bool GetKey(EDkeyCode k); 
 	const static bool GetKeyUp(EDkeyCode k); 
