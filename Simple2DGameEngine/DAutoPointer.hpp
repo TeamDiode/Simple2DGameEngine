@@ -11,9 +11,9 @@ public:
 
 private:
 	MemberType* data;
+	void SetValue(MemberType value);
 public:
 	MemberType* GetValue();
-	void SetValue(MemberType value);
 
 	void operator=(const MemberType copy);
 	void operator=(const MemberType* copy);
@@ -56,7 +56,7 @@ inline void DAutoPointer<MemberType>::SetValue(MemberType value)
 	if (data == nullptr)
 		data = new MemberType(value);
 	else
-		data = value;
+		*data = value;
 }
 
 template<typename MemberType>
