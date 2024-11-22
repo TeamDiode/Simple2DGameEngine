@@ -74,9 +74,9 @@ DWORD WINAPI DEngine::ManageSubSystemThread(PVOID subSystemClass)
 	
 }
 
-void DEngine::CreateSybSystemThread(DAutoPointer<DSubSystem>& subSystemClass, int threadPriority)
+void DEngine::CreateSybSystemThread(DAutoPointer<DSubSystem> subSystemClass, int threadPriority)
 {
 	DWORD newThreadID;
 	HANDLE newThreadHandle = CreateThread(NULL, 0, ManageSubSystemThread, (PVOID)&subSystemClass, 0, &newThreadID);
-	SetThreadPriority(newThreadHandle, threadPriority);
+	if(newThreadHandle != NULL) SetThreadPriority(newThreadHandle, threadPriority);
 }
