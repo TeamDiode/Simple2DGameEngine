@@ -78,5 +78,10 @@ public:
 			Bullet* a = new Bullet();
 			a->SetLocation(GetLocation());
 		}
+
+		if (DInputManager::GetKeyDown(space))
+		{
+			DOCamera::Move(10);
+		}
 	}
 };

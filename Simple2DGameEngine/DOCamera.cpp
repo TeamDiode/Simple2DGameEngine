@@ -1,68 +1,77 @@
 #include "DOCamera.h"
 #include "DObject.h"
+#include "EDkeyCodeEnum.h"
 
-DOCamera::DOCamera()
+void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT newScreenRect, RECT newCameraRect)
 {
-	hWnd = nullptr;
-	hdc = nullptr;
-	mapRect = { NULL };
+	hWnd = newhWnd;
+	hdc = newHdc;
+	screenRect = newScreenRect;
+	cameraRect = newCameraRect;
+
+	this->SetLocation((newCameraRect.left + newCameraRect.right) / 2, (newCameraRect.top + newCameraRect.bottom) / 2);
+	this->SetScale(newCameraRect.right - newCameraRect.left, newCameraRect.bottom - newCameraRect.top);
 }
 
-void DOCamera::RenderBasedCamera()
+void DOCamera::Rendering()
 {
 	AllReset();
-	LimitedCameraPositionInGameWorld();
-	InvalidateRect(hWnd, &mapRect, TRUE);
+	DrawCamera();
+	InvalidateRect(hWnd, &cameraRect, TRUE);
 }
 
-void DOCamera::LimitedCameraPositionInGameWorld()
+void DOCamera::Move(int type ,int moveScale)
 {
-	float x = GetLocation().x;
-	float y = GetLocation().y;
-
-	//left 力茄
-	if((int)(GetLocation().x - GetScale().x / 2) < mapRect.left)
-	{ 
-		x = mapRect.left + GetScale().x / 2;
-		y = GetLocation().y;
-	}
-
-	//right 力茄
-	if((int)(GetLocation().x + GetScale().x / 2) > mapRect.right)
+	LimitedMove();
+	
+	switch (type)
 	{
-		x = mapRect.right - GetScale().x / 2;
-		y = GetLocation().y;
+	case W:
+		this->GetLocation().y - moveScale;
+		break;
+	case A:
+		this->GetLocation().x - moveScale;
+		break;
+	case S:
+		this->GetLocation().y + moveScale;
+		break;
+	case D:
+		this->GetLocation().y - moveScale;
+		break;
 	}
-
-	//top 力茄
-	if ((int)(GetLocation().y - GetScale().y / 2) < mapRect.top)
-	{
-		x = GetLocation().x;
-		y = mapRect.top + GetScale().y / 2;
-	}
-
-	//bottom 力茄
-	if ((int)(GetLocation().y + GetScale().y / 2) > mapRect.bottom)
-	{
-		x = GetLocation().x;
-		y = mapRect.bottom - GetScale().y / 2;
-	}
-
-	SetLocation(DVector2i(x, y));
 }
 
-void DOCamera::RetrieveGameWorld(DObject* newMap)
+void DOCamera::DrawCamera()
 {
-	int left = (int)(newMap->GetLocation().x - newMap->GetScale().x / 2);
-	int right = (int)(newMap->GetLocation().x + newMap->GetScale().x / 2);
-	int top = (int)(newMap->GetLocation().y - newMap->GetScale().y / 2);
-	int bottom = (int)(newMap->GetLocation().y + newMap->GetScale().y / 2);
+	cameraRect.left = this->GetLocation().x - this->GetScale().x / 2;
+	cameraRect.top = this->GetLocation().y - this->GetScale().y / 2;
+	cameraRect.right = this->GetLocation().x + this->GetScale().x / 2;
+	cameraRect.bottom = this->GetLocation().y + this->GetScale().y / 2;
 
-	mapRect = { left,top,right,bottom };
+	Rectangle(hdc, cameraRect.left, cameraRect.top, cameraRect.right, cameraRect.bottom);
 }
 
 void DOCamera::AllReset()
 {
-	GetClientRect(WindowFromDC(hdc), &mapRect);
-	FillRect(hdc, &mapRect, (HBRUSH)(COLOR_WINDOW + 1));
+	GetClientRect(WindowFromDC(hdc), &screenRect);
+	FillRect(hdc, &screenRect, (HBRUSH)(COLOR_WINDOW + 1));
+}
+
+void DOCamera::LimitedMove()
+{
+	DVector2i pos(GetLocation().x, GetLocation().y);
+
+	if (cameraRect.left < screenRect.left)
+		pos.x = screenRect.left + this->GetScale().x / 2;
+
+	if (cameraRect.right > screenRect.right)
+		pos.x = screenRect.right - this->GetScale().x / 2;
+
+	if (cameraRect.top < screenRect.top)
+		pos.y = screenRect.top + this->GetScale().y / 2;
+
+	if (cameraRect.bottom > screenRect.bottom)
+		pos.y = screenRect.bottom - this->GetScale().y / 2;
+
+	this->SetLocation(pos);
 }
