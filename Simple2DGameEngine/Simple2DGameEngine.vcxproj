@@ -138,6 +138,7 @@
     <ClCompile Include="DMathHelper.cpp" />
     <ClCompile Include="DOCamera.cpp" />
     <ClCompile Include="DRenderer.cpp" />
+    <ClCompile Include="DSubSystem.cpp" />
     <ClCompile Include="DWorld.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="DObjectManager.cpp" />
