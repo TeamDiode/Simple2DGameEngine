@@ -35,10 +35,64 @@ float DCollisionData::CalculateMass()
 }
 
 void DCollisionData::UpdatePosition(float deltaTime) {
-    // 속도 위치 업데이트
-    SetLocation(GetLocation() + velocity * deltaTime); // DObject에 위치 반영
-    aabb.min = GetLocation() - (size * 0.5f);  //AABB 위치 갱신
-    aabb.max = GetLocation() + (size * 0.5f);
-
+    if(!freezeX)
+        localPosition.x += static_cast<int>(velocity.x * deltaTime);
+    if (!freezeY)
+        localPosition.y += static_cast<int>(velocity.y * deltaTime);
     
+    // 속도 위치 업데이트
+    aabb.min = localPosition - (size * 0.5f);
+    aabb.max = localPosition + (size * 0.5f);
+    SetLocation(localPosition);
+
+    UpdateChildren();
+}
+
+
+void DCollisionData::AddChild(DCollisionData* child)
+{
+    if (child)
+    {
+        children.AddNext(child);
+        child->SetLocation(localPosition); // 부모의 위치로 동기화
+    }
+}
+
+void DCollisionData::RemoveChild(DCollisionData* child)
+{
+    if (children.IsEmpty()) return;
+
+    int listSize = children.GetSize();
+    for (int i = 0; i < listSize; i++)
+    {
+        if (children.GetValue() == child)
+        {
+            children.RemoveHere();
+            break;
+        }
+        children.Move();
+    }
+}
+
+
+void DCollisionData::UpdateChildren()
+{
+    if (children.IsEmpty()) return;
+
+    int listSize = children.GetSize();
+    for (int i = 0; i < listSize; i++)
+    {
+        DCollisionData* child = children.GetValue();
+        if (child)
+        {
+            DVector2i offset = child->localPosition;
+            child->SetLocation(localPosition + offset);
+        }
+        children.Move();
+    }
+}
+
+void DCollisionData::SetRestitution(float restitutionValue)
+{
+    restitution = restitutionValue;
 }
