@@ -15,12 +15,14 @@ class DEngine
 {
 public:
 	DEngine();
-	DEngine(HDC deviceContextHandle);
+	DEngine(HWND windowHandle);
 	~DEngine();
 
 	
 private:
 	static DEngine* engineInstance;
+	
+	static HWND currentWindowHandle;
 
 	DObjectManager objectManager;
 	DPhysicsManager physicsManager;
@@ -43,6 +45,8 @@ public:
 	void ProcessGameLogic();
 	// ��� ó��
 	void ProcessDisplay();
+
+	static void LogMessageBox(LPCSTR log);
 
 private:
 	void CreateSybSystemThread(DAutoPointer<DSubSystem> subSystemClass, int threadPriority);

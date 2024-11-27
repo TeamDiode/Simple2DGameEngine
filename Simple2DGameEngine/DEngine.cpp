@@ -2,6 +2,7 @@
 
 
 DEngine* DEngine::engineInstance = nullptr;
+HWND DEngine::currentWindowHandle = NULL;
 
 DEngine::DEngine()
 {
@@ -12,11 +13,12 @@ DEngine::DEngine()
 	startWorld.Load();
 }
 
-DEngine::DEngine(HDC deviceContextHandle)
+DEngine::DEngine(HWND windowHandle)
 {
+	currentWindowHandle = windowHandle;
 	objectManager = DObjectManager();
 	physicsManager = DPhysicsManager();
-	renderer = DRenderer(deviceContextHandle);
+	renderer = DRenderer(GetDC(windowHandle));
 	engineInstance = this;
 	startWorld.Load();
 }
@@ -56,6 +58,11 @@ void DEngine::ProcessGameLogic()
 void DEngine::ProcessDisplay()
 {
 	renderer.Draw();
+}
+
+void DEngine::LogMessageBox(LPCSTR log)
+{
+	if(currentWindowHandle) MessageBoxA(currentWindowHandle, log, NULL, MB_OK);
 }
 
 DWORD WINAPI DEngine::ManageSubSystemThread(PVOID subSystemClass)
