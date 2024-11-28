@@ -61,6 +61,10 @@ void DRenderer::Draw()
     LeaveCriticalSection(&spritesCriticalSection);
 }
 
+void DRenderer::Tick(double deltaTime)
+{
+}
+
 void DRenderer::DrawBySpriteType(DOSprite* sprite)
 {
     switch (sprite->GetType())
