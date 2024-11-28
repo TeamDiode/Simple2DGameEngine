@@ -13,6 +13,7 @@ public:
 private:
 	HWND hWnd;
 	HDC hdc;
+	RECT rt;
 
 	void DrawCamera();
 };

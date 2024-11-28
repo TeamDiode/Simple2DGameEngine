@@ -15,12 +15,14 @@ void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT newCameraRect)
 
 void DOCamera::Rendering()
 {
-	DrawCamera();
+    SelectClipRgn(hdc, NULL); 
     IntersectClipRect(hdc,
-        this->GetLocation().x - this->GetScale().x / 2, //left
-        this->GetLocation().y - this->GetScale().y / 2, //top
-        this->GetLocation().x + this->GetScale().x / 2, //right
-        this->GetLocation().y + this->GetScale().y / 2);//bottom
+        this->GetLocation().x - this->GetScale().x / 2, // left
+        this->GetLocation().y - this->GetScale().y / 2, // top
+        this->GetLocation().x + this->GetScale().x / 2, // right
+        this->GetLocation().y + this->GetScale().y / 2  // bottom
+    );
+    DrawCamera();
 }
 
 void DOCamera::Move(int type, int moveScale)
@@ -41,22 +43,24 @@ void DOCamera::Move(int type, int moveScale)
     case D:
         currentLocation.x += moveScale;
         break;
+    default:
+        return;
     }
     this->SetLocation(currentLocation);
     DrawCamera();
 }
 
-
 void DOCamera::DrawCamera()
 {
-    //cameraRect.left = this->GetLocation().x - this->GetScale().x / 2;
-    //cameraRect.top = this->GetLocation().y - this->GetScale().y / 2;
-    //cameraRect.right = this->GetLocation().x + this->GetScale().x / 2;
-    //cameraRect.bottom = this->GetLocation().y + this->GetScale().y / 2;
+    int left = this->GetLocation().x - this->GetScale().x / 2;
+    int top = this->GetLocation().y - this->GetScale().y / 2;
+    int right = this->GetLocation().x + this->GetScale().x / 2;
+    int bottom = this->GetLocation().y + this->GetScale().y / 2;
 
-	MoveToEx(hdc, this->GetLocation().x - this->GetScale().x / 2, this->GetLocation().y - this->GetScale().y / 2, NULL);
-	LineTo(hdc, this->GetLocation().x + this->GetScale().x / 2, this->GetLocation().y - this->GetScale().y / 2);
-	LineTo(hdc, this->GetLocation().x + this->GetScale().x / 2, this->GetLocation().y + this->GetScale().y / 2);
-	LineTo(hdc, this->GetLocation().x - this->GetScale().x / 2, this->GetLocation().y + this->GetScale().y / 2);
-	LineTo(hdc, this->GetLocation().x - this->GetScale().x / 2, this->GetLocation().y - this->GetScale().y / 2);
+    // 카메라 사각형을 정확히 그림
+    MoveToEx(hdc, left + 1, top + 1, NULL);
+    LineTo(hdc, right - 1, top + 1);
+    LineTo(hdc, right - 1, bottom- 1);
+    LineTo(hdc, left + 1, bottom - 1);
+    LineTo(hdc, left + 1, top + 1);
 }

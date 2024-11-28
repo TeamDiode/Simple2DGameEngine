@@ -41,12 +41,12 @@ void DRenderer::MoveCamera(int type, int moveScale)
 void DRenderer::Draw()
 {
     AllReset();
+    camera.Rendering();
     for (int i = sprites.GetSize(); i > 0; i--)
     {
         sprites.Move();
         DrawBySpriteType(sprites.GetValue());
     }
-    camera.Rendering();
 }
 
 void DRenderer::Tick(double deltaTime)
