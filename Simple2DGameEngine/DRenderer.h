@@ -8,10 +8,8 @@
 class DRenderer : public DSingleton<DRenderer>
 {
 public:
-    DRenderer(HDC newHdc, HWND newhWnd) : hdc(newHdc), hWnd(newhWnd) {}
-
-    static void Initialize();
-    static void Destroy();
+    DRenderer(HDC newHdc, HWND newhWnd);
+    ~DRenderer(); 
 
     static void RegisterSprite(DOSprite* sprite);
     //screenRect는 1920 * 1080같이 전체 크기
@@ -27,6 +25,9 @@ private:
 
     static DList<DOSprite*> sprites;
     static CRITICAL_SECTION spritesCriticalSection;
+
+    void InitializeSection();
+    void DestroySection();
 
     void DrawBySpriteType(DOSprite* sprite);
     void DrawRectangel(DOSprite* sprite);
