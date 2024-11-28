@@ -79,9 +79,9 @@ public:
 			a->SetLocation(GetLocation());
 		}
 
-		if (DInputManager::GetKeyDown(space))
+		if (DInputManager::GetKeyDown(R))
 		{
-			DOCamera::Move(10);
+			DRenderer::MoveCamera(D, 100);
 		}
 	}
 };

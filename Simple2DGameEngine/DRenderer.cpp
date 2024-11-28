@@ -8,11 +8,19 @@
 #define EllIPSE 2
 
 DList<DOSprite*> DRenderer::sprites = DList<DOSprite*>();
+DOCamera DRenderer::camera = DOCamera();
+
+DRenderer::DRenderer()
+{
+    hdc = nullptr;
+    hWnd = nullptr;
+}
 
 DRenderer::DRenderer(HDC newHdc, HWND newhWnd)
 {
     hdc = newHdc;
     hWnd = newhWnd;
+    SetCameraOptions();
 }
 
 void DRenderer::RegisterSprite(DOSprite* sprite)
@@ -20,9 +28,9 @@ void DRenderer::RegisterSprite(DOSprite* sprite)
     sprites.AddNext(sprite);
 }
 
-void DRenderer::SetCameraOptions(RECT screenRect, RECT cameraRect)
+void DRenderer::SetCameraOptions()
 {
-    camera.InitializeCamera(hWnd, hdc, screenRect, cameraRect);
+    camera.InitializeCamera(hWnd, hdc, cameraRect);
 }
 
 void DRenderer::MoveCamera(int type, int moveScale)
@@ -32,6 +40,7 @@ void DRenderer::MoveCamera(int type, int moveScale)
 
 void DRenderer::Draw()
 {
+    AllReset();
     for (int i = sprites.GetSize(); i > 0; i--)
     {
         sprites.Move();
@@ -43,6 +52,12 @@ void DRenderer::Draw()
 void DRenderer::Tick(double deltaTime)
 {
     Draw();
+}
+
+void DRenderer::AllReset()
+{
+    GetClientRect(WindowFromDC(hdc), &rt);
+    FillRect(hdc, &rt, (HBRUSH)(COLOR_WINDOW + 1));
 }
 
 void DRenderer::DrawBySpriteType(DOSprite* sprite)

@@ -18,7 +18,7 @@ DEngine::DEngine(HWND windowHandle)
 	currentWindowHandle = windowHandle;
 	objectManager = DObjectManager();
 	physicsManager = DPhysicsManager();
-	renderer = DRenderer(GetDC(windowHandle));
+	renderer = DRenderer(GetDC(windowHandle), windowHandle);
 	engineInstance = this;
 	startWorld.Load();
 }

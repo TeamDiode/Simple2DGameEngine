@@ -5,7 +5,7 @@
 class DOCamera : public DObject
 {
 public:
-	void InitializeCamera(HWND newhWnd, HDC newHdc, RECT newScreenRect, RECT newCameraRect);
+	void InitializeCamera(HWND newhWnd, HDC newHdc, RECT cameraRect);
 
 	void Rendering();
 	void Move(int type, int moveScale);
@@ -13,10 +13,6 @@ public:
 private:
 	HWND hWnd;
 	HDC hdc;
-	RECT screenRect;
-	RECT cameraRect;
 
 	void DrawCamera();
-	void AllReset();
-	void LimitedMove();
 };
