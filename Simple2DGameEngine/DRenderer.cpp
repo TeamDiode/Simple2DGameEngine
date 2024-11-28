@@ -8,10 +8,35 @@
 #define EllIPSE 2
 
 DList<DOSprite*> DRenderer::sprites = DList<DOSprite*>();
+CRITICAL_SECTION DRenderer::spritesCriticalSection; 
+
+DRenderer::DRenderer(HDC newHdc, HWND newhWnd)
+{
+    hdc = newHdc;
+    hWnd = newhWnd;
+    InitializeSection();
+}
+
+DRenderer::~DRenderer()
+{
+    DestroySection();
+}
+
+void DRenderer::InitializeSection()
+{
+    InitializeCriticalSection(&spritesCriticalSection);
+}
+
+void DRenderer::DestroySection()
+{
+    DeleteCriticalSection(&spritesCriticalSection);
+}
 
 void DRenderer::RegisterSprite(DOSprite* sprite)
 {
+    EnterCriticalSection(&spritesCriticalSection); 
     sprites.AddNext(sprite);
+    LeaveCriticalSection(&spritesCriticalSection); 
 }
 
 void DRenderer::SetCameraOptions(RECT screenRect, RECT cameraRect)
@@ -26,11 +51,13 @@ void DRenderer::MoveCamera(int type, int moveScale)
 
 void DRenderer::Draw()
 {
+    EnterCriticalSection(&spritesCriticalSection); 
     for (int i = sprites.GetSize(); i > 0; i--)
     {
         sprites.Move();
         DrawBySpriteType(sprites.GetValue());
     }
+    LeaveCriticalSection(&spritesCriticalSection);
     camera.Rendering();
 }
 
