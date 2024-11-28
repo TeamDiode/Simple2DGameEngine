@@ -46,7 +46,9 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 
 	RECT displayRectangle;
 	GetClientRect(windowHandle, &displayRectangle);
-	DEngine engine(GetDC(windowHandle), displayRectangle);
+	DEngine engine(windowHandle);
+	//DEngine engine(GetDC(windowHandle), displayRectangle);
+	// -> Change -> DEngine engine(windowHandle);  - HAUN
 
 	ShowWindow(windowHandle, commandShowAmount);
 	while (GetMessage(&message, NULL, 0, 0))
@@ -99,6 +101,7 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		break;
 
 	case WM_MOUSEMOVE:
+		mousePostionVector2 = DVector2i(LOWORD(wordParameter), HIWORD(wordParameter));
 		DInputManager::MouseMove(mousePostionVector2);
 		break;
 

@@ -1,10 +1,11 @@
 #pragma once
 #include "DMathTypes.h"
 #include "EDkeyCodeEnum.h"
+#include "DSubSystem.h"
 #define LEN 10
 #define MOUSE_INPUT_TYPE 2 // 0 = L  1 = R   Temp=2
 
-class DInputManager {
+class DInputManager : public DSubSystem {
 private:
 	static bool isLockDownBuffer;
 	static bool isLockUpBuffer;
@@ -43,4 +44,5 @@ public:
 
 	static void Init();
 	static void Start();
+	virtual void Tick(double deltaTime);
 };
