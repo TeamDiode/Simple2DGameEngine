@@ -4,9 +4,9 @@
 #include "DGravity.h"
 #include "DList.hpp"
 #include "DCollisionData.h"
-//#include "DSubSystem.h"
+#include "DSubSystem.h"
 
-class DPhysicsManager // : public DSubSystem
+class DPhysicsManager : public DSubSystem
 {
 public:
     // 오브젝트 추가
@@ -21,11 +21,11 @@ public:
         object->SetRestitution(restitutionValue);
     }
 
-    //virtual void Tick(double deltaTime) override 
-    //{
-    //    UpdateObjects(deltaTime);  
-    //    ResolveCollisions();       
-    //}
+    virtual void Tick(double deltaTime) override 
+    {
+        UpdateObjects(deltaTime);  
+        ResolveCollisions();       
+    }
 
 private:
     static DList<DCollisionData*> objects;
