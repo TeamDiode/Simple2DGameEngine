@@ -57,8 +57,8 @@ void DRenderer::Draw()
         sprites.Move();
         DrawBySpriteType(sprites.GetValue());
     }
-    LeaveCriticalSection(&spritesCriticalSection);
     camera.Rendering();
+    LeaveCriticalSection(&spritesCriticalSection);
 }
 
 void DRenderer::DrawBySpriteType(DOSprite* sprite)
