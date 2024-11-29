@@ -89,6 +89,6 @@ void DObject::AttachObject(DObject* newLowerObject)
 	lowerObjectAttachments.AddNext(newLowerObject);
 }
 
-void DObject::Update()
+void DObject::Update(double deltaTime)
 {
 }

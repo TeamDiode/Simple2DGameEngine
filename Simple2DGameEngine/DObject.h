@@ -59,7 +59,7 @@ public:
 	void AttachObject(DObject* lowerObjectToAttach);
 
 	// 매 틱마다 호출되는 함수
-	virtual void Update();
+	virtual void Update(double deltaTime);
 
 };
 
