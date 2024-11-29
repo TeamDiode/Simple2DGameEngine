@@ -52,7 +52,7 @@ private:
 	template<class SubSystemClass>
 	static DWORD WINAPI ProcessSubSystemThread(LPVOID subSystemClass)
 	{
-		clock_t s;
+		clock_t currentTime = clock();
 		double daltatime = 0;
 		IDSubSystem* subSystemInstance = dynamic_cast<IDSubSystem*>((SubSystemClass*)subSystemClass);
 
@@ -60,9 +60,9 @@ private:
 
 		while (true)
 		{
-			s = clock();
+			daltatime = (clock() - currentTime) / (double)CLOCKS_PER_SEC;
+			currentTime = clock();
 			subSystemInstance->Tick(daltatime);
-			daltatime = s - clock();
 		}
 
 		return 0;
