@@ -1,68 +1,66 @@
 #include "DOCamera.h"
 #include "DObject.h"
+#include "EDkeyCodeEnum.h"
 
-DOCamera::DOCamera()
+void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT newCameraRect)
 {
-	hWnd = nullptr;
-	hdc = nullptr;
-	mapRect = { NULL };
+	hWnd = newhWnd;
+	hdc = newHdc;
+
+	this->SetLocation((newCameraRect.left + newCameraRect.right) / 2,
+        (newCameraRect.top + newCameraRect.bottom) / 2);
+	this->SetScale(newCameraRect.right - newCameraRect.left, 
+        newCameraRect.bottom - newCameraRect.top);
 }
 
-void DOCamera::RenderBasedCamera()
+void DOCamera::Rendering()
 {
-	AllReset();
-	LimitedCameraPositionInGameWorld();
-	InvalidateRect(hWnd, &mapRect, TRUE);
+    SelectClipRgn(hdc, NULL); 
+    IntersectClipRect(hdc,
+        this->GetLocation().x - this->GetScale().x / 2, // left
+        this->GetLocation().y - this->GetScale().y / 2, // top
+        this->GetLocation().x + this->GetScale().x / 2, // right
+        this->GetLocation().y + this->GetScale().y / 2  // bottom
+    );
+    DrawCamera();
 }
 
-void DOCamera::LimitedCameraPositionInGameWorld()
+void DOCamera::Move(int type, int moveScale)
 {
-	float x = GetLocation().x;
-	float y = GetLocation().y;
+    DVector2i currentLocation = this->GetLocation();
 
-	//left 제한
-	if((int)(GetLocation().x - GetScale().x / 2) < mapRect.left)
-	{ 
-		x = mapRect.left + GetScale().x / 2;
-		y = GetLocation().y;
-	}
-
-	//right 제한
-	if((int)(GetLocation().x + GetScale().x / 2) > mapRect.right)
-	{
-		x = mapRect.right - GetScale().x / 2;
-		y = GetLocation().y;
-	}
-
-	//top 제한
-	if ((int)(GetLocation().y - GetScale().y / 2) < mapRect.top)
-	{
-		x = GetLocation().x;
-		y = mapRect.top + GetScale().y / 2;
-	}
-
-	//bottom 제한
-	if ((int)(GetLocation().y + GetScale().y / 2) > mapRect.bottom)
-	{
-		x = GetLocation().x;
-		y = mapRect.bottom - GetScale().y / 2;
-	}
-
-	SetLocation(DVector2i(x, y));
+    switch (type)
+    {
+    case W:
+        currentLocation.y -= moveScale;
+        break;
+    case A:
+        currentLocation.x -= moveScale;
+        break;
+    case S:
+        currentLocation.y += moveScale;
+        break;
+    case D:
+        currentLocation.x += moveScale;
+        break;
+    default:
+        return;
+    }
+    this->SetLocation(currentLocation);
+    DrawCamera();
 }
 
-void DOCamera::RetrieveGameWorld(DObject* newMap)
+void DOCamera::DrawCamera()
 {
-	int left = (int)(newMap->GetLocation().x - newMap->GetScale().x / 2);
-	int right = (int)(newMap->GetLocation().x + newMap->GetScale().x / 2);
-	int top = (int)(newMap->GetLocation().y - newMap->GetScale().y / 2);
-	int bottom = (int)(newMap->GetLocation().y + newMap->GetScale().y / 2);
+    int left = this->GetLocation().x - this->GetScale().x / 2;
+    int top = this->GetLocation().y - this->GetScale().y / 2;
+    int right = this->GetLocation().x + this->GetScale().x / 2;
+    int bottom = this->GetLocation().y + this->GetScale().y / 2;
 
-	mapRect = { left,top,right,bottom };
-}
-
-void DOCamera::AllReset()
-{
-	GetClientRect(WindowFromDC(hdc), &mapRect);
-	FillRect(hdc, &mapRect, (HBRUSH)(COLOR_WINDOW + 1));
+    // 카메라 사각형을 정확히 그림
+    MoveToEx(hdc, left + 1, top + 1, NULL);
+    LineTo(hdc, right - 1, top + 1);
+    LineTo(hdc, right - 1, bottom- 1);
+    LineTo(hdc, left + 1, bottom - 1);
+    LineTo(hdc, left + 1, top + 1);
 }

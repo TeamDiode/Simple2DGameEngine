@@ -1,21 +1,19 @@
 #pragma once
 #include "DObject.h"
-#include "DSingleton.hpp"
 #include <Windows.h>
 
-class DOCamera : public DObject , DSingleton<DOCamera>
+class DOCamera : public DObject
 {
 public:
-	DOCamera();
+	void InitializeCamera(HWND newhWnd, HDC newHdc, RECT cameraRect);
 
-	void RenderBasedCamera();
-	void RetrieveGameWorld(DObject* newMap);
+	void Rendering();
+	void Move(int type, int moveScale);
 
 private:
 	HWND hWnd;
 	HDC hdc;
-	RECT mapRect;
+	RECT rt;
 
-	void LimitedCameraPositionInGameWorld();
-	void AllReset();
+	void DrawCamera();
 };
