@@ -52,7 +52,6 @@ void DEngine::ProcessPhysics()
 
 void DEngine::ProcessGameLogic()
 {
-	objectManager.UpdateTick();
 }
 
 void DEngine::ProcessDisplay()
@@ -63,27 +62,4 @@ void DEngine::ProcessDisplay()
 void DEngine::LogMessageBox(LPCSTR log)
 {
 	if(currentWindowHandle) MessageBoxA(currentWindowHandle, log, NULL, MB_OK);
-}
-
-DWORD WINAPI DEngine::ManageSubSystemThread(PVOID subSystemClass)
-{
-	// deltaTime, Clock
-	clock_t s;
-	double daltatime = 0;
-	DSubSystem subSystemInstance = *((DAutoPointer<DSubSystem>*)subSystemClass)->GetValue();
-
-	while (true)
-	{
-		s = clock();
-		subSystemInstance.Tick(daltatime);
-		daltatime = s - clock();
-	}
-	
-}
-
-void DEngine::CreateSybSystemThread(DAutoPointer<DSubSystem> subSystemClass, int threadPriority)
-{
-	DWORD newThreadID;
-	HANDLE newThreadHandle = CreateThread(NULL, 0, ManageSubSystemThread, (PVOID)&subSystemClass, 0, &newThreadID);
-	if(newThreadHandle != NULL) SetThreadPriority(newThreadHandle, threadPriority);
 }

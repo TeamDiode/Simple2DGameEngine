@@ -1,9 +1,8 @@
 #pragma once
-class DSubSystem
+
+
+class IDSubSystem
 {
 public:
-	DSubSystem();
-	~DSubSystem();
-public:
-	virtual void Tick(double deltaTime);
+	virtual void Tick(double deltaTime) = 0;
 };

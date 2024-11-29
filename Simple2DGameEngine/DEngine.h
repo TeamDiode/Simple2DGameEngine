@@ -49,7 +49,31 @@ public:
 	static void LogMessageBox(LPCSTR log);
 
 private:
-	void CreateSybSystemThread(DAutoPointer<DSubSystem> subSystemClass, int threadPriority);
-	static DWORD WINAPI ManageSubSystemThread(PVOID subSystemClass);
-	
+	template<class SubSystemClass>
+	static DWORD WINAPI ProcessSubSystemThread(LPVOID subSystemClass)
+	{
+		clock_t s;
+		double daltatime = 0;
+		IDSubSystem* subSystemInstance = dynamic_cast<IDSubSystem*>((SubSystemClass*)subSystemClass);
+
+		if (subSystemClass == nullptr) return 0;
+
+		while (true)
+		{
+			s = clock();
+			subSystemInstance->Tick(daltatime);
+			daltatime = s - clock();
+		}
+
+		return 0;
+	}
+
+	template<class SubSystemClass>
+	void CreateSubSystemThread(IDSubSystem* subSystemClass, int threadPriority)
+	{
+		DWORD newThreadID;
+		HANDLE newThreadHandle = CreateThread(NULL, 0, ProcessSubSystemThread<SubSystemClass>, subSystemClass, 0, &newThreadID);
+		if (newThreadHandle != NULL) SetThreadPriority(newThreadHandle, threadPriority);
+
+	}
 };
