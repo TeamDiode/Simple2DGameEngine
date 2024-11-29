@@ -1,12 +1,13 @@
 #include "DObjectManager.h"
 #include "DList.hpp"
+#include "DEngine.h"
 
 
 DList<DObject*> DObjectManager::objectInstances = DList<DObject*>();
 
 DObjectManager::DObjectManager()
 {
-	objectInstances = DList<DObject*>(new DObject(), 5);
+	//objectInstances = DList<DObject*>(new DObject(), 5);
 }
 
 DObjectManager::~DObjectManager()
@@ -73,4 +74,10 @@ void DObjectManager::UpdateTick()
 		objectInstances.GetValue()->Update();
 		objectInstances.Move();
 	}
+}
+
+
+void DObjectManager::Tick(double deltaTime)
+{
+	UpdateTick();
 }

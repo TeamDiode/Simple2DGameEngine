@@ -2,8 +2,9 @@
 
 #include "DObject.h"
 #include "DList.hpp"
+#include "DSubSystem.h"
 
-class DObjectManager
+class DObjectManager : public IDSubSystem
 {
 public:
 	DObjectManager();
@@ -20,5 +21,7 @@ public:
 	static bool CancelObject(DObject* oldObject);
 
 	void UpdateTick();
+
+	virtual void Tick(double deltaTime) override;
 
 };

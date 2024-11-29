@@ -6,7 +6,7 @@ HWND DEngine::currentWindowHandle = NULL;
 
 DEngine::DEngine()
 {
-	objectManager = DObjectManager();
+	//objectManager = DObjectManager();
 	physicsManager = DPhysicsManager();
 	renderer = DRenderer();
 	engineInstance = this;
@@ -16,7 +16,7 @@ DEngine::DEngine()
 DEngine::DEngine(HWND windowHandle)
 {
 	currentWindowHandle = windowHandle;
-	objectManager = DObjectManager();
+	CreateSubSystemThread<DObjectManager>(new DObjectManager(), THREAD_PRIORITY_LOWEST);
 	physicsManager = DPhysicsManager();
 	renderer = DRenderer(GetDC(windowHandle));
 	engineInstance = this;
