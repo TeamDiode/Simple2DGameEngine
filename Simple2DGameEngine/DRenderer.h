@@ -6,6 +6,8 @@
 #include "DSubSystem.h"
 #include <Windows.h>
 
+#define FRAMELATE 60
+
 class DRenderer : public DSingleton<DRenderer>, public IDSubSystem
 {
 public:
@@ -17,13 +19,14 @@ public:
     static void MoveCamera(int type, int moveScale);
     void Draw();
 
-    void Tick(double deltaTime) override;
+    virtual void Tick(double deltaTime) override;
 
 private:
     HDC hdc;
     HWND hWnd;
     RECT rt;
     RECT cameraRect = { 50,50,700,700 };
+    const int displayInterval = 1000 / FRAMELATE;
     static DOCamera camera;
     static DList<DOSprite*> sprites;
 

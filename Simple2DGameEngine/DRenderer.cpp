@@ -52,6 +52,7 @@ void DRenderer::Draw()
 void DRenderer::Tick(double deltaTime)
 {
     Draw();
+    Sleep(displayInterval);
 }
 
 void DRenderer::AllReset()
