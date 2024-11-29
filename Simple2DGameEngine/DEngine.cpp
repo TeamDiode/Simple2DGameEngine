@@ -8,7 +8,7 @@ DEngine::DEngine()
 {
 	//objectManager = DObjectManager();
 	physicsManager = DPhysicsManager();
-	renderer = DRenderer();
+	//renderer = DRenderer();
 	engineInstance = this;
 	startWorld.Load();
 }
@@ -18,7 +18,7 @@ DEngine::DEngine(HWND windowHandle)
 	currentWindowHandle = windowHandle;
 	CreateSubSystemThread<DObjectManager>(new DObjectManager(), THREAD_PRIORITY_LOWEST);
 	physicsManager = DPhysicsManager();
-	renderer = DRenderer(GetDC(windowHandle), windowHandle);
+	CreateSubSystemThread<DRenderer>(new DRenderer(GetDC(windowHandle), windowHandle), THREAD_PRIORITY_LOWEST);
 	engineInstance = this;
 	startWorld.Load();
 }
@@ -56,7 +56,7 @@ void DEngine::ProcessGameLogic()
 
 void DEngine::ProcessDisplay()
 {
-	renderer.Draw();
+	//renderer.Draw();
 }
 
 void DEngine::LogMessageBox(LPCSTR log)

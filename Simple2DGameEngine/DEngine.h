@@ -26,8 +26,6 @@ private:
 
 	DObjectManager objectManager;
 	DPhysicsManager physicsManager;
-	// ���� �ý���
-	DRenderer renderer;
 
 	DWorld startWorld;
 

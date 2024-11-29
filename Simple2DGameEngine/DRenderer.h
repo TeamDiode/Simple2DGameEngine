@@ -6,7 +6,7 @@
 #include "DSubSystem.h"
 #include <Windows.h>
 
-class DRenderer : public DSingleton<DRenderer>, public DSubSystem
+class DRenderer : public DSingleton<DRenderer>, public IDSubSystem
 {
 public:
     DRenderer();
