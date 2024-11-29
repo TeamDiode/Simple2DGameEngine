@@ -19,7 +19,7 @@ class Bullet : public DObject
 public:
 	Bullet()
 	{
-		acceleration = 1;
+		acceleration = 1000;
 		currentSpeed = 0;
 		DOSprite* skin = new DOSprite(2);
 		skin->SetScale(50, 50);
@@ -32,10 +32,10 @@ private:
 	float currentSpeed;
 
 public:
-	virtual void Update() override
+	virtual void Update(double deltaTime) override
 	{
-		currentSpeed += acceleration;
-		SetLocation(GetLocation() + DVector2i(currentSpeed, 0));
+		currentSpeed += deltaTime * acceleration;
+		SetLocation(GetLocation() + DVector2i(deltaTime * currentSpeed, 0));
 	}
 };
 
@@ -55,23 +55,23 @@ public:
 private:
 	DOSprite* skin;
 public:
-	virtual void Update() override
+	virtual void Update(double deltaTime) override
 	{
 		if (DInputManager::GetKeyDown(W))
 		{
-			SetLocation(GetLocation() + DVector2i(0, -50));
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * -200));
 		}
 		if (DInputManager::GetKeyDown(S))
 		{
-			SetLocation(GetLocation() + DVector2i(0, 50));
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * 200));
 		}
 		if (DInputManager::GetKeyDown(D))
 		{
-			SetLocation(GetLocation() + DVector2i(50, 0));
+			SetLocation(GetLocation() + DVector2i(deltaTime * 200, 0));
 		}
 		if (DInputManager::GetKeyDown(A))
 		{
-			SetLocation(GetLocation() + DVector2i(-50, 0));
+			SetLocation(GetLocation() + DVector2i(deltaTime * -200, 0));
 		}
 		if (DInputManager::GetKeyDown(K))
 		{
@@ -81,7 +81,7 @@ public:
 
 		if (DInputManager::GetKeyDown(R))
 		{
-			DRenderer::MoveCamera(D, 100);
+			DRenderer::MoveCamera(D, deltaTime * 100);
 		}
 	}
 };
