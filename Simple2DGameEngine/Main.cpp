@@ -10,6 +10,7 @@
 #include "DEngine.h"
 #include "EDkeyCodeEnum.h"
 #include "DInput.h"
+#include "DMathTypes.h"
 
 // â ���� ũ��
 #define SCREEN_WIDTH 1600
@@ -46,6 +47,8 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 	RECT displayRectangle;
 	GetClientRect(windowHandle, &displayRectangle);
 	DEngine engine(windowHandle);
+	//DEngine engine(GetDC(windowHandle), displayRectangle);
+	// -> Change -> DEngine engine(windowHandle);  - HAUN
 
 	ShowWindow(windowHandle, commandShowAmount);
 	while (GetMessage(&message, NULL, 0, 0))
@@ -61,12 +64,13 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM wordParameter,
 	LPARAM pointerParameter)
 {
-
+	DVector2i mousePostionVector2;
 	switch (messageFlag)
 	{
 	case WM_CREATE: // ���� ����
 		SetTimer(windowHandle, 1, 1000 / DefaultFrameLate, OnTimerTickProcedure);
-		
+		mousePostionVector2 = DVector2i(LOWORD(wordParameter), HIWORD(wordParameter));
+		DInputManager::SetMousePostion(mousePostionVector2);
 		break;
 
 	case WM_TIMER: // ������ Ÿ�̸� ƽ
@@ -74,15 +78,12 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		break;
 
 	case WM_KEYDOWN: // Key Down  HAUN
-		if (EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z) {
-			DInputManager::BufferAddKeyDown((EDkeyCode)wordParameter);
-		}
+		DInputManager::BufferAddKeyDown((EDkeyCode)wordParameter);
 		break;
 
 	case WM_KEYUP: // Key Up  HAUN
-		if(EDkeyCode::A <= wordParameter && wordParameter <= EDkeyCode::Z || EDkeyCode::a <= wordParameter && wordParameter <= EDkeyCode::z){
-			DInputManager::BufferAddKeyUp((EDkeyCode)wordParameter);
-		}
+		DInputManager::BufferAddKeyUp((EDkeyCode)wordParameter);
+		
 		break;
 	case WM_LBUTTONDOWN:
 		DInputManager::BufferAddMouseDown(0);
@@ -93,11 +94,17 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		break;
 
 	case WM_RBUTTONDOWN:
-		DInputManager::BufferAddMouseUP(1);
+		DInputManager::BufferAddMouseDown(1);
 		break;
 
 	case WM_RBUTTONUP:
 		DInputManager::BufferAddMouseUP(1);
+		break;
+
+	case WM_MOUSEMOVE:
+		mousePostionVector2 = DVector2i(LOWORD(wordParameter), HIWORD(wordParameter));
+		DInputManager::SetMousePostion(mousePostionVector2);
+		
 		break;
 
 	case WM_PAINT: // �׸���
