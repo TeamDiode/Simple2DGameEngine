@@ -119,12 +119,45 @@ void DCollisionDetector::ResolveCollision(DCollisionData a, DCollisionData b)
     float velAlongNormal = rv.x * normal.x + rv.y * normal.y; //내적 계산
     if (velAlongNormal > 0)
         return;
+
     float e = a.restitution < b.restitution ? a.restitution : b.restitution;
+
+    if (e == 0) {
+        if (normal.y > 0) {
+            a.velocity.y = 0;  
+            b.velocity.y = 0;  
+
+            DVector2i overlap = normal * penetration;
+            a.SetLocation(a.GetLocation() - overlap);
+            b.SetLocation(b.GetLocation() + overlap);
+        }
+        return;
+    }
+
     float j = -(1 + e) * velAlongNormal; // 충격량
     j /= 1 / a.mass + 1 / b.mass; // 충격 후 속도변화에 적용될 충격량
     DVector2i impulse = DVector2i(normal.x * j, normal.y * j);
-    a.velocity.x -= (1 / a.mass) * impulse.x;
-    a.velocity.y -= (1 / a.mass) * impulse.y;
-    b.velocity.x += (1 / b.mass) * impulse.x;
-    b.velocity.y += (1 / b.mass) * impulse.y;
+
+    // 수평 충돌
+    if (normal.y == 0) {
+        a.velocity.x -= (1 / a.mass) * impulse.x;
+        a.velocity.y -= (1 / a.mass) * impulse.y;
+        b.velocity.x += (1 / b.mass) * impulse.x;
+        b.velocity.y += (1 / b.mass) * impulse.y;
+    }
+    // 수직 충돌
+    else if (normal.y > 0) {
+        float rebound = (e > 1.0f) ? e : 1.0f; 
+        a.velocity.x -= (1 / a.mass) * impulse.x;
+        b.velocity.x += (1 / b.mass) * impulse.x;
+
+        // y축 속도는 충격량에 비례하여 튕겨나감
+        a.velocity.y = -rebound * a.velocity.y;
+        b.velocity.y = -rebound * b.velocity.y;
+
+        // 위치 업데이트
+        DVector2i overlap = normal * penetration;
+        a.SetLocation(a.GetLocation() - overlap);
+        b.SetLocation(b.GetLocation() + overlap);
+    }
 }

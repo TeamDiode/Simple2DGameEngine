@@ -14,6 +14,8 @@ void DPhysicsManager::UpdateObjects(float deltaTime) {
         obj->UpdatePosition(deltaTime); // 위치 업데이트
         objects.Move();
     }
+
+    ResolveCollisions();
 }
 
 void DPhysicsManager::ResolveCollisions() {
@@ -28,5 +30,18 @@ void DPhysicsManager::ResolveCollisions() {
             objects.Move();
         }
         objects.Move();
+    }
+}
+
+void DPhysicsManager::SetParent(DCollisionData* parent, DCollisionData* child) {
+        child->SetParent(parent); 
+        parent->AddChild(child);
+}
+
+void DPhysicsManager::RemoveParent(DCollisionData* child) {
+    DCollisionData* parent = child->GetParent();
+    if (parent) {
+        parent->RemoveChild(child); 
+        child->SetParent(nullptr);  
     }
 }
