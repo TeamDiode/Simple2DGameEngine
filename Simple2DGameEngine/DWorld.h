@@ -61,7 +61,7 @@ public:
 		
 		if (DInputManager::GetMouseButton(0))
 		{
-			SetLocation(GetLocation() + DVector2i(0, deltaTime * -200));
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * -150));
 		}
 		if (DInputManager::GetMouseButtonDown(1))
 		{
@@ -74,6 +74,10 @@ public:
 		if (DInputManager::GetKeyDown(A))
 		{
 			SetLocation(GetLocation() + DVector2i(-50, 0));
+		}
+		if (DInputManager::GetKeyDown(space))
+		{
+			SetLocation(GetLocation() + DVector2i(0, 50));
 		}
 		if (DInputManager::GetKeyDown(K))
 		{

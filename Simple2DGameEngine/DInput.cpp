@@ -52,9 +52,7 @@ void DInputManager::BufferAddKeyUp(EDkeyCode keyValue)
 
 void DInputManager::BufferAddKeyDown(EDkeyCode keyValue)
 {
-	//if (isLockDownBuffer) return; // 동기화를 위해 Lock적용
 	isLockDownBuffer = true;
-	//DEngine::LogMessageBox("Init 10000000");
 	for (int i = 0; i < LEN; i++)
 	{
 		if (keyAnyBuffer[i] == keyValue) {
@@ -116,13 +114,15 @@ void DInputManager::Init()
 {
 	for (int i = 0; i < LEN; i++)
 	{
-		keyUpBuffer[0][i] = keyUpBuffer[1][i];
-		keyUpBuffer[1][i] = EDkeyCode::null;
-
-		BufferAddKeyAny(keyDownBuffer[0][i]);
-		keyDownBuffer[0][i] = keyDownBuffer[1][i];
-		keyDownBuffer[1][i] = EDkeyCode::null;
-
+		if (!isLockUpBuffer) {
+			keyUpBuffer[0][i] = keyUpBuffer[1][i];
+			keyUpBuffer[1][i] = EDkeyCode::null;
+		}
+		if (!isLockDownBuffer) {
+			BufferAddKeyAny(keyDownBuffer[0][i]);
+			keyDownBuffer[0][i] = keyDownBuffer[1][i];
+			keyDownBuffer[1][i] = EDkeyCode::null;
+		}
 	}
 	for (int i = 0; i < MOUSE_INPUT_TYPE; i++)
 	{
