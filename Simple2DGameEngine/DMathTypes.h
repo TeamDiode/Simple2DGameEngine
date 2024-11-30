@@ -1,6 +1,6 @@
 #pragma once
-
-// TODO : 내적과 외적연산 추가
+#include <iostream>
+#include <cmath>
 
 struct DVector2i
 {
