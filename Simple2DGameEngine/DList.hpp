@@ -141,7 +141,7 @@ bool DList<MemberType>::Move(bool isNext)
 template<typename MemberType>
 MemberType DList<MemberType>::GetValue()
 {
-	return currentIterator->currentValue;
+return currentIterator->currentValue;
 }
 /// <summary>
 /// 현재 방분하고 있는 위치의 뒤에 value을 삽입합니다.
