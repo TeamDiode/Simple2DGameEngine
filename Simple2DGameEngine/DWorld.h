@@ -18,25 +18,19 @@ public:
 class Bullet : public DObject
 {
 public:
-	Bullet()
-	{
-		acceleration = 1000;
-		currentSpeed = 0;
-		DOSprite* skin = new DOSprite(2);
-		skin->SetScale(50, 50);
-		AttachObject(skin);
-	}
+	Bullet(DVector2i pos);
 
 private:
 	DOSprite* skin;
 	float acceleration;
 	float currentSpeed;
-
+	DVector2i dir;
 public:
 	virtual void Update(double deltaTime) override
 	{
-		currentSpeed += deltaTime * acceleration;
-		SetLocation(GetLocation() + DVector2i(deltaTime * currentSpeed, 0));
+		//currentSpeed += deltaTime * acceleration;
+
+		SetLocation(GetLocation() + (dir * deltaTime * currentSpeed));
 	}
 };
 
@@ -48,6 +42,7 @@ public:
 		DOSprite* skin = new DOSprite(1);
 		skin->SetScale(100, 100);
 		AttachObject(skin);
+		f = false;
 	}
 	~Player()
 	{
@@ -55,6 +50,7 @@ public:
 	}
 private:
 	DOSprite* skin;
+	bool f;
 public:
 	virtual void Update(double deltaTime) override
 	{
@@ -75,15 +71,22 @@ public:
 		{
 			SetLocation(GetLocation() + DVector2i(deltaTime * -200, 0));
 		}
-		if (DInputManager::GetKey(K))
+		/*if (DInputManager::GetMouseButton(0))*/
+		if (DInputManager::GetMouseButton(0))
 		{
-			Bullet* a = new Bullet();
-			a->SetLocation(GetLocation());
+			if(!f)
+			Bullet* a = new Bullet(GetLocation());
+			f = true;
+			//SetLocation(DInputManager::GetMousePostion());
 		}
-
-		if (DInputManager::GetKeyDown(R))
+		if (DInputManager::GetMouseButton(1))
 		{
-			DRenderer::MoveCamera(D, deltaTime * 100);
+			f = false;
 		}
 	}
+};
+
+class Enemy : public DObject
+{
+
 };
