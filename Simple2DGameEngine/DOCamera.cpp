@@ -25,28 +25,16 @@ void DOCamera::Rendering()
     DrawCamera();
 }
 
-void DOCamera::Move(int type, int moveScale)
+void DOCamera::Move(DVector2i location)
 {
-    DVector2i currentLocation = this->GetLocation();
+    this->SetLocation(location);
+    DrawCamera();
+}
 
-    switch (type)
-    {
-    case W:
-        currentLocation.y -= moveScale;
-        break;
-    case A:
-        currentLocation.x -= moveScale;
-        break;
-    case S:
-        currentLocation.y += moveScale;
-        break;
-    case D:
-        currentLocation.x += moveScale;
-        break;
-    default:
-        return;
-    }
-    this->SetLocation(currentLocation);
+void DOCamera::Move(float x, float y)
+{
+    DVector2i location(x, y);
+    this->SetLocation(location);
     DrawCamera();
 }
 

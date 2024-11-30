@@ -33,9 +33,14 @@ void DRenderer::SetCameraOptions()
     camera.InitializeCamera(hWnd, hdc, cameraRect);
 }
 
-void DRenderer::MoveCamera(int type, int moveScale)
+void DRenderer::MoveCamera(DVector2i location)
 {
-    camera.Move(type, moveScale);
+    camera.Move(location);
+}
+
+void DRenderer::MoveCamera(float x, float y)
+{
+    camera.Move(x, y);
 }
 
 void DRenderer::Draw()
