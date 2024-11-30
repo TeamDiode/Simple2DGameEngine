@@ -5,7 +5,7 @@
 
 
 DCollisionData::DCollisionData(Shape sha, float den, float r)
-    : shape(sha), density(den), restitution(r), otherObject(nullptr) {
+    : shape(sha), density(den), restitution(r) {
 
     UpdateAABB();
 
@@ -98,6 +98,9 @@ void DCollisionData::SetRestitution(float restitutionValue)
     restitution = restitutionValue;
 }
 
+void DCollisionData::OnCollision(DCollisionData* other)
+{
 
+}
 
 

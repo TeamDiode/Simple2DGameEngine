@@ -35,18 +35,11 @@ void DPhysicsManager::ResolveCollisions() {
             DCollisionData* objB = objects.GetValue();
             DCollisionDetector detector(objA, objB);
             if (detector.DetectCollision()) {
-                DEngine::LogMessageBox("충돌");
-                
-                // 충돌한 객체들을 서로에게 등록
-                objA->RegisterCollisionEvent(objB);
-                objB->RegisterCollisionEvent(objA);
+                objA->OnCollision(objB);
 
                 // 충돌 처리
-                detector.ResolveCollision(*objA, *objB);
+                //detector.ResolveCollision(*objA, *objB);
 
-                // 충돌한 객체를 반환해서 처리
-                DCollisionData* otherA = objA->GetOtherObject();
-                DCollisionData* otherB = objB->GetOtherObject();
                 
             }
         }

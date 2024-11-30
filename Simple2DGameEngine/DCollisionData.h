@@ -27,23 +27,15 @@ public:
     AABB aabb; // 물체의 AABB 충돌 경계
     bool freezeX;
     bool freezeY;
-    DCollisionData* otherObject; // 충돌한 상대 객체
 
 
     DCollisionData* parent = nullptr;
     DList<DCollisionData*> children;
 
-    // 충돌 이벤트 등록
-    void RegisterCollisionEvent(DCollisionData* other) {
-        otherObject = other;
-    }
+    
+    virtual void OnCollision(DCollisionData* other);
 
-    // 충돌한 상대 객체를 반환
-    DCollisionData* GetOtherObject() {
-        return otherObject;
-    }
-
-    void UpdateAABB();
+    
 
 public:
     DCollisionData(Shape sha, float den, float r);
@@ -59,7 +51,7 @@ public:
     void SetRestitution(float restitutionValue);
     float GetRestitution() const { return restitution; }
 
-    void SyncWithLinkedObject();
+    void UpdateAABB();
 
 private:
     void UpdateChildren();
