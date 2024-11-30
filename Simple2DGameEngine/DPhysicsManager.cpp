@@ -16,7 +16,6 @@ void DPhysicsManager::AddObject(DCollisionData* object) {
 void DPhysicsManager::UpdateObjects(float deltaTime) {
     for (int i = 0; i < objects.GetSize(); i++) {
         DCollisionData* obj = objects.GetValue();
-        obj->SyncWithLinkedObject();
 
         gravity.ApplyGravity(*obj, deltaTime); // 중력 적용
         obj->UpdatePosition(deltaTime); // 위치 업데이트

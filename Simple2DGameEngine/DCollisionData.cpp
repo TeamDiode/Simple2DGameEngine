@@ -4,15 +4,8 @@
 #include <string>
 
 
-DCollisionData::DCollisionData(Shape sha, float den, float r, DObject* linkedObj)
-    : shape(sha), density(den), restitution(r), linkedObject(linkedObj), otherObject(nullptr) {
-    if (linkedObject) {
-        size = linkedObject->GetScale();
-        SetLocation(linkedObject->GetLocation());
-    }
-    else {
-        size = GetScale();
-    }
+DCollisionData::DCollisionData(Shape sha, float den, float r)
+    : shape(sha), density(den), restitution(r), otherObject(nullptr) {
 
     UpdateAABB();
 
@@ -22,23 +15,21 @@ DCollisionData::DCollisionData(Shape sha, float den, float r, DObject* linkedObj
 }
 
 void DCollisionData::UpdateAABB() {
-    aabb.min = GetLocation() - (size * 0.5f);
-    aabb.max = GetLocation() + (size * 0.5f);
-
-    
+    aabb.min = GetLocation() - (GetScale() * 0.5f);
+    aabb.max = GetLocation() + (GetScale() * 0.5f);
 }
 
 float DCollisionData::CalculateMass()
 {
     if (shape == Shape::Rectangle)
     {
-        float area = size.x * size.y;
+        float area = GetScale().x * GetScale().y;
         return density * area;
     }
     else if (shape == Shape::Circle)
     {
-        float radius = size.x / 2.0f; // 반지름
-        float area = 3.141592f * radius * radius * size.y;
+        float radius = GetScale().x / 2.0f; // 반지름
+        float area = 3.141592f * radius * radius * GetScale().y;
         return density * area;
     }
     return 0.0f; // 다른 형태
@@ -107,14 +98,6 @@ void DCollisionData::SetRestitution(float restitutionValue)
     restitution = restitutionValue;
 }
 
-void DCollisionData::SyncWithLinkedObject() {
-    if (linkedObject) {
-        // linkedObject의 값으로 동기화
-        SetLocation(linkedObject->GetLocation());
-        size = linkedObject->GetScale();
-        UpdateAABB();
-    }
-}
 
 
 

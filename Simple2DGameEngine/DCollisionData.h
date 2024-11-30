@@ -46,7 +46,7 @@ public:
     void UpdateAABB();
 
 public:
-    DCollisionData(Shape sha, float den, float r, DObject* linkedObj = nullptr);
+    DCollisionData(Shape sha, float den, float r);
     float CalculateMass();
     void UpdatePosition(float deltaTime);
 
