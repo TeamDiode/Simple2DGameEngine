@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Windows.h>
 #include "DMathTypes.h"
 #include "DList.hpp"
 
@@ -9,6 +10,9 @@ class DObject
 public:
 	DObject();
 	~DObject();
+
+public:
+	static HANDLE mutexHandle;
 
 private:
 	// 월드 위치

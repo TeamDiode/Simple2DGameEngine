@@ -1,10 +1,11 @@
 #include "DObject.h"
 #include "DObjectManager.h"
 
-// TODO : 라디언 단위로 각도 수정하는 부분 개선
+HANDLE DObject::mutexHandle = NULL;
 
 DObject::DObject()
 {
+	mutexHandle = CreateMutex(NULL, false, NULL);
 	location = DVector2i();
 	localLocation = DVector2i();
 	angle = 0.f;
@@ -16,6 +17,7 @@ DObject::DObject()
 
 DObject::~DObject()
 {
+	CloseHandle(mutexHandle);
 	DObjectManager::CancelObject(this);
 }
 
