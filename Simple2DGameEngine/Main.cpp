@@ -69,7 +69,8 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 	{
 	case WM_CREATE: // ���� ����
 		SetTimer(windowHandle, 1, 1000 / DefaultFrameLate, OnTimerTickProcedure);
-		
+		mousePostionVector2 = DVector2i(LOWORD(wordParameter), HIWORD(wordParameter));
+		DInputManager::SetMousePostion(mousePostionVector2);
 		break;
 
 	case WM_TIMER: // ������ Ÿ�̸� ƽ
@@ -102,7 +103,8 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 
 	case WM_MOUSEMOVE:
 		mousePostionVector2 = DVector2i(LOWORD(wordParameter), HIWORD(wordParameter));
-		DInputManager::MouseMove(mousePostionVector2);
+		DInputManager::SetMousePostion(mousePostionVector2);
+		
 		break;
 
 	case WM_PAINT: // �׸���

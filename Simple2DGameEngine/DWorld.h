@@ -4,6 +4,7 @@
 #include "DRenderer.h"
 #include "DInput.h"
 
+
 class DWorld
 {
 public:
@@ -57,7 +58,8 @@ private:
 public:
 	virtual void Update(double deltaTime) override
 	{
-		if (DInputManager::GetKeyDown(W))
+		
+		if (DInputManager::GetKey(W))
 		{
 			SetLocation(GetLocation() + DVector2i(0, deltaTime * -200));
 		}

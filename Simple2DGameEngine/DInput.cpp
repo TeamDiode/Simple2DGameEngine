@@ -4,9 +4,11 @@
 #include "EDkeyCodeEnum.h"
 #include "DMathTypes.h"
 
+#include "DEngine.h"
+
 bool DInputManager::isLockDownBuffer = false;
 bool DInputManager::isLockUpBuffer = false;
-DVector2i DInputManager::mousePostion(0, 0);
+DVector2i DInputManager::mousePostion(100, 100);
 
 EDkeyCode DInputManager::keyDownBuffer[LEN] = { EDkeyCode::null };
 EDkeyCode DInputManager::keyUpBuffer[LEN] = { EDkeyCode::null };
@@ -38,23 +40,23 @@ const EDkeyCode DInputManager::TrueValueReturn(EDkeyCode k)
 	return EDkeyCode::null;
 }
 
-void DInputManager::BufferAddKeyAny(EDkeyCode k)
+void DInputManager::BufferAddKeyAny(EDkeyCode keyValue)
 {
 	for (int i = 0; i < LEN; i++)
 	{
 		if (keyAnyBuffer[i] == 0) {
-			keyAnyBuffer[i] = k;
+			keyAnyBuffer[i] = keyValue;
 			return;
 		}
 	}
 }
 
-void DInputManager::BufferAddKeyUp(EDkeyCode k)
+void DInputManager::BufferAddKeyUp(EDkeyCode keyValue)
 {
 	if (isLockUpBuffer) return; // 동기화를 위해 Lock적용
 	for (int i = 0; i < LEN; i++)
 	{
-		if (keyAnyBuffer[i] == k) {
+		if (keyAnyBuffer[i] == keyValue) {
 			keyAnyBuffer[i] = EDkeyCode::null;
 			break;
 		}
@@ -62,59 +64,72 @@ void DInputManager::BufferAddKeyUp(EDkeyCode k)
 	for (int i = 0; i < LEN; i++)
 	{
 		if (keyUpBuffer[i] == 0) {
-			keyUpBuffer[i] = k;
+			keyUpBuffer[i] = keyValue;
 			return;
 		}
 	}
 }
 
-void DInputManager::BufferAddKeyDown(EDkeyCode e)
+void DInputManager::BufferAddKeyDown(EDkeyCode keyValue)
 {
 	if (isLockDownBuffer) return; // 동기화를 위해 Lock적용
+	
+	for (int i = 0; i < LEN; i++)
+	{
+		if (keyAnyBuffer[i] == keyValue) return;
+	}
+
 	for (int i = 0; i < LEN; i++)
 	{
 		if (keyDownBuffer[i] == 0) {
-			keyDownBuffer[i] = k;
+			
+			keyDownBuffer[i] = keyValue;
 			return;
 		}
 	}
 }
 
 void DInputManager::BufferAddMouseUP(int i){
-	if(MOUSE_INPUT_TYPE <= i || i < 0) return; //indet errer check
+	if(MOUSE_INPUT_TYPE <= i && i < 0) return; //index errer check
 	mouseUpBuffer[i] = true;
 	mouseAnyBuffer[i] = false;
 	}
 
 void DInputManager::BufferAddMouseDown(int i){
-	if(MOUSE_INPUT_TYPE <= i || i < 0) return; //indet errer check
+	if(MOUSE_INPUT_TYPE <= i && i < 0) return; //index errer check
 	mouseDownBuffer[i] = true;
+	//DEngine::LogMessageBox("L Mouse Down");
 }
 
-const bool DInputManager::GetKeyDown(EDkeyCode k)
+const bool DInputManager::GetKeyDown(EDkeyCode keyValue)
 {
 	for (int i = 0; i < LEN; i++)
 	{
-		if (keyDownBuffer[i] == k) return true;
-		if (keyDownBuffer[i] == EDkeyCode::null) return false;
+		if (keyDownBuffer[i] == keyValue) {
+			//DEngine::LogMessageBox("down true");
+			return true;
+		}
+		if (keyDownBuffer[i] == EDkeyCode::null) {
+			return false;
+		}
 	}
 	return false;
 }
 
-const bool DInputManager::GetKey(EDkeyCode k)
+const bool DInputManager::GetKey(EDkeyCode keyValue)
 {
 	for (int i = 0; i < LEN; i++)
 	{
-		if (keyAnyBuffer[i] == k) return true;
+		if (keyAnyBuffer[i] == keyValue) return true;
 	}
 	return false;
 }
 
-const bool DInputManager::GetKeyUp(EDkeyCode k)
+const bool DInputManager::GetKeyUp(EDkeyCode keyValue)
 {
 	for (int i = 0; i < LEN; i++)
 	{
-		if (keyUpBuffer[i] == k) return true;
+		if (keyUpBuffer[i] == keyValue) return true;
 		if (keyUpBuffer[i] == EDkeyCode::null) return false;
 	}
 	return false;
@@ -128,8 +143,12 @@ void DInputManager::Init()
 	for (int i = 0; i < LEN; i++)
 	{
 		keyUpBuffer[i] = EDkeyCode::null;
-		if(keyDownBuffer[i] != EDkeyCode::null) BufferAddKeyAny(keyDownBuffer[i]);
-		keyDownBuffer[i] = EDkeyCode::null;
+		if (keyDownBuffer[i] != EDkeyCode::null) {
+			
+			BufferAddKeyAny(keyDownBuffer[i]);
+			//DEngine::LogMessageBox("log - down init");
+			keyDownBuffer[i] = EDkeyCode::null;
+		}
 	}
 	for (int i = 0; i < MOUSE_INPUT_TYPE; i++)
 	{
