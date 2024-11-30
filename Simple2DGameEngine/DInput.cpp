@@ -7,7 +7,6 @@
 #include "DEngine.h"
 
 bool DInputManager::isLockDownBuffer = false;
-bool DInputManager::isLockUpBuffer = false;
 DVector2i DInputManager::mousePostion(100, 100);
 
 EDkeyCode DInputManager::keyDownBuffer[LEN] = { EDkeyCode::null };
@@ -138,7 +137,6 @@ const bool DInputManager::GetKeyUp(EDkeyCode keyValue)
 void DInputManager::Init()
 {
 	isLockDownBuffer = true;
-	isLockUpBuffer = true;
 	for (int i = 0; i < LEN; i++)
 	{
 		keyUpBuffer[i] = EDkeyCode::null;
@@ -156,13 +154,11 @@ void DInputManager::Init()
 		mouseDownBuffer[i] = false;
 	}
 	isLockDownBuffer = false;
-	isLockUpBuffer = false;;
 }
 
 void DInputManager::Start()
 {
 	isLockDownBuffer = false;
-	isLockUpBuffer = false;
 	for (int i = 0; i < LEN; i++)
 	{
 		keyUpBuffer[i] = EDkeyCode::null;

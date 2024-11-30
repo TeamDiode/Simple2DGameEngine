@@ -11,7 +11,6 @@
 class DInputManager : public IDSubSystem {
 private:
 	static bool isLockDownBuffer;
-	static bool isLockUpBuffer;
 
 	static DVector2i mousePostion;
 
