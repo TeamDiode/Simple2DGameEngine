@@ -1,6 +1,6 @@
 #pragma once
-
-// TODO : ³»Àû°ú ¿ÜÀû¿¬»ê Ãß°¡
+#include <iostream>
+#include <cmath>
 
 struct DVector2i
 {
@@ -9,24 +9,28 @@ public:
 	DVector2i(float x, float y);
 
 public:
-	// x ¿ø¼Ò
+	// x ï¿½ï¿½ï¿½ï¿½
 	float x;
-	// y ¿ø¼Ò
+	// y ï¿½ï¿½ï¿½ï¿½
 	float y;
 
 public:
-	// º¤ÅÍ µ¡¼À
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	DVector2i operator +(DVector2i value);
-	// º¤ÅÍ »¬¼À
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	DVector2i operator -(DVector2i value);
-	// ½ºÄ®¶ó °ö
+	// ï¿½ï¿½Ä®ï¿½ï¿½ ï¿½ï¿½
 	DVector2i operator *(float value);
+	/// <summary>
+	/// ï¿½ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+	/// </summary>
+	static float Distance(DVector2i value1, DVector2i value2);
 	
-	// º¤ÅÍ Á¤±ÔÈ­
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
 	void Normalize();
 
-	// ¹éÅÍ ³»Àû
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	float Dot(DVector2i value);
-	// ¹éÅÍ ¿ÜÀû
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	DVector2i Cross(DVector2i value);
 };

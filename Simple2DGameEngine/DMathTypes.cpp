@@ -1,7 +1,6 @@
 #include "DMathTypes.h"
 #include <cmath>
 
-
 DVector2i::DVector2i()
 {
 	x = 0.0f;
@@ -43,5 +42,10 @@ float DVector2i::Dot(DVector2i value)
 
 DVector2i DVector2i::Cross(DVector2i value)
 {
-	return DVector2i((x + value.y), (value.x+ y));
+	return DVector2i((x + value.y), (value.x + y));
+}
+
+float DVector2i::Distance(DVector2i value1, DVector2i value2)
+{
+	return std::sqrt(std::pow(value2.x - value1.x, 2) + std::pow(value2.y - value1.y, 2));
 }
