@@ -63,9 +63,9 @@ public:
 		{
 			SetLocation(GetLocation() + DVector2i(0, deltaTime * -200));
 		}
-		if (DInputManager::GetKeyDown(S))
+		if (DInputManager::GetKeyUp(S))
 		{
-			SetLocation(GetLocation() + DVector2i(0, deltaTime * 200));
+			SetLocation(GetLocation() + DVector2i(0,  200));
 		}
 		if (DInputManager::GetKeyDown(D))
 		{

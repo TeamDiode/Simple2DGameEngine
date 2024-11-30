@@ -53,7 +53,6 @@ void DInputManager::BufferAddKeyAny(EDkeyCode keyValue)
 
 void DInputManager::BufferAddKeyUp(EDkeyCode keyValue)
 {
-	if (isLockUpBuffer) return; // 동기화를 위해 Lock적용
 	for (int i = 0; i < LEN; i++)
 	{
 		if (keyAnyBuffer[i] == keyValue) {
