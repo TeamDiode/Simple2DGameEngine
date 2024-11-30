@@ -7,7 +7,7 @@ public:
     DCollisionDetector(DCollisionData* objectA, DCollisionData* objectB);
 
     bool DetectCollision(); // 충돌 발생시 true
-    void ResolveCollision(DCollisionData objectA, DCollisionData objectB);
+    void ResolveCollision(DCollisionData& a, DCollisionData& b);
 
     DVector2i GetNormal() const { return normal; }
     float GetPenetration() const { return penetration; }
