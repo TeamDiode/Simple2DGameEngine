@@ -1,19 +1,31 @@
 #include "DCollisionData.h"
 #include "DPhysicsManager.h"
-
-DCollisionData::DCollisionData(Shape sha, float den, float r)
-    : shape(sha), density(den), restitution(r) 
-{
-    size = GetScale();
+#include "DEngine.h"
+#include <string>
 
 
-    //AABB경계 구하기
-    aabb.min = GetLocation() - (size * 0.5f);
-    aabb.max = GetLocation() + (size * 0.5f);
+DCollisionData::DCollisionData(Shape sha, float den, float r, DObject* linkedObj)
+    : shape(sha), density(den), restitution(r), linkedObject(linkedObj), otherObject(nullptr) {
+    if (linkedObject) {
+        size = linkedObject->GetScale();
+        SetLocation(linkedObject->GetLocation());
+    }
+    else {
+        size = GetScale();
+    }
+
+    UpdateAABB();
 
     mass = CalculateMass();
 
     DPhysicsManager::AddObject(this);
+}
+
+void DCollisionData::UpdateAABB() {
+    aabb.min = GetLocation() - (size * 0.5f);
+    aabb.max = GetLocation() + (size * 0.5f);
+
+    
 }
 
 float DCollisionData::CalculateMass()
@@ -40,11 +52,8 @@ void DCollisionData::UpdatePosition(float deltaTime) {
         velocity.y = 0;
 
     SetLocation(GetLocation() + velocity * deltaTime);
-    
-    
-    // 속도 위치 업데이트
-    aabb.min = GetLocation() - (size * 0.5f);
-    aabb.max = GetLocation() + (size * 0.5f);
+
+    UpdateAABB();
 
     UpdateChildren();
 }
@@ -97,3 +106,15 @@ void DCollisionData::SetRestitution(float restitutionValue)
 {
     restitution = restitutionValue;
 }
+
+void DCollisionData::SyncWithLinkedObject() {
+    if (linkedObject) {
+        // linkedObject의 값으로 동기화
+        SetLocation(linkedObject->GetLocation());
+        size = linkedObject->GetScale();
+        UpdateAABB();
+    }
+}
+
+
+
