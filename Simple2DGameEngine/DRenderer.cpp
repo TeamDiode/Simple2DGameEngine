@@ -33,9 +33,9 @@ void DRenderer::SetCameraOptions()
     camera.InitializeCamera(hWnd, hdc, cameraRect);
 }
 
-void DRenderer::MoveCamera(int type, double moveScale)
+void DRenderer::MoveCamera(DVector2i position)
 {
-    camera.Move(type, moveScale);
+    camera.Move(position);
 }
 
 void DRenderer::Draw()
@@ -46,7 +46,7 @@ void DRenderer::Draw()
         sprites.Move();
         DrawBySpriteType(sprites.GetValue());
     }
-    camera.Rendering();
+    camera.Rendering(sprites);
 }
 
 void DRenderer::Tick(double deltaTime)
