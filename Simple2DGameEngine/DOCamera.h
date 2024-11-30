@@ -8,7 +8,8 @@ public:
 	void InitializeCamera(HWND newhWnd, HDC newHdc, RECT cameraRect);
 
 	void Rendering();
-	void Move(int type, int moveScale);
+	void Move(DVector2i currentLocation);
+	void Move(float x, float y);
 
 private:
 	HWND hWnd;
