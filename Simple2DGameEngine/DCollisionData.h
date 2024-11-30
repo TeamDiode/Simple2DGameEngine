@@ -25,7 +25,6 @@ public:
     Shape shape;
     float restitution; // 반발 계수
     AABB aabb; // 물체의 AABB 충돌 경계
-    DVector2i localPosition; // 이동된 값
     bool freezeX;
     bool freezeY;
 

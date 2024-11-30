@@ -4,13 +4,12 @@
 DCollisionData::DCollisionData(Shape sha, float den, float r)
     : shape(sha), density(den), restitution(r) 
 {
-    localPosition = GetLocation();
     size = GetScale();
 
 
     //AABB경계 구하기
-    aabb.min = localPosition - (size * 0.5f);
-    aabb.max = localPosition + (size * 0.5f);
+    aabb.min = GetLocation() - (size * 0.5f);
+    aabb.max = GetLocation() + (size * 0.5f);
 
     mass = CalculateMass();
 
@@ -35,15 +34,17 @@ float DCollisionData::CalculateMass()
 }
 
 void DCollisionData::UpdatePosition(float deltaTime) {
-    if(!freezeX)
-        localPosition.x += velocity.x * deltaTime;
-    if (!freezeY)
-        localPosition.y += velocity.y * deltaTime;
+    if (freezeX)
+        velocity.x = 0;
+    if (freezeY)
+        velocity.y = 0;
+
+    SetLocation(GetLocation() + velocity * deltaTime);
+    
     
     // 속도 위치 업데이트
-    aabb.min = localPosition - (size * 0.5f);
-    aabb.max = localPosition + (size * 0.5f);
-    SetLocation(localPosition);
+    aabb.min = GetLocation() - (size * 0.5f);
+    aabb.max = GetLocation() + (size * 0.5f);
 
     UpdateChildren();
 }
@@ -54,7 +55,7 @@ void DCollisionData::AddChild(DCollisionData* child)
     if (child)
     {
         children.AddNext(child);
-        child->SetLocation(localPosition); // 부모의 위치로 동기화
+        child->SetLocation(GetLocation()); // 부모의 위치로 동기화
     }
 }
 
@@ -85,8 +86,8 @@ void DCollisionData::UpdateChildren()
         DCollisionData* child = children.GetValue();
         if (child)
         {
-            DVector2i offset = child->localPosition;
-            child->SetLocation(localPosition + offset);
+            DVector2i offset = child->GetLocation();
+            child->SetLocation(GetLocation() + offset);
         }
         children.Move();
     }

@@ -35,7 +35,7 @@ bool DCollisionDetector::DetectCollision()
 // AABB-AABB 충돌 감지
 bool DCollisionDetector::DetectAABBCollision()
 {
-    DVector2i n = b->localPosition - a->localPosition;
+    DVector2i n = b->GetLocation() - a->GetLocation();
 
     float aExtentX = (a->aabb.max.x - a->aabb.min.x) / 2;
     float bExtentX = (b->aabb.max.x - b->aabb.min.x) / 2;
