@@ -61,19 +61,19 @@ public:
 		
 		if (DInputManager::GetKey(W))
 		{
-			SetLocation(GetLocation() + DVector2i(0, deltaTime * -150));
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * -200));
 		}
-		if (DInputManager::GetKeyUp(D))
+		if (DInputManager::GetKey(S))
 		{
-			SetLocation(GetLocation() + DVector2i(50, 0));
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * 200));
 		}
-		if (DInputManager::GetMouseButtonUp(0))
+		if (DInputManager::GetKey(D))
 		{
-			SetLocation(GetLocation() + DVector2i(-50, 0));
+			SetLocation(GetLocation() + DVector2i(deltaTime * 200, 0));
 		}
-		if (DInputManager::GetMouseButtonDown(1))
+		if (DInputManager::GetKey(A))
 		{
-			SetLocation(GetLocation() + DVector2i(0, 50));
+			SetLocation(GetLocation() + DVector2i(deltaTime * -200, 0));
 		}
 		if (DInputManager::GetKeyDown(K))
 		{
