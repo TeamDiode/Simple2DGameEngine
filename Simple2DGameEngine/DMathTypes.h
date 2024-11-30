@@ -21,5 +21,9 @@ public:
 	DVector2i operator -(DVector2i value);
 	// 스칼라 곱
 	DVector2i operator *(int value);
+	/// <summary>
+	/// 두 벡터간 거리를 구합니다.
+	/// </summary>
+	static float Distance(DVector2i value1, DVector2i value2);
 	
 };
