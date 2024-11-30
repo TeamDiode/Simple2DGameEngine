@@ -1,62 +1,24 @@
 #include "DEngine.h"
 
 
-DEngine* DEngine::engineInstance = nullptr;
 HWND DEngine::currentWindowHandle = NULL;
 
-DEngine::DEngine()
-{
-	//objectManager = DObjectManager();
-	physicsManager = DPhysicsManager();
-	//renderer = DRenderer();
-	engineInstance = this;
-	startWorld.Load();
-}
 
 DEngine::DEngine(HWND windowHandle)
 {
+	// 현재 위도우 핸들 할당
 	currentWindowHandle = windowHandle;
+	// 매니저 초기화
 	CreateSubSystemThread<DObjectManager>(new DObjectManager(), THREAD_PRIORITY_LOWEST);
 	CreateSubSystemThread<DPhysicsManager>(new DPhysicsManager(), THREAD_PRIORITY_NORMAL);
 	CreateSubSystemThread<DRenderer>(new DRenderer(GetDC(windowHandle), windowHandle), THREAD_PRIORITY_LOWEST);
-	engineInstance = this;
+	// 시작 세계 불러오기
 	startWorld.Load();
 }
 
 DEngine::~DEngine()
 {
-}
-
-DEngine* DEngine::GetInstance()
-{
-	return engineInstance;
-}
-
-void DEngine::ProcessTick()
-{
-	ProcessObject();
-	ProcessPhysics();
-	ProcessGameLogic();
-	ProcessDisplay();
-	//DInputManager::Init();
-}
-
-void DEngine::ProcessObject()
-{
-}
-
-void DEngine::ProcessPhysics()
-{
-	//physicsManager.UpdateObjects(0.02f); // �ӽ� deltaTime
-}
-
-void DEngine::ProcessGameLogic()
-{
-}
-
-void DEngine::ProcessDisplay()
-{
-	//renderer.Draw();
+	// 매니저 종료 코드
 }
 
 void DEngine::LogMessageBox(LPCSTR log)

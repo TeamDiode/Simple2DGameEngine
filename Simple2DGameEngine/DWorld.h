@@ -59,21 +59,21 @@ public:
 	virtual void Update(double deltaTime) override
 	{
 		
-		if (DInputManager::GetMouseButton(0))
+		if (DInputManager::GetKey(W))
 		{
 			SetLocation(GetLocation() + DVector2i(0, deltaTime * -200));
 		}
-		if (DInputManager::GetMouseButtonDown(1))
+		if (DInputManager::GetKey(S))
 		{
-			SetLocation(GetLocation() + DVector2i(0, 50));
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * 200));
 		}
-		if (DInputManager::GetKeyDown(D))
+		if (DInputManager::GetKey(D))
 		{
-			SetLocation(GetLocation() + DVector2i(50, 0));
+			SetLocation(GetLocation() + DVector2i(deltaTime * 200, 0));
 		}
-		if (DInputManager::GetKeyDown(A))
+		if (DInputManager::GetKey(A))
 		{
-			SetLocation(GetLocation() + DVector2i(-50, 0));
+			SetLocation(GetLocation() + DVector2i(deltaTime * -200, 0));
 		}
 		if (DInputManager::GetKeyDown(K))
 		{

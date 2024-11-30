@@ -27,6 +27,7 @@ private:
 	DList<DObject*> lowerObjectAttachments;
 
 protected:
+	// 뮤텍스 핸들
 	HANDLE mutexHandle;
 	
 public:
