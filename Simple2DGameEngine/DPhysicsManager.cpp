@@ -29,22 +29,25 @@ void DPhysicsManager::UpdateObjects(float deltaTime) {
 void DPhysicsManager::ResolveCollisions() {
     for (int i = 0; i < objects.GetSize(); i++) {
         DCollisionData* objA = objects.GetValue();
-        objects.Move();  // 다음 객체로 이동
+        //objects.Move();  // 다음 객체로 이동
 
-        for (int j = i + 1; j < objects.GetSize(); j++) {
+        for (int j = 1; j < objects.GetSize(); j++) {
+            objects.Move();  // 다음 객체로 이동
             DCollisionData* objB = objects.GetValue();
             DCollisionDetector detector(objA, objB);
             if (detector.DetectCollision()) {
                 objA->OnCollision(objB);
 
+
+                //DEngine::LogMessageBox("충돌");
                 // 충돌 처리
-                //detector.ResolveCollision(*objA, *objB);
+                //detector.ResolveCollision(objA, objB);
 
-                
             }
+            
         }
-
-        objects.Move();  // 다음 객체로 이동
+        //objects.Move();  // 다음 객체로 이동
+        
     }
 }
 

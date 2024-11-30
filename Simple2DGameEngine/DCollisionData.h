@@ -51,10 +51,20 @@ public:
     void SetRestitution(float restitutionValue);
     float GetRestitution() const { return restitution; }
 
+
     void UpdateAABB();
+
+
+    DVector2i GetVelocity() const { return velocity; } 
+    void SetVelocity(const DVector2i& newVelocity) { velocity = newVelocity; }
+    float GetGravityScale() const { return gravityScale; }  
+    void SetGravityScale(float scale) { gravityScale = scale; } 
+
 
 private:
     void UpdateChildren();
+
+    float gravityScale = 1.0f;
 
 
 };
