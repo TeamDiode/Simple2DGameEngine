@@ -7,7 +7,6 @@ void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT cameraRect)
     hWnd = newhWnd;
     hdc = newHdc;
     renderingRect = cameraRect;
-    objectList = NULL;
 
     this->SetLocation((cameraRect.left + cameraRect.right) / 2,
         (cameraRect.top + cameraRect.bottom) / 2);
@@ -15,29 +14,12 @@ void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT cameraRect)
         cameraRect.bottom - cameraRect.top);
 }
 
-void DOCamera::Rendering(DList<DOSprite*> objects)
+void DOCamera::Rendering()
 {
     SelectClipRgn(hdc, NULL);
-    if (!objects.IsEmpty())
-        objectList = objects;
     DrawScreen();
     IntersectClipRect(hdc, renderingRect.left, renderingRect.top,
         renderingRect.right, renderingRect.bottom);
-}
-
-void DOCamera::Move(DVector2i position)
-{
-    for (int i = 0; i < objectList.GetSize(); i++)
-    {
-        DistanceCalculation(objectList.GetValue());
-        objectList.Move();
-    }
-    DrawScreen();
-}
-
-DVector2i DOCamera::GetSimulationLocation()
-{
-    return simulationLocation;
 }
 
 void DOCamera::SetSimulationLocation(DVector2i newLocation)
@@ -45,13 +27,15 @@ void DOCamera::SetSimulationLocation(DVector2i newLocation)
     simulationLocation = newLocation;
 }
 
-void DOCamera::DistanceCalculation(DOSprite* object)
+DVector2i DOCamera::GetSimulationLocation()
 {
-    DVector2i cameraLocation = this->GetLocation();
-    DVector2i objectLocation = object->GetLocation();
-    DVector2i relativeLocation = objectLocation - cameraLocation;
+    return simulationLocation;
+}
 
-    object->SetLocation(relativeLocation + cameraLocation);
+void DOCamera::Move(DVector2i position)
+{
+    simulationLocation = simulationLocation + position;
+    DrawScreen();
 }
 
 void DOCamera::DrawScreen()
