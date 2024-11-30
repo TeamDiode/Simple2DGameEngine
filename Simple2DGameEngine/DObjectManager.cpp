@@ -1,6 +1,7 @@
 #include "DObjectManager.h"
 #include "DList.hpp"
 #include "DEngine.h"
+#include "DInput.h"
 
 
 DList<DObject*> DObjectManager::objectInstances = DList<DObject*>();
@@ -74,10 +75,11 @@ void DObjectManager::UpdateTick()
 void DObjectManager::Tick(double deltaTime)
 {
 	int objectAmount = objectInstances.GetSize();
-
+	
 	for (int i = 0; i < objectAmount; i++)
 	{
 		objectInstances.GetValue()->Update(deltaTime);
 		objectInstances.Move();
 	}
+	DInputManager::Init();
 }

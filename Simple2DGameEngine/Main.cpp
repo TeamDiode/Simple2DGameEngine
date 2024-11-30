@@ -78,6 +78,7 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		break;
 
 	case WM_KEYDOWN: // Key Down  HAUN
+		
 		DInputManager::BufferAddKeyDown((EDkeyCode)wordParameter);
 		break;
 
