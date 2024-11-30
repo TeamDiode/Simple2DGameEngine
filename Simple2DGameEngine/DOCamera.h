@@ -8,13 +8,16 @@ public:
 	void InitializeCamera(HWND newhWnd, HDC newHdc, RECT cameraRect);
 
 	void Rendering();
-	void Move(DVector2i currentLocation);
-	void Move(float x, float y);
+	void Move(int type, double moveScale);
+	void Move(DVector2i position);
+	void Move(DObject* object);
 
 private:
 	HWND hWnd;
 	HDC hdc;
 	RECT rt;
+	RECT renderingRect;
 
-	void DrawCamera();
+	void DrawScreen();
+	void CopyToRenderingRect();
 };

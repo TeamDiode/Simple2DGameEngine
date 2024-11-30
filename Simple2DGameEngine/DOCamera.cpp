@@ -2,53 +2,87 @@
 #include "DObject.h"
 #include "EDkeyCodeEnum.h"
 
-void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT newCameraRect)
+void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT cameraRect)
 {
-	hWnd = newhWnd;
-	hdc = newHdc;
+    hWnd = newhWnd;
+    hdc = newHdc;
+    renderingRect = cameraRect;
 
-	this->SetLocation((newCameraRect.left + newCameraRect.right) / 2,
-        (newCameraRect.top + newCameraRect.bottom) / 2);
-	this->SetScale(newCameraRect.right - newCameraRect.left, 
-        newCameraRect.bottom - newCameraRect.top);
+    this->SetLocation((cameraRect.left + cameraRect.right) / 2,
+        (cameraRect.top + cameraRect.bottom) / 2);
+    this->SetScale(cameraRect.right - cameraRect.left,
+        cameraRect.bottom - cameraRect.top);
 }
 
 void DOCamera::Rendering()
 {
-    SelectClipRgn(hdc, NULL); 
-    IntersectClipRect(hdc,
-        this->GetLocation().x - this->GetScale().x / 2, // left
-        this->GetLocation().y - this->GetScale().y / 2, // top
-        this->GetLocation().x + this->GetScale().x / 2, // right
-        this->GetLocation().y + this->GetScale().y / 2  // bottom
-    );
-    DrawCamera();
+    SelectClipRgn(hdc, NULL);
+
+    IntersectClipRect(hdc, renderingRect.left, renderingRect.top,
+        renderingRect.right, renderingRect.bottom);
+
+    CopyToRenderingRect();
+    
+    DrawScreen();
 }
 
-void DOCamera::Move(DVector2i location)
+void DOCamera::Move(int type, double moveScale)
 {
-    this->SetLocation(location);
-    DrawCamera();
+    DVector2i moveOffset;
+
+    switch (type)
+    {
+    case W:
+        moveOffset = DVector2i(0, -moveScale);
+        break;
+    case A:
+        moveOffset = DVector2i(-moveScale, 0);
+        break;
+    case S:
+        moveOffset = DVector2i(0, moveScale);
+        break;
+    case D:
+        moveOffset = DVector2i(moveScale, 0);
+        break;
+    }
+
+    this->SetLocation(this->GetLocation() + moveOffset);
+    CopyToRenderingRect();
+    DrawScreen();
 }
 
-void DOCamera::Move(float x, float y)
+void DOCamera::Move(DVector2i position)
 {
-    DVector2i location(x, y);
-    this->SetLocation(location);
-    DrawCamera();
+    this->SetLocation(position);
+    CopyToRenderingRect();
+    DrawScreen();
 }
 
-void DOCamera::DrawCamera()
+void DOCamera::Move(DObject* object)
+{
+    DVector2i position = object->GetLocation();
+    this->SetLocation(position);
+    CopyToRenderingRect();
+    DrawScreen();
+}
+
+void DOCamera::DrawScreen()
+{
+    MoveToEx(hdc, renderingRect.left, renderingRect.top, NULL);
+    LineTo(hdc, renderingRect.right - 1, renderingRect.top);
+    LineTo(hdc, renderingRect.right - 1, renderingRect.bottom - 1);
+    LineTo(hdc, renderingRect.left, renderingRect.bottom - 1);
+    LineTo(hdc, renderingRect.left, renderingRect.top);
+}
+
+void DOCamera::CopyToRenderingRect()
 {
     int left = this->GetLocation().x - this->GetScale().x / 2;
     int top = this->GetLocation().y - this->GetScale().y / 2;
-    int right = this->GetLocation().x + this->GetScale().x / 2;
-    int bottom = this->GetLocation().y + this->GetScale().y / 2;
 
-    // 카메라 사각형을 정확히 그림
-    MoveToEx(hdc, left + 1, top + 1, NULL);
-    LineTo(hdc, right - 1, top + 1);
-    LineTo(hdc, right - 1, bottom- 1);
-    LineTo(hdc, left + 1, bottom - 1);
-    LineTo(hdc, left + 1, top + 1);
+
+    BitBlt(hdc, renderingRect.left , renderingRect.top,
+        this->GetScale().x,
+        this->GetScale().y,
+        hdc, left, top, SRCCOPY);
 }

@@ -16,8 +16,7 @@ public:
 
     static void RegisterSprite(DOSprite* sprite);
     void SetCameraOptions();
-    static void MoveCamera(DVector2i location);
-    static void MoveCamera(float x, float y);
+    static void MoveCamera(int type, double moveScale);
     void Draw();
 
     virtual void Tick(double deltaTime) override;
