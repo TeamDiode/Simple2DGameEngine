@@ -30,7 +30,7 @@ DVector2i DVector2i::operator*(float value)
 
 void DVector2i::Normalize()
 {
-	float v = sqrt(pow(x,x) + pow(y,y));
+	float v = sqrt((x*x) + (y*y));
 	x = x / v;
 	y = y / v;
 }
