@@ -90,14 +90,9 @@ public:
 		{
 			DRenderer::MoveCamera(DVector2i(-100, 0));//deltaTime * 100);
 		}
-		if (DInputManager::GetKeyDown(T))
+		if (DInputManager::GetKeyDown(R))
 		{
 			DRenderer::SetCameraSimulationLocation(GetLocation());
 		}
-		if (DInputManager::GetKeyDown(R))
-		{
-			DRenderer::SetCameraSimulationLocation(GetLocation() + DVector2i(100, 100));
-		}
-
 	}
 };
