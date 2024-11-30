@@ -3,6 +3,11 @@
 
 DList<DCollisionData*> DPhysicsManager::objects = DList<DCollisionData*>();
 
+DPhysicsManager::DPhysicsManager()
+{
+    gravity = DGravity(700); // 임시
+}
+
 void DPhysicsManager::AddObject(DCollisionData* object) {
     objects.AddNext(object); // 객체 추가
 }

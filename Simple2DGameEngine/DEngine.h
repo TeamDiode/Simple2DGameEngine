@@ -54,7 +54,11 @@ private:
 		double daltatime = 0;
 		IDSubSystem* subSystemInstance = dynamic_cast<IDSubSystem*>((SubSystemClass*)subSystemClass);
 
-		if (subSystemClass == nullptr) return 0;
+		if (subSystemClass == nullptr)
+		{
+			DEngine::LogMessageBox("스레드 생성 실패");
+			return 0;
+		}
 
 		while (true)
 		{

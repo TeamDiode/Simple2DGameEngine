@@ -17,7 +17,7 @@ DEngine::DEngine(HWND windowHandle)
 {
 	currentWindowHandle = windowHandle;
 	CreateSubSystemThread<DObjectManager>(new DObjectManager(), THREAD_PRIORITY_LOWEST);
-	physicsManager = DPhysicsManager();
+	CreateSubSystemThread<DPhysicsManager>(new DPhysicsManager(), THREAD_PRIORITY_NORMAL);
 	CreateSubSystemThread<DRenderer>(new DRenderer(GetDC(windowHandle), windowHandle), THREAD_PRIORITY_LOWEST);
 	engineInstance = this;
 	startWorld.Load();
@@ -47,7 +47,7 @@ void DEngine::ProcessObject()
 
 void DEngine::ProcessPhysics()
 {
-	physicsManager.UpdateObjects(0.02f); // �ӽ� deltaTime
+	//physicsManager.UpdateObjects(0.02f); // �ӽ� deltaTime
 }
 
 void DEngine::ProcessGameLogic()

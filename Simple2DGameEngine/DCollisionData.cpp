@@ -36,9 +36,9 @@ float DCollisionData::CalculateMass()
 
 void DCollisionData::UpdatePosition(float deltaTime) {
     if(!freezeX)
-        localPosition.x += static_cast<int>(velocity.x * deltaTime);
+        localPosition.x += velocity.x * deltaTime;
     if (!freezeY)
-        localPosition.y += static_cast<int>(velocity.y * deltaTime);
+        localPosition.y += velocity.y * deltaTime;
     
     // 속도 위치 업데이트
     aabb.min = localPosition - (size * 0.5f);

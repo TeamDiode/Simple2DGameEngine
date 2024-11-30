@@ -5,9 +5,12 @@
 #include "DList.hpp"
 #include "DCollisionData.h"
 #include "DSubSystem.h"
+#include <Windows.h>
 
-class DPhysicsManager : public DSubSystem
+class DPhysicsManager : public IDSubSystem
 {
+public:
+    DPhysicsManager();
 public:
     // 오브젝트 추가
     static void AddObject(DCollisionData* object);
@@ -24,7 +27,7 @@ public:
     virtual void Tick(double deltaTime) override 
     {
         UpdateObjects(deltaTime);  
-        ResolveCollisions();       
+        ResolveCollisions();
     }
 
 private:
