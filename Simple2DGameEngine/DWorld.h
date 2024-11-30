@@ -83,14 +83,12 @@ public:
 
 		if (DInputManager::GetKeyDown(Q))
 		{
-			DVector2i pos(100, 0);
-			DRenderer::MoveCamera(pos);//deltaTime * 100);
+			DRenderer::MoveCamera(DVector2i(100, 0));//deltaTime * 100);
 		}
 
 		if (DInputManager::GetKeyDown(E))
 		{
-			DVector2i pos(-100, 0);
-			DRenderer::MoveCamera(pos);//deltaTime * 100);
+			DRenderer::MoveCamera(DVector2i(-100, 0));//deltaTime * 100);
 		}
 		if (DInputManager::GetKeyDown(T))
 		{
@@ -100,5 +98,6 @@ public:
 		{
 			DRenderer::SetCameraSimulationLocation(GetLocation() + DVector2i(100, 100));
 		}
+
 	}
 };

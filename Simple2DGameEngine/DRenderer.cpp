@@ -33,6 +33,11 @@ void DRenderer::SetCameraOptions()
     camera.InitializeCamera(hWnd, hdc, cameraRect);
 }
 
+void DRenderer::SetCameraOptions(RECT newCameraRect)
+{
+    camera.InitializeCamera(hWnd, hdc, newCameraRect);
+}
+
 void DRenderer::MoveCamera(DVector2i position)
 {
     camera.Move(position);
@@ -51,7 +56,7 @@ void DRenderer::Draw()
         sprites.Move();
         DrawBySpriteType(sprites.GetValue());
     }
-    camera.Rendering(sprites);
+    camera.Rendering();
 }
 
 void DRenderer::Tick(double deltaTime)
@@ -62,8 +67,8 @@ void DRenderer::Tick(double deltaTime)
 
 void DRenderer::AllReset()
 {
-    GetClientRect(WindowFromDC(hdc), &rt);
-    FillRect(hdc, &rt, (HBRUSH)(COLOR_WINDOW + 1));
+    GetClientRect(WindowFromDC(hdc), &rect);
+    FillRect(hdc, &rect, (HBRUSH)(COLOR_WINDOW + 1));
 }
 
 void DRenderer::DrawBySpriteType(DOSprite* sprite)
@@ -82,15 +87,25 @@ void DRenderer::DrawBySpriteType(DOSprite* sprite)
 void DRenderer::DrawRectangel(DOSprite* sprite)
 {
     DVector2i spritesDisplayOffset = camera.GetLocation() - camera.GetSimulationLocation();
-    MoveToEx(hdc, (int)sprite->GetLeftTopPosition().x + spritesDisplayOffset.x, (int)sprite->GetLeftTopPosition().y + spritesDisplayOffset.y, NULL);
-    LineTo(hdc, (int)sprite->GetRightTopPosition().x + spritesDisplayOffset.x, (int)sprite->GetRightTopPosition().y + spritesDisplayOffset.y);
-    LineTo(hdc, (int)sprite->GetRightBottomPosiiton().x + spritesDisplayOffset.x, (int)sprite->GetRightBottomPosiiton().y + spritesDisplayOffset.y);
-    LineTo(hdc, (int)sprite->GetLeftBottomPosition().x + spritesDisplayOffset.x, (int)sprite->GetLeftBottomPosition().y + spritesDisplayOffset.y);
-    LineTo(hdc, (int)sprite->GetLeftTopPosition().x + spritesDisplayOffset.x, (int)sprite->GetLeftTopPosition().y + spritesDisplayOffset.y);
+    int left = (int)sprite->GetLeftTopPosition().x + spritesDisplayOffset.x;
+    int right = (int)sprite->GetRightTopPosition().x + spritesDisplayOffset.x;
+    int top = (int)sprite->GetLeftTopPosition().y + spritesDisplayOffset.y;
+    int bottom = (int)sprite->GetLeftBottomPosition().y + spritesDisplayOffset.y;
+
+    MoveToEx(hdc, left, top, NULL);
+    LineTo(hdc, right, top);
+    LineTo(hdc, right, bottom);
+    LineTo(hdc, left, bottom);
+    LineTo(hdc, left, top);
 }
 
 void DRenderer::DrawEllipse(DOSprite* sprite)
 {
-    Ellipse(hdc, (int)sprite->GetLeftTopPosition().x, (int)sprite->GetLeftTopPosition().y,
-        (int)sprite->GetRightBottomPosiiton().x, (int)sprite->GetRightBottomPosiiton().y);
+    DVector2i spritesDisplayOffset = camera.GetLocation() - camera.GetSimulationLocation();
+    int left = (int)sprite->GetLeftTopPosition().x + spritesDisplayOffset.x;
+    int right = (int)sprite->GetRightTopPosition().x + spritesDisplayOffset.x;
+    int top = (int)sprite->GetLeftTopPosition().y + spritesDisplayOffset.y;
+    int bottom = (int)sprite->GetLeftBottomPosition().y + spritesDisplayOffset.y;
+
+    Ellipse(hdc, left, top, right, bottom);
 }
