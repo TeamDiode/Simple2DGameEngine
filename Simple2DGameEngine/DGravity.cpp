@@ -1,8 +1,15 @@
 #include "DGravity.h"
 
-void DGravity::ApplyGravity(DCollisionData& object, float deltaTime)
-{
-	float effectiveGravity = gravity * gravityScale; // 중력 계산
 
-	object.velocity.y += effectiveGravity * deltaTime; // 변화량 반영
+DGravity::DGravity(float g) : gravity(g) {}
+
+void DGravity::ApplyGravity(DCollisionData& object, float deltaTime) {
+    float adjustedGravity = gravity * object.GetGravityScale();
+
+    // 객체의 현재 속도
+    DVector2i velocity = object.GetVelocity();
+    velocity.y += adjustedGravity * deltaTime;  // Y축 중력 적용
+
+    // 새로운 속도 설정
+    object.SetVelocity(velocity);
 }
