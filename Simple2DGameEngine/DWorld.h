@@ -83,7 +83,7 @@ public:
 
 		if (DInputManager::GetKeyDown(R))
 		{
-			DRenderer::MoveCamera(D, deltaTime * 100);
+			DRenderer::MoveCamera(D, 50);//deltaTime * 100);
 		}
 	}
 };
