@@ -63,19 +63,19 @@ public:
 		{
 			SetLocation(GetLocation() + DVector2i(0, deltaTime * -200));
 		}
-		if (DInputManager::GetKeyUp(S))
+		if (DInputManager::GetKey(S))
 		{
-			SetLocation(GetLocation() + DVector2i(0,  200));
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * 200));
 		}
-		if (DInputManager::GetKeyDown(D))
+		if (DInputManager::GetKey(D))
 		{
 			SetLocation(GetLocation() + DVector2i(deltaTime * 200, 0));
 		}
-		if (DInputManager::GetKeyDown(A))
+		if (DInputManager::GetKey(A))
 		{
 			SetLocation(GetLocation() + DVector2i(deltaTime * -200, 0));
 		}
-		if (DInputManager::GetKeyDown(K))
+		if (DInputManager::GetKey(K))
 		{
 			Bullet* a = new Bullet();
 			a->SetLocation(GetLocation());
