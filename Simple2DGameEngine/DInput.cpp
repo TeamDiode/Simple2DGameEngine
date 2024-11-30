@@ -4,8 +4,6 @@
 #include "EDkeyCodeEnum.h"
 #include "DMathTypes.h"
 
-#include "DEngine.h"
-
 bool DInputManager::isLockDownBuffer = false;
 DVector2i DInputManager::mousePostion(100, 100);
 

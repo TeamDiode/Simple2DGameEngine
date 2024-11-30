@@ -26,7 +26,7 @@ public:
 
     virtual void Tick(double deltaTime) override 
     {
-        UpdateObjects(deltaTime);  
+        UpdateObjects(deltaTime);
         ResolveCollisions();
     }
 

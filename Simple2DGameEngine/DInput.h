@@ -3,8 +3,6 @@
 #include "EDkeyCodeEnum.h"
 #include "DSubSystem.h"
 
-//#include "DEngine.h"
-
 #define LEN 10
 #define MOUSE_INPUT_TYPE 2 // 0 = L  1 = R   Temp=2
 

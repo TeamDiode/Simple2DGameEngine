@@ -102,9 +102,8 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 		break;
 
 	case WM_MOUSEMOVE:
-		mousePostionVector2 = DVector2i(LOWORD(wordParameter), HIWORD(wordParameter));
+		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
 		DInputManager::SetMousePostion(mousePostionVector2);
-		
 		break;
 
 	case WM_PAINT: // �׸���
