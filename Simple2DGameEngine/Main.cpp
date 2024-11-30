@@ -63,43 +63,43 @@ LRESULT CALLBACK OnWindowProcedure(HWND windowHandle, UINT messageFlag, WPARAM w
 	{
 	case WM_CREATE: // 윈도우 생성
 		mousePostionVector2 = DVector2i(LOWORD(wordParameter), HIWORD(wordParameter));
-		DInputManager::SetMousePostion(mousePostionVector2);
+		DInputManager::SetMousePostion(mousePostionVector2); // 마우스 위치 가져오기
 
 		break;
 
 	case WM_KEYDOWN: // Key Down
-		DInputManager::BufferAddKeyDown((EDkeyCode)wordParameter);
+		DInputManager::BufferAddKeyDown((EDkeyCode)wordParameter); // keyDown 입력 함수
 
 		break;
 
 	case WM_KEYUP: // Key Up
-		DInputManager::BufferAddKeyUp((EDkeyCode)wordParameter);
+		DInputManager::BufferAddKeyUp((EDkeyCode)wordParameter); // keyUp 입력 함수
 		
 		break;
 
 	case WM_LBUTTONDOWN:
-		DInputManager::BufferAddMouseDown(0);
+		DInputManager::BufferAddMouseDown(0); // 마우스 L버튼 Down 상태 입력 함수
 
 		break;
 
 	case WM_LBUTTONUP:
-		DInputManager::BufferAddMouseUP(0);
+		DInputManager::BufferAddMouseUP(0); // 마우스 L버튼 UP 상태 입력 함수
 
 		break;
 
 	case WM_RBUTTONDOWN:
-		DInputManager::BufferAddMouseDown(1);
+		DInputManager::BufferAddMouseDown(1); // 마우스 R버튼 Down 상태 입력 함수
 
 		break;
 
 	case WM_RBUTTONUP:
-		DInputManager::BufferAddMouseUP(1);
+		DInputManager::BufferAddMouseUP(1); // 마우스 R버튼 UP 상태 입력 함수
 
 		break;
 
 	case WM_MOUSEMOVE:
 		mousePostionVector2 = DVector2i((float)LOWORD(pointerParameter), (float)HIWORD(pointerParameter));
-		DInputManager::SetMousePostion(mousePostionVector2);
+		DInputManager::SetMousePostion(mousePostionVector2); // 마우스가 움직일때마다 마우스 위치 가져오기
 
 		break;
 
