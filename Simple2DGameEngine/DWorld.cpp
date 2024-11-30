@@ -11,11 +11,12 @@ DWorld::~DWorld()
 void DWorld::Load()
 {
 	// 플레이어 생성
-	Player* a = new Player();
-	a->SetLocation(500, 500);
-	a->SetScale(100, 100);
+	Player* player = new Player();
+	player->SetLocation(500, 500);
+	player->SetScale(100, 100);
 
-	
+	// 적을 생성을 관리하는 EnemyManager 클래스 생성
+	EnemyManager* em = new EnemyManager(player);
 }
 #include "DEngine.h"
 #include <string>
