@@ -35,6 +35,16 @@ void DOCamera::Move(DVector2i position)
     DrawScreen();
 }
 
+DVector2i DOCamera::GetSimulationLocation()
+{
+    return simulationLocation;
+}
+
+void DOCamera::SetSimulationLocation(DVector2i newLocation)
+{
+    simulationLocation = newLocation;
+}
+
 void DOCamera::DistanceCalculation(DOSprite* object)
 {
     DVector2i cameraLocation = this->GetLocation();

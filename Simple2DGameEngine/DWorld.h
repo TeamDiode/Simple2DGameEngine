@@ -92,5 +92,13 @@ public:
 			DVector2i pos(-100, 0);
 			DRenderer::MoveCamera(pos);//deltaTime * 100);
 		}
+		if (DInputManager::GetKeyDown(T))
+		{
+			DRenderer::SetCameraSimulationLocation(GetLocation());
+		}
+		if (DInputManager::GetKeyDown(R))
+		{
+			DRenderer::SetCameraSimulationLocation(GetLocation() + DVector2i(100, 100));
+		}
 	}
 };
