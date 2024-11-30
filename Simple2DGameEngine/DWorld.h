@@ -3,7 +3,7 @@
 #include "DObjectManager.h"
 #include "DRenderer.h"
 #include "DInput.h"
-#include "DGravity.h"
+#include "DPhysicsManager.h"
 #include "DCollisionData.h"
 
 class DWorld
@@ -16,39 +16,15 @@ public:
 	virtual void Load();
 };
 
-class Bullet : public DObject
+class Player :public DObject
 {
 public:
-	Bullet()
-	{
-		acceleration = 1000;
-		currentSpeed = 0;
-		DOSprite* skin = new DOSprite(2);
-		skin->SetScale(50, 50);
-		AttachObject(skin);
-	}
-
-private:
-	DOSprite* skin;
-	float acceleration;
-	float currentSpeed;
-
-public:
-	virtual void Update(double deltaTime) override
-	{
-		currentSpeed += deltaTime * acceleration;
-		SetLocation(GetLocation() + DVector2i(deltaTime * currentSpeed, 0));
-	}
-};
-
-class Player :public DCollisionData, public DGravity
-{
-public:
-	Player() : DCollisionData(Shape::Rectangle,1,1) ,DGravity()
-	{
+	Player() /*: DCollisionData(Shape::Rectangle,1,1)*/
+	{ 
 		DOSprite* skin = new DOSprite(1);
 		skin->SetScale(100, 100);
 		DObject::AttachObject(skin);
+		
 	}
 	~Player()
 	{
@@ -59,11 +35,14 @@ private:
 public:
 	virtual void Update(double deltaTime) override
 	{
-
-		if (DInputManager::GetKeyDown(space))
+		if (DInputManager::GetKey(W))
 		{
-			DRenderer::MoveCamera(D, deltaTime * 100);
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * -200));
 		}
-		//ApplyGravity((class Player*)(this), deltaTime);
+		else
+		{
+			SetLocation(GetLocation() + DVector2i(0, deltaTime * 200));
+		}
+		
 	}
 };
