@@ -11,9 +11,6 @@ public:
 	DObject();
 	~DObject();
 
-public:
-	static HANDLE mutexHandle;
-
 private:
 	// 월드 위치
 	DVector2i location;
@@ -28,6 +25,9 @@ private:
 	DObject* upperObject;
 	// 부착된 하위 오브젝트
 	DList<DObject*> lowerObjectAttachments;
+
+protected:
+	HANDLE mutexHandle;
 	
 public:
 	/* 오브젝트 상태 프로퍼티 */

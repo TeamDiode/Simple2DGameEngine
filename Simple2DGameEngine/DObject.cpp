@@ -1,7 +1,6 @@
 #include "DObject.h"
 #include "DObjectManager.h"
 
-HANDLE DObject::mutexHandle = NULL;
 
 DObject::DObject()
 {
@@ -28,11 +27,14 @@ DVector2i DObject::GetLocation()
 
 void DObject::SetLocation(DVector2i newLocation)
 {
+	DWORD result = WaitForSingleObject(mutexHandle, INFINITE);
+
 	location = newLocation + localLocation;
 	for (int i = lowerObjectAttachments.GetSize(); i > 0; i--)
 	{
 		lowerObjectAttachments.GetValue()->SetLocation(location);
 	}
+	ReleaseMutex(mutexHandle);
 }
 
 void DObject::SetLocation(int newLocationX, int newLocationY)
@@ -42,7 +44,10 @@ void DObject::SetLocation(int newLocationX, int newLocationY)
 
 void DObject::SetLocalLocation(DVector2i newLocalLocation)
 {
+	DWORD result = WaitForSingleObject(mutexHandle, INFINITE);
+
 	localLocation = newLocalLocation;
+	ReleaseMutex(mutexHandle);
 }
 
 void DObject::SetLocalLocation(int newLocalLocationX, int newLocalLocationY)
@@ -57,12 +62,15 @@ float DObject::GetAngle()
 
 void DObject::SetAngle(float degree)
 {
+	DWORD result = WaitForSingleObject(mutexHandle, INFINITE);
+
 	angle = degree;
+	ReleaseMutex(mutexHandle);
 }
 
 void DObject::SetAngleByRadian(float radian)
 {
-	angle = radian * 3.1415 / 180; // 수학 부분에서 추가 구현 후 수정
+	SetAngle(radian * 3.1415 / 180);
 }
 
 DVector2i DObject::GetScale()
@@ -72,12 +80,15 @@ DVector2i DObject::GetScale()
 
 void DObject::SetScale(DVector2i newScale)
 {
+	DWORD result = WaitForSingleObject(mutexHandle, INFINITE);
+
 	scale = newScale;
+	ReleaseMutex(mutexHandle);
 }
 
 void DObject::SetScale(int newScaleX, int newScaleY)
 {
-	scale = DVector2i(newScaleX, newScaleY);
+	SetScale(DVector2i(newScaleX, newScaleY));
 }
 
 void DObject::SetUpperObject(DObject* newUpperObject)
