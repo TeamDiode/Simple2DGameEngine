@@ -81,9 +81,18 @@ public:
 			a->SetLocation(GetLocation());
 		}
 
+		if (DInputManager::GetKeyDown(Q))
+		{
+			DRenderer::MoveCamera(DVector2i(100, 0));//deltaTime * 100);
+		}
+
+		if (DInputManager::GetKeyDown(E))
+		{
+			DRenderer::MoveCamera(DVector2i(-100, 0));//deltaTime * 100);
+		}
 		if (DInputManager::GetKeyDown(R))
 		{
-			DRenderer::MoveCamera(D, deltaTime * 100);
+			DRenderer::SetCameraSimulationLocation(GetLocation());
 		}
 	}
 };
