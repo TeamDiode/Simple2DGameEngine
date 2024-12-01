@@ -1,26 +1,24 @@
 #pragma once
 #include "DMathTypes.h"
 #include "EDkeyCodeEnum.h"
-#include "DSubSystem.h"
 
-#define LEN 10
+#define LEN 7
 #define MOUSE_INPUT_TYPE 2 // 0 = L  1 = R   Temp=2
 
-class DInputManager : public IDSubSystem {
+class DInputManager {
 private:
 	static bool isLockDownBuffer;
+	static bool isLockUpBuffer;
 
 	static DVector2i mousePostion;
 
-	static bool mouseUpBuffer[MOUSE_INPUT_TYPE];
-	static bool mouseDownBuffer[MOUSE_INPUT_TYPE];
+	static bool mouseUpBuffer[2][MOUSE_INPUT_TYPE];
+	static bool mouseDownBuffer[2][MOUSE_INPUT_TYPE];
 	static bool mouseAnyBuffer[MOUSE_INPUT_TYPE];
 
-	static EDkeyCode keyDownBuffer[LEN];
-	static EDkeyCode keyUpBuffer[LEN];
+	static EDkeyCode keyDownBuffer[2][LEN];
+	static EDkeyCode keyUpBuffer[2][LEN];
 	static EDkeyCode keyAnyBuffer[LEN];
-
-	static const EDkeyCode TrueValueReturn(EDkeyCode e);
 
 	static void BufferAddKeyAny(EDkeyCode keyValue);
 public:
@@ -34,8 +32,8 @@ public:
 	const static bool GetKey(EDkeyCode keyValue);
 	const static bool GetKeyUp(EDkeyCode keyValue);
 
-	const static bool GetMouseButtonDown(int i) { return (MOUSE_INPUT_TYPE > i && i >= 0) ? mouseDownBuffer[i] : false; }
-	const static bool GetMouseButtonUp(int i) { return (MOUSE_INPUT_TYPE > i && i >= 0) ? mouseUpBuffer[i] : false; }
+	const static bool GetMouseButtonDown(int i) { return (MOUSE_INPUT_TYPE > i && i >= 0) ? mouseDownBuffer[0][i] : false; }
+	const static bool GetMouseButtonUp(int i) { return (MOUSE_INPUT_TYPE > i && i >= 0) ? mouseUpBuffer[0][i] : false; }
 	const static bool GetMouseButton(int i) { return (MOUSE_INPUT_TYPE > i && i >= 0) ? mouseAnyBuffer[i] : false; }
 
 	const static DVector2i GetMousePostion() { return mousePostion; }
@@ -43,6 +41,4 @@ public:
 	
 
 	static void Init();
-	static void Start();
-	virtual void Tick(double deltaTime) override;
 };

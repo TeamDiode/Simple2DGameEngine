@@ -1,157 +1,174 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="DEngine">
-      <UniqueIdentifier>{840f0d8d-5e24-486d-b128-c07472618ae0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source">
-      <UniqueIdentifier>{25fedfda-0a6d-47d3-a0a9-0c3eef3f2f5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Private">
-      <UniqueIdentifier>{ac3dad94-978a-4bc2-b992-0801673bc169}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Public">
-      <UniqueIdentifier>{22a1fe79-6c1e-408b-ab41-f1a685305143}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Private\Engine">
-      <UniqueIdentifier>{136c3b52-6f92-4541-9d69-af5351dbbce7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Public\Engine">
-      <UniqueIdentifier>{72c5dee6-463d-4b3f-913f-0643146ab61e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Public\Object">
-      <UniqueIdentifier>{7b23594b-397d-4ea7-9924-0807af87dd02}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Private\Object">
-      <UniqueIdentifier>{71a6b726-a414-4f24-bfce-6f91e7be6503}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Private\Math">
-      <UniqueIdentifier>{8b39e2bf-4749-4e11-8754-124e1dd75574}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Public\Math">
-      <UniqueIdentifier>{e87e99b6-d1a9-493a-aa23-5b0bda433d28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Private\Graphics">
-      <UniqueIdentifier>{7e473a79-a3fa-4b2c-afbc-c468047853e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Public\Graphics">
-      <UniqueIdentifier>{a5d1d827-8c7c-4952-9cfe-b2f3796e845c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SampleProject">
-      <UniqueIdentifier>{b0cb964e-689b-4dd7-95ee-acd5af66e9f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Public\Data">
-      <UniqueIdentifier>{683451c8-03bb-4881-8422-ed234c69c86a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Public\DesignPattern">
-      <UniqueIdentifier>{16cc1e7d-fe69-422c-855c-e92039055611}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Private\Physics">
-      <UniqueIdentifier>{a494cc7c-687a-4259-a7a9-d8c467cfc582}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Public\Physics">
-      <UniqueIdentifier>{598df82c-5695-4609-ab92-bd2043596894}</UniqueIdentifier>
-    <Filter Include="DEngine\Source\Public\Input">
-      <UniqueIdentifier>{e6f69814-1194-426f-b951-5c24d165ec12}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="DEngine\Source\Private\Input">
-      <UniqueIdentifier>{fbae12ab-70d5-440d-8f5b-818390050c36}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>DEngine\Source\Public</Filter>
-    </ClCompile>
-    <ClCompile Include="DEngine.cpp">
-      <Filter>DEngine\Source\Private\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="DObject.cpp">
-      <Filter>DEngine\Source\Private\Object</Filter>
+      <Filter>Engine\Source\Private\Object</Filter>
     </ClCompile>
     <ClCompile Include="DObjectManager.cpp">
-      <Filter>DEngine\Source\Private\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="DMathTypes.cpp">
-      <Filter>DEngine\Source\Private\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="DRenderer.cpp">
-      <Filter>DEngine\Source\Private\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="DInput.cpp">
-      <Filter>DEngine\Source\Private\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="DOSprite.cpp">
-      <Filter>DEngine\Source\Private\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="DMathHelper.cpp">
-      <Filter>DEngine\Source\Private\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="DOCamera.cpp">
-      <Filter>DEngine\Source\Private\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="DCollision.cpp">
-      <Filter>DEngine\Source\Private\Physics</Filter>
+      <Filter>Engine\Source\Private\Object</Filter>
     </ClCompile>
     <ClCompile Include="DCollisionData.cpp">
-      <Filter>DEngine\Source\Private\Physics</Filter>
+      <Filter>Engine\Source\Private\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="DCollision.cpp">
+      <Filter>Engine\Source\Private\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="DEngine.cpp">
+      <Filter>Engine\Source\Private\System</Filter>
+    </ClCompile>
+    <ClCompile Include="DMathTypes.cpp">
+      <Filter>Engine\Source\Private\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="DMathHelper.cpp">
+      <Filter>Engine\Source\Private\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="DOSprite.cpp">
+      <Filter>Engine\Source\Private\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="DOCamera.cpp">
+      <Filter>Engine\Source\Private\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="DInput.cpp">
+      <Filter>Engine\Source\Private\Input</Filter>
     </ClCompile>
     <ClCompile Include="DGravity.cpp">
-      <Filter>DEngine\Source\Private\Physics</Filter>
+      <Filter>Engine\Source\Private\Physics</Filter>
     </ClCompile>
     <ClCompile Include="DPhysicsManager.cpp">
-      <Filter>DEngine\Source\Private\Physics</Filter>
+      <Filter>Engine\Source\Private\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="DRenderer.cpp">
+      <Filter>Engine\Source\Private\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Engine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DWorld.cpp">
+      <Filter>Engine\Source\Private\System</Filter>
+    </ClCompile>
+    <ClCompile Include="DSubSystem.cpp">
+      <Filter>Engine\Source\Private\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DEngine.h">
-      <Filter>DEngine\Source\Public\Engine</Filter>
-    </ClInclude>
     <ClInclude Include="DObject.h">
-      <Filter>DEngine\Source\Public\Object</Filter>
+      <Filter>Engine\Source\Public\Object</Filter>
     </ClInclude>
     <ClInclude Include="DObjectManager.h">
-      <Filter>DEngine\Source\Public\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="DMathTypes.h">
-      <Filter>DEngine\Source\Public\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="DRenderer.h">
-      <Filter>DEngine\Source\Public\Graphics</Filter>
+      <Filter>Engine\Source\Public\Object</Filter>
     </ClInclude>
     <ClInclude Include="DArray.hpp">
-      <Filter>DEngine\Source\Public\Data</Filter>
+      <Filter>Engine\Source\Public\DataType</Filter>
     </ClInclude>
-    <ClInclude Include="DList.hpp">
-      <Filter>DEngine\Source\Public\Data</Filter>
-    </ClInclude>
-    <ClInclude Include="DSingleton.hpp">
-      <Filter>DEngine\Source\Public\DesignPattern</Filter>
-    </ClInclude>
-    <ClInclude Include="DCollision.h">
-      <Filter>DEngine\Source\Public\Physics</Filter>
+    <ClInclude Include="DAutoPointer.hpp">
+      <Filter>Engine\Source\Public\DataType</Filter>
     </ClInclude>
     <ClInclude Include="DCollisionData.h">
-      <Filter>DEngine\Source\Public\Physics</Filter>
+      <Filter>Engine\Source\Public\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="DGravity.h">
-      <Filter>DEngine\Source\Public\Physics</Filter>
+    <ClInclude Include="DCollision.h">
+      <Filter>Engine\Source\Public\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="DPhysicsManager.h">
-      <Filter>DEngine\Source\Public\Physics</Filter>
-    <ClInclude Include="DInput.h">
-      <Filter>DEngine\Source\Public\Input</Filter>
+    <ClInclude Include="DEngine.h">
+      <Filter>Engine\Source\Public\System</Filter>
     </ClInclude>
-    <ClInclude Include="EDkeyCodeEnum.h">
-      <Filter>DEngine\Source\Public\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="DOSprite.h">
-      <Filter>DEngine\Source\Public\Graphics</Filter>
+    <ClInclude Include="DMathTypes.h">
+      <Filter>Engine\Source\Public\Math</Filter>
     </ClInclude>
     <ClInclude Include="DMathHelper.h">
-      <Filter>DEngine\Source\Public\Math</Filter>
-    </ClCompile>
-    <ClInclude Include="DOCamera.h">
-      <Filter>DEngine\Source\Public\Graphics</Filter>
+      <Filter>Engine\Source\Public\Math</Filter>
     </ClInclude>
+    <ClInclude Include="DORender.h">
+      <Filter>Engine\Source\Public\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="DOCamera.h">
+      <Filter>Engine\Source\Public\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="DList.hpp">
+      <Filter>Engine\Source\Public\DataType</Filter>
+    </ClInclude>
+    <ClInclude Include="DOSprite.h">
+      <Filter>Engine\Source\Public\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="DPhysicsManager.h">
+      <Filter>Engine\Source\Public\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="DGravity.h">
+      <Filter>Engine\Source\Public\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="DRenderer.h">
+      <Filter>Engine\Source\Public\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="DInput.h">
+      <Filter>Engine\Source\Public\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="EDkeyCodeEnum.h">
+      <Filter>Engine\Source\Public\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="DSubSystem.h">
+      <Filter>Engine\Source\Public\System</Filter>
+    </ClInclude>
+    <ClInclude Include="DWorld.h">
+      <Filter>Engine\Source\Public\System</Filter>
+    </ClInclude>
+    <ClInclude Include="DSingleton.hpp">
+      <Filter>Engine\Source\Public\DataType</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{0f6fa572-85dd-4e8a-8af6-c2c6c0b9e3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source">
+      <UniqueIdentifier>{8d92c208-1f75-4207-b104-65a9edc232b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Private">
+      <UniqueIdentifier>{c3e10074-e6e8-4aaf-9288-0ea6461ee026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Public">
+      <UniqueIdentifier>{8aecf0c7-0748-465b-aa7a-c6c519aa05dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Public\Object">
+      <UniqueIdentifier>{c70fdad4-9807-45c8-b213-c98eff483e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Private\Object">
+      <UniqueIdentifier>{0992c0e8-e0ab-493a-a670-d8846fd00daf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Public\Physics">
+      <UniqueIdentifier>{1171df41-a761-4c28-bc02-275aee3a2a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Private\Physics">
+      <UniqueIdentifier>{17a3eb6b-9723-48dd-8eb7-bd1fa5050075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Public\DataType">
+      <UniqueIdentifier>{a9080d43-cbc6-4255-9398-7705e23efe03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Private\DataType">
+      <UniqueIdentifier>{c4bdcb12-b06c-4d27-82f0-ee7ec46b8b0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Public\Rendering">
+      <UniqueIdentifier>{aa7b69ce-4aee-4cdc-b34f-8eaef82ffde0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Private\Rendering">
+      <UniqueIdentifier>{a937172a-c238-4db6-bf89-e4097eadb500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Public\Math">
+      <UniqueIdentifier>{a5fe6a24-8b19-4a6a-8ef7-792fe7935e65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Private\Math">
+      <UniqueIdentifier>{1bd0753c-e12c-4a5a-b899-00edd865d2f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Public\Input">
+      <UniqueIdentifier>{88681b14-f2f7-45ee-bb90-869806dd2132}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Private\Input">
+      <UniqueIdentifier>{2bcfb012-9cad-432f-b5d0-4708afb0e448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Public\System">
+      <UniqueIdentifier>{5ca3673e-9ec4-4750-9ad9-440f83dbe085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Private\System">
+      <UniqueIdentifier>{d5793a29-f92c-415b-805b-618a8f13c363}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

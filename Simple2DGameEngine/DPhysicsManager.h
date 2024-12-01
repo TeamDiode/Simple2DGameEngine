@@ -7,6 +7,7 @@
 #include "DSubSystem.h"
 #include <Windows.h>
 
+
 class DPhysicsManager : public IDSubSystem
 {
 public:
@@ -24,6 +25,7 @@ public:
         object->SetRestitution(restitutionValue);
     }
 
+
     virtual void Tick(double deltaTime) override 
     {
         UpdateObjects(deltaTime);
@@ -40,4 +42,5 @@ private:
     void UpdateObjects(float deltaTime);
     // 충돌 처리
     void ResolveCollisions();
+
 };
