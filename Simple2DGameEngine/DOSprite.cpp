@@ -25,6 +25,11 @@ DOSprite::DOSprite(int newType)
     DRenderer::RegisterSprite(this);
 }
 
+DOSprite::~DOSprite()
+{
+    DRenderer::CancelSprite(this);
+}
+
 DVector2i DOSprite::GetRotatedPosition(float x, float y)
 {
     DVector2i center = GetLocation();

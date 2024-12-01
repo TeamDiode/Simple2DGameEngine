@@ -9,6 +9,7 @@ class DOSprite : public DObject
 public:
 	DOSprite();
 	DOSprite(int newType);
+	~DOSprite();
 
 	DVector2i GetLeftTopPosition();
 	DVector2i GetLeftBottomPosition();
