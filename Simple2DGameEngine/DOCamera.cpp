@@ -2,65 +2,47 @@
 #include "DObject.h"
 #include "EDkeyCodeEnum.h"
 
-void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT newCameraRect)
+void DOCamera::InitializeCamera(HWND newhWnd, HDC newHdc, RECT cameraRect)
 {
-	hWnd = newhWnd;
-	hdc = newHdc;
+    hWnd = newhWnd;
+    hdc = newHdc;
+    renderingRect = cameraRect;
 
-	this->SetLocation((newCameraRect.left + newCameraRect.right) / 2,
-        (newCameraRect.top + newCameraRect.bottom) / 2);
-	this->SetScale(newCameraRect.right - newCameraRect.left, 
-        newCameraRect.bottom - newCameraRect.top);
+    this->SetLocation((cameraRect.left + cameraRect.right) / 2,
+        (cameraRect.top + cameraRect.bottom) / 2);
+    this->SetScale(cameraRect.right - cameraRect.left,
+        cameraRect.bottom - cameraRect.top);
 }
 
 void DOCamera::Rendering()
 {
-    SelectClipRgn(hdc, NULL); 
-    IntersectClipRect(hdc,
-        this->GetLocation().x - this->GetScale().x / 2, // left
-        this->GetLocation().y - this->GetScale().y / 2, // top
-        this->GetLocation().x + this->GetScale().x / 2, // right
-        this->GetLocation().y + this->GetScale().y / 2  // bottom
-    );
-    DrawCamera();
+    SelectClipRgn(hdc, NULL);
+    DrawScreen();
+    IntersectClipRect(hdc, renderingRect.left, renderingRect.top,
+        renderingRect.right, renderingRect.bottom);
 }
 
-void DOCamera::Move(int type, int moveScale)
+void DOCamera::SetSimulationLocation(DVector2i newLocation)
 {
-    DVector2i currentLocation = this->GetLocation();
-
-    switch (type)
-    {
-    case W:
-        currentLocation.y -= moveScale;
-        break;
-    case A:
-        currentLocation.x -= moveScale;
-        break;
-    case S:
-        currentLocation.y += moveScale;
-        break;
-    case D:
-        currentLocation.x += moveScale;
-        break;
-    default:
-        return;
-    }
-    this->SetLocation(currentLocation);
-    DrawCamera();
+    simulationLocation = newLocation;
 }
 
-void DOCamera::DrawCamera()
+DVector2i DOCamera::GetSimulationLocation()
 {
-    int left = this->GetLocation().x - this->GetScale().x / 2;
-    int top = this->GetLocation().y - this->GetScale().y / 2;
-    int right = this->GetLocation().x + this->GetScale().x / 2;
-    int bottom = this->GetLocation().y + this->GetScale().y / 2;
+    return simulationLocation;
+}
 
-    // 카메라 사각형을 정확히 그림
-    MoveToEx(hdc, left + 1, top + 1, NULL);
-    LineTo(hdc, right - 1, top + 1);
-    LineTo(hdc, right - 1, bottom- 1);
-    LineTo(hdc, left + 1, bottom - 1);
-    LineTo(hdc, left + 1, top + 1);
+void DOCamera::Move(DVector2i position)
+{
+    simulationLocation = simulationLocation + position;
+    DrawScreen();
+}
+
+void DOCamera::DrawScreen()
+{
+    MoveToEx(hdc, renderingRect.left, renderingRect.top, NULL);
+    LineTo(hdc, renderingRect.right - 1, renderingRect.top);
+    LineTo(hdc, renderingRect.right - 1, renderingRect.bottom - 1);
+    LineTo(hdc, renderingRect.left, renderingRect.bottom - 1);
+    LineTo(hdc, renderingRect.left, renderingRect.top);
 }

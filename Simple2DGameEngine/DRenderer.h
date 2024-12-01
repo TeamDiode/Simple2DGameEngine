@@ -15,16 +15,20 @@ public:
     DRenderer(HDC newHdc, HWND newhWnd);
 
     static void RegisterSprite(DOSprite* sprite);
-    void SetCameraOptions();
-    static void MoveCamera(int type, int moveScale);
-    void Draw();
+    static void CancelSprite(DOSprite* sprite);
 
+    void SetCameraOptions();
+    void SetCameraOptions(RECT newCameraRect);
+    static void SetCameraSimulationLocation(DVector2i newLocation);
+    static void MoveCamera(DVector2i position);
+    
+    void Draw();
     virtual void Tick(double deltaTime) override;
 
 private:
     HDC hdc;
     HWND hWnd;
-    RECT rt;
+    RECT rect;
     RECT cameraRect = { 50,50,700,700 };
     const int displayInterval = 1000 / FRAMELATE;
     static DOCamera camera;

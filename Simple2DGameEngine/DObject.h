@@ -1,16 +1,22 @@
 #pragma once
 
+#include <Windows.h>
 #include "DMathTypes.h"
 #include "DList.hpp"
+#include <string>
 
+using namespace std;
 
 class DObject
 {
 public:
 	DObject();
+	DObject(DVector2i defaultLocation, DVector2i defaultScale, float defaultAngle);
 	~DObject();
 
 private:
+	// 이름
+	string name;
 	// 월드 위치
 	DVector2i location;
 	// 상위 오브젝트에 상대적인 로컬 위치
@@ -24,10 +30,18 @@ private:
 	DObject* upperObject;
 	// 부착된 하위 오브젝트
 	DList<DObject*> lowerObjectAttachments;
+
+protected:
+	// 뮤텍스 핸들
+	HANDLE mutexHandle;
 	
 public:
-	/* 오브젝트 상태 프로퍼티 */
+	// 이름을 반환
+	string GetName();
+	// 이름을 수정
+	void SetName(string newName);
 
+	/* 오브젝트 상태 프로퍼티 */
 	// 위치을 반환
 	DVector2i GetLocation();
 	// 월드 위치를 벡터로 수정
