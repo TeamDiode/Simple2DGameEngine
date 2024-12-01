@@ -39,7 +39,7 @@ void DPhysicsManager::ResolveCollisions() {
                 objA->OnCollision(objB);
 
 
-                //DEngine::LogMessageBox("面倒");
+                DEngine::LogMessageBox("面倒");
                 // 面倒 贸府
                 //detector.ResolveCollision(objA, objB);
 

@@ -37,6 +37,7 @@ private:
 	bool isUsed;
 public:
 	virtual void Update(double deltaTime) override;
+	virtual void OnCollision(DCollisionData* other) override;
 	// 이미 사용된 벽인지 확인
 	bool GetIsUsed() { return isUsed; }
 	// 다시 사용하기 위해 초기화
@@ -87,14 +88,15 @@ public:
 };
 
 
-class Player :public DObject
+class Player : public DCollisionData
 {
 public:
-	Player() /*: DCollisionData(Shape::Rectangle,1,1)*/;
+	Player();
 	// 이미지 오브젝트 해제
 	~Player() { delete skin; }
 private:
 	DOSprite* skin;
 public:
 	virtual void Update(double deltaTime) override;
+	virtual void OnCollision(DCollisionData* other) override;
 };

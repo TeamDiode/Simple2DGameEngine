@@ -1,5 +1,5 @@
 #include "DWorld.h"
-
+#include "DEngine.h"
 DWorld::DWorld()
 {
 }
@@ -29,8 +29,7 @@ Wall::Wall() : DCollisionData(Shape::Rectangle, 1, 1)
 	// 하위 오브젝트에 추가
 	DObject::AttachObject(skin);
 	// DCollisionData 중력 또는 속도로 인한 X Y 축 이동 잠금
-	freezeX = true;
-	freezeY = true;
+	SetGravityScale(0);
 	// 사용되기 전으로 초기화
 	isUsed = false;
 
@@ -66,6 +65,11 @@ void Wall::Update(double deltaTime)
 
 }
 
+void Wall::OnCollision(DCollisionData* other)
+{
+	DEngine::LogMessageBox("충돌 w!");
+}
+
 Wall* WallObjectPool::GetWall()
 {
 	// 만약 큐의 맨 앞이 사용 가능하다면
@@ -88,6 +92,7 @@ Wall* WallObjectPool::GetWall()
 
 		// 벽 오브젝트 생성
 		Wall* wall = new Wall();
+		wall->SetName("Wall");
 		// 큐에 벽 저장
 		objQueue.push(wall);
 		// 생성된 벽 반환
@@ -124,15 +129,17 @@ void WallManager::Update(double deltaTime)
 		float dis = distr(gen);
 
 		// 일정한 거리가 되도록 윗 벽, 아랫 벽에 랜덤 값 연산
-		wall->SetLocation(700, 125 + dis);
-		wall2->SetLocation(700, 650 + dis);
+		/*wall->SetLocation(700, 125 + dis);
+		wall2->SetLocation(700, 650 + dis);*/
+		wall->SetLocation(400, -225 + dis);
+		wall2->SetLocation(400, 300 + dis);
 		// 현재 시간을 0으로 초기화
 		curTime = 0;
 	}
 
 }
 
-Player::Player()
+Player::Player() : DCollisionData(Shape::Rectangle, 1, 1)
 {
 	// 이미지 오브젝트 생성
 	DOSprite* skin = new DOSprite(1);
@@ -140,6 +147,8 @@ Player::Player()
 	skin->SetScale(70, 70);
 	// 이미지 오브젝트 플레이어 오브젝트 하위에 상속
 	DObject::AttachObject(skin);
+	// 중력 값 0으로 설정
+	SetGravityScale(0);
 }
 
 void Player::Update(double deltaTime)
@@ -156,4 +165,13 @@ void Player::Update(double deltaTime)
 	}
 
 
+}
+
+void Player::OnCollision(DCollisionData* other)
+{
+	DEngine::LogMessageBox("충돌!");
+	if (other->GetName() == "Wall")
+	{
+		
+	}
 }
