@@ -18,6 +18,23 @@ DObject::DObject()
 	DObjectManager::RegisterObject(this);
 }
 
+DObject::DObject(DVector2i defaultLocation, DVector2i defaultScale, float defaultAngle)
+{
+	// 뮤텍스 생성
+	mutexHandle = CreateMutex(NULL, false, NULL);
+	// 오브젝트 상태 초기화
+	location = defaultLocation;
+	localLocation = DVector2i();
+	angle = defaultAngle;
+	scale = defaultScale;
+	// 상위 오브젝트 초기화
+	upperObject = nullptr;
+
+	// 매니저에 등록
+	DObjectManager::RegisterObject(this);
+
+}
+
 DObject::~DObject()
 {
 	// 뮤텍스 제거

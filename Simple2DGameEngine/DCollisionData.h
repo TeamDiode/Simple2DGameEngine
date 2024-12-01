@@ -39,6 +39,7 @@ public:
 
 public:
     DCollisionData(Shape sha, float den, float r);
+    DCollisionData(DVector2i defaultLocation, DVector2i defaultScale, float defaultAngle, Shape sha, float den, float r);
     float CalculateMass();
     void UpdatePosition(float deltaTime);
 

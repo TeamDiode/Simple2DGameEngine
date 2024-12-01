@@ -9,9 +9,10 @@ class DObject
 {
 public:
 	DObject();
+	DObject(DVector2i defaultLocation, DVector2i defaultScale, float defaultAngle);
 	~DObject();
 
-private:
+protected:
 	// 월드 위치
 	DVector2i location;
 	// 상위 오브젝트에 상대적인 로컬 위치

@@ -14,6 +14,16 @@ DCollisionData::DCollisionData(Shape sha, float den, float r)
     DPhysicsManager::AddObject(this);
 }
 
+DCollisionData::DCollisionData(DVector2i defaultLocation, DVector2i defaultScale, float defaultAngle, Shape sha, float den, float r)
+    : DObject(defaultLocation, defaultScale, defaultAngle), shape(sha), density(den), restitution(r)
+{
+    UpdateAABB();
+
+    mass = CalculateMass();
+
+    DPhysicsManager::AddObject(this);
+}
+
 void DCollisionData::UpdateAABB() {
     aabb.min = GetLocation() - (GetScale() * 0.5f);
     aabb.max = GetLocation() + (GetScale() * 0.5f);
