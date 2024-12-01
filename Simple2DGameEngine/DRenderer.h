@@ -19,6 +19,8 @@ public:
     void SetCameraOptions();
     void SetCameraOptions(RECT newCameraRect);
     static void SetCameraSimulationLocation(DVector2i newLocation);
+    static DVector2i GetCameraSimulationLocation();
+    static DVector2i GetWorldLocationInScreenPoint(DVector2i point);
     static void MoveCamera(DVector2i position);
     
     void Draw();
