@@ -48,6 +48,18 @@ void DRenderer::SetCameraSimulationLocation(DVector2i newLocation)
     camera.SetSimulationLocation(newLocation);
 }
 
+DVector2i DRenderer::GetCameraSimulationLocation()
+{
+    return camera.GetSimulationLocation();
+}
+
+DVector2i DRenderer::GetWorldLocationInScreenPoint(DVector2i point)
+{
+    DVector2i simulationOffset = point - camera.GetLocation();
+    
+    return GetCameraSimulationLocation() + simulationOffset;
+}
+
 void DRenderer::Draw()
 {
     AllReset();

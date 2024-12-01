@@ -20,13 +20,14 @@ void DWorld::Load()
 }
 #include "DEngine.h"
 #include <string>
-Bullet::Bullet(DVector2i pos)
+Bullet::Bullet(DVector2i pos) : DCollisionData(pos, DVector2i(50, 50), 0, Shape::Rectangle, 1, 1)
 {
-	// 현재 위치 설정 ( 플레이어 위치 )
-	SetLocation(pos);
-
-	currentSpeed = 100;
-	DOSprite* skin = new DOSprite(2);
+	// 중력 제거
+	SetGravityScale(0);
+	// 속도 초기화
+	currentSpeed = 400;
+	// 외형
+	skin = new DOSprite(2);
 	skin->SetScale(50, 50);
 	AttachObject(skin);
 	
@@ -34,9 +35,26 @@ Bullet::Bullet(DVector2i pos)
 	curTime = 0;
 	delTime = 1;
 
-	// 마우스 방향 계산
-	dir = DInputManager::GetMousePostion();
+	// 속도
+	dir = DRenderer::GetWorldLocationInScreenPoint(DInputManager::GetMousePostion());
 	dir = dir - GetLocation();
 	dir.Normalize();
+	dir = dir * currentSpeed;
+}
+
+void Bullet::OnCollision(DCollisionData* other)
+{
+	// 데미지
+}
+
+void Bullet::Update(double deltaTime)
+{
+	// 구한 마우스 방향으로 이동
+	SetLocation(GetLocation() + (dir * deltaTime));
+
+	curTime += deltaTime;
+	// 생성된 후 일정 시간 후 스스로 파괴
+	if (curTime >= delTime);
+		//delete this;
 }
 

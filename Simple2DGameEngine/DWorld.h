@@ -3,6 +3,7 @@
 #include "DObjectManager.h"
 #include "DRenderer.h"
 #include "DInput.h"
+#include "DPhysicsManager.h"
 
 #include <iostream>
 #include <random>
@@ -22,7 +23,7 @@ public:
 // 총알 클래스
 // - 플레이어와 마우스의 뱡향 계산 후 이동
 // - 일정 시간 후 삭제
-class Bullet : public DObject
+class Bullet : public DCollisionData
 {
 public:
 	Bullet(DVector2i pos);
@@ -38,16 +39,8 @@ private:
 	float curTime;
 	float delTime;
 public:
-	virtual void Update(double deltaTime) override
-	{
-		// 구한 마우스 방향으로 이동
-		SetLocation(GetLocation() + (dir * deltaTime * currentSpeed));
-
-		curTime += deltaTime;
-		// 생성된 후 일정 시간 후 스스로 파괴
-		if (curTime >= delTime)
-			delete this;
-	}
+	virtual void OnCollision(DCollisionData* other) override;
+	virtual void Update(double deltaTime) override;
 };
 
 // 플래이어 클래스
@@ -58,10 +51,9 @@ class Player : public DObject
 public:
 	Player()
 	{
-		DOSprite* skin = new DOSprite(1);
+		skin = new DOSprite(1);
 		skin->SetScale(60, 60);
 		AttachObject(skin);
-		f = false;
 	}
 	~Player()
 	{
@@ -69,7 +61,6 @@ public:
 	}
 private:
 	DOSprite* skin;
-	bool f;
 public:
 	virtual void Update(double deltaTime) override
 	{
@@ -90,18 +81,11 @@ public:
 		{
 			SetLocation(GetLocation() + DVector2i(deltaTime * -200, 0));
 		}
-		/*if (DInputManager::GetMouseButton(0))*/
-		if (DInputManager::GetMouseButton(0))
+		DRenderer::SetCameraSimulationLocation(GetLocation());
+
+		if (DInputManager::GetMouseButtonDown(0))
 		{
-			// 총알 생성
-			if (!f)
-				Bullet* a = new Bullet(GetLocation());
-			f = true;
-			//SetLocation(DInputManager::GetMousePostion());
-		}
-		if (DInputManager::GetMouseButton(1))
-		{
-			f = false;
+			Bullet* a = new Bullet(GetLocation());
 		}
 	}
 };
