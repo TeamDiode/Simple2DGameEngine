@@ -43,6 +43,19 @@ DObject::~DObject()
 	DObjectManager::CancelObject(this);
 }
 
+string DObject::GetName()
+{
+	return name;
+}
+
+void DObject::SetName(string newName)
+{
+	DWORD result = WaitForSingleObject(mutexHandle, INFINITE);
+
+	name = newName;
+	ReleaseMutex(mutexHandle);
+}
+
 DVector2i DObject::GetLocation()
 {
 	return location;
