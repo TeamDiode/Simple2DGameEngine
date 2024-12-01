@@ -27,10 +27,6 @@ DCollisionData::DCollisionData(DVector2i defaultLocation, DVector2i defaultScale
     DPhysicsManager::AddObject(this);
 }
 
-DPhysicsManager::~DPhysicsManager()
-{
-    CloseHandle(hMutex);
-}
 
 void DCollisionData::UpdateAABB() {
     DWORD result = WaitForSingleObject(hMutex, INFINITE);  // 뮤텍스 잠금
