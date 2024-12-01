@@ -165,7 +165,7 @@ void Player::OnCollision(DCollisionData* other)
 {
 	if (other->GetName() == "Wall")
 	{
-		DEngine::LogMessageBox("충돌!");
+		//DEngine::LogMessageBox("충돌!");
 		
 	}
 }
