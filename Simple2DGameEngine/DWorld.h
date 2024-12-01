@@ -98,7 +98,7 @@ class Enemy : public DCollisionData
 public:
 	Enemy(DObject* obj) : player(obj), DCollisionData(DVector2i(400,400),DVector2i(70,70),0, Shape::Rectangle, 1, 1)
 	{
-		DOSprite* skin = new DOSprite(1);
+		skin = new DOSprite(1);
 		AttachObject(skin);
 		skin->SetScale(70, 70);
 
