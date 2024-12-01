@@ -7,18 +7,23 @@
 
 class DInputManager {
 private:
+	// 동기화를 위해 만든 Lock변수. true이면 Init()에서 값을 초기화 하지 못한다.
 	static bool isLockDownBuffer;
 	static bool isLockUpBuffer;
 
+	//마우스 위치 저장하는 변수
 	static DVector2i mousePostion;
 
+	// 마우스 입력 값 저장 배열들
 	static bool mouseUpBuffer[2][MOUSE_INPUT_TYPE];
 	static bool mouseDownBuffer[2][MOUSE_INPUT_TYPE];
 	static bool mouseAnyBuffer[MOUSE_INPUT_TYPE];
 
+	// 키 입력값 저장 배열들
 	static EDkeyCode keyDownBuffer[2][LEN];
 	static EDkeyCode keyUpBuffer[2][LEN];
 	static EDkeyCode keyAnyBuffer[LEN];
+
 	//anyBuffer에 추가 
 	static void BufferAddKeyAny(EDkeyCode keyValue);
 public:

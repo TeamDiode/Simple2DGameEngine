@@ -6,7 +6,7 @@
 
 #include "DEngine.h"
 
-
+//static 변수들 초기화 코드
 bool DInputManager::isLockDownBuffer = false;
 bool DInputManager::isLockUpBuffer = false;
 DVector2i DInputManager::mousePostion(100, 100);
@@ -14,9 +14,11 @@ DVector2i DInputManager::mousePostion(100, 100);
 EDkeyCode DInputManager::keyDownBuffer[2][LEN] = { {EDkeyCode::null},{EDkeyCode::null} };
 EDkeyCode DInputManager::keyUpBuffer[2][LEN] = { {EDkeyCode::null},{EDkeyCode::null} };
 EDkeyCode DInputManager::keyAnyBuffer[LEN] = { EDkeyCode::null, };
+
 bool DInputManager::mouseUpBuffer[2][MOUSE_INPUT_TYPE] = { {false,},{false,} };
 bool DInputManager::mouseDownBuffer[2][MOUSE_INPUT_TYPE] = { {false,},{false,} };
 bool DInputManager::mouseAnyBuffer[MOUSE_INPUT_TYPE] = { false, };
+
 
 void DInputManager::BufferAddKeyAny(EDkeyCode keyValue)
 {

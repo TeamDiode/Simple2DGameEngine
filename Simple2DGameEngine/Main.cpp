@@ -32,7 +32,7 @@ int APIENTRY WinMain(HINSTANCE instanceHandle, HINSTANCE prevInstanceHandle, LPS
 	windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	windowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 	windowClass.hInstance = instanceHandle;
-	windowClass.lpfnWndProc = OnWindowProcedure;
+	windowClass.lpfnWndProc = OnWindowProcedure; // 이벤트 함수 세팅
 	windowClass.lpszClassName = windowShowName;
 	windowClass.lpszMenuName = NULL;
 	windowClass.style = CS_HREDRAW | CS_VREDRAW;
