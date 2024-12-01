@@ -28,6 +28,21 @@ void DRenderer::RegisterSprite(DOSprite* sprite)
     sprites.AddNext(sprite);
 }
 
+void DRenderer::CancelSprite(DOSprite* sprite)
+{
+    int remainLoopAmount = sprites.GetSize();
+
+    while (remainLoopAmount-- && sprites.Move())
+    {
+        if (sprites.GetValue() == sprite)
+        {
+            sprites.RemoveHere();
+            
+            break;
+        }
+    }
+}
+
 void DRenderer::SetCameraOptions()
 {
     camera.InitializeCamera(hWnd, hdc, cameraRect);

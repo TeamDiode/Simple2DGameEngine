@@ -15,6 +15,7 @@ public:
     DRenderer(HDC newHdc, HWND newhWnd);
 
     static void RegisterSprite(DOSprite* sprite);
+    static void CancelSprite(DOSprite* sprite);
 
     void SetCameraOptions();
     void SetCameraOptions(RECT newCameraRect);
