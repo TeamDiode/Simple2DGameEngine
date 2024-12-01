@@ -40,6 +40,8 @@ public:
 public:
     DCollisionData(Shape sha, float den, float r);
     DCollisionData(DVector2i defaultLocation, DVector2i defaultScale, float defaultAngle, Shape sha, float den, float r);
+    ~DCollisionData();
+    
     float CalculateMass();
     void UpdatePosition(float deltaTime);
 
@@ -67,5 +69,6 @@ private:
 
     float gravityScale = 1.0f;
 
+    HANDLE hMutex;
 
 };
