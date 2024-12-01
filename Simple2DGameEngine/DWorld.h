@@ -39,8 +39,8 @@ private:
 	float curTime;
 	float delTime;
 public:
-	virtual void OnCollision(DCollisionData* other) override;
 	virtual void Update(double deltaTime) override;
+	virtual void OnCollision(DCollisionData* other) override;
 };
 
 // 플래이어 클래스
@@ -93,20 +93,21 @@ public:
 // 적 클래스
 // - 이동기능
 // 이후 충돌판정 후 삭제 기능
-class Enemy : public DObject
+class Enemy : public DCollisionData
 {
 public:
-	Enemy(DObject* obj) : player(obj)
+	Enemy(DObject* obj) : player(obj), DCollisionData(DVector2i(400,400),DVector2i(70,70),0, Shape::Rectangle, 1, 1)
 	{
 		DOSprite* skin = new DOSprite(1);
-		skin->SetScale(70, 70);
 		AttachObject(skin);
+		skin->SetScale(70, 70);
 
-		curHp = 2;
+		curHp = 5;
 
 		cognizance = 300;
 
 		moveSpeed = 100;
+		SetGravityScale(0);
 	}
 	~Enemy()
 	{
@@ -139,6 +140,16 @@ public:
 		}
 	}
 	// 충돌 판정 후 hp
+	void Attacked()
+	{
+		curHp -= 1;
+
+		// 체력이 0 이하라면 삭제
+		if (curHp <= 0)
+		{
+			delete this;
+		}
+	}
 }; 
 
 // 적 생성을 관리하는 클래스
@@ -181,6 +192,7 @@ public:
 	{
 		// 적 생성
 		Enemy* e = new Enemy(playerObj);
+		e->SetName("Enemy");
 		e->SetLocation(distr(gen), distr(gen));
 	}
 
