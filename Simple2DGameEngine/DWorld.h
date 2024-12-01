@@ -26,7 +26,7 @@ public:
 class Wall : public DCollisionData
 {
 public:
-	Wall();
+	Wall(DVector2i pos);
 	~Wall();
 private:
 	DOSprite* skin;
@@ -37,7 +37,6 @@ private:
 	bool isUsed;
 public:
 	virtual void Update(double deltaTime) override;
-	virtual void OnCollision(DCollisionData* other) override;
 	// 이미 사용된 벽인지 확인
 	bool GetIsUsed() { return isUsed; }
 	// 다시 사용하기 위해 초기화
@@ -54,7 +53,7 @@ private:
 	queue<Wall*> objQueue;
 public:
 	// 사용할 벽을 반환하는 함수
-	Wall* GetWall();
+	Wall* GetWall(DVector2i pos);
 	// 현재 큐의 맨 앞에 벽이 사용가능한지 확인하는 함수
 	bool PossibleGetWall();
 	// 큐의 크기(== 벽의 갯수)를 확인하는 함수
